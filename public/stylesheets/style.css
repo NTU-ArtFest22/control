@@ -4,6 +4,12 @@
     position: relative;
     text-align: right;
 }
+
+.user-picture {
+  width: 100px;
+  height: 100px;
+}
+
 button, input, select {
     font-family: Myriad, Arial, Verdana;
     font-weight: normal;

@@ -19,7 +19,7 @@ module.exports = function(passport){
   router.get('/', function(req, res) {
     console.log("here");
     // Display the Login page with any flash message, if any
-    res.render('index', { message: req.flash('message') });
+    res.render('index', { message: req.flash('message') , user: req.user});
   });
 
   /* Handle Login POST */
@@ -37,7 +37,7 @@ module.exports = function(passport){
 
   // route for facebook authentication and login
   // different scopes while logging in
-  router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' } ));
+  router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] } ));
 
   // handle the callback after facebook has authenticated the user
   router.get('/auth/facebook/callback',

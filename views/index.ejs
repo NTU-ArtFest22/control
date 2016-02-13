@@ -30,10 +30,10 @@
               </a>
             </div>
           <% } else { %>
-            <h2>Hello, <%= user.username %>.</h2>
-            <p>ID: <%= user.id %></p>
-            <p>Username: <%= user.username %></p>
-            <p>Name :<%= user.displayName %></p>
+            <img src='http://graph.facebook.com/<%= user.fb.id %>/picture?type=normal' width="70px" height="70px"></img>
+            <h2>Hello, <%= user.fb.displayName %>.</h2>
+            <p>ID: <%= user.fb.id %></p>
+            <p>Email: <%= user.fb.email %></p>
           <% } %>
         </td>
       </tr>
