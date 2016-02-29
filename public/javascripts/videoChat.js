@@ -33,7 +33,7 @@ var audioConstraints = {
     // echoCancellation: false,
     // googEchoCancellation: false, // disabling audio processing
     // googAutoGainControl: true,
-    // googNoiseSuppression: true,
+    googNoiseSuppression: true,
     // googHighpassFilter: true,
     // googTypingNoiseDetection: true,
     // googAudioMirroring: true

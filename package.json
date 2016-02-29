@@ -29,11 +29,13 @@
     "express": "~4.13.1",
     "express-session": "1.7.6",
     "mongoose": "^4.4.2",
+    "mongoose-validator": "^1.2.4",
     "morgan": "~1.6.1",
     "passport": "0.2.1",
     "passport-facebook": "^2.1.0",
     "reliable-signaler": "1.0.2",
     "serve-favicon": "~2.3.0",
-    "socket.io": "^0.9.17"
+    "socket.io": "^0.9.17",
+    "underscore": "^1.8.3"
   }
 }

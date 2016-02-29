@@ -1,0 +1,61 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <img alt="Home" src="/images/NTUAF-copy.png" width="48px" height="27px">
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/about">About us <span class="sr-only">(current)</span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Activities <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action #1</a></li>
+            <li><a href="#">Action #2</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Special #1</a></li>
+            <li><a href="#">Special #2</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">You can't see me!</a></li>
+          </ul>
+        </li>
+        <li><a href="/contact">Ping us</a></li>
+      </ul>
+
+      <!-- log in -->
+      <% if (! locals['user']) { %>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/auth/facebook">FB Login</a>
+            <!--Login with FB-->
+            <!--<img href="/auth/facebook" src="/images/fb-login.png" width="96px" height="46px">-->
+            <!--<button type="button" href="/auth/facebook" class="btn btn-default navbar-btn">Login with FB</button>-->
+          </li>
+        </ul>
+      <% } else { %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <img src='http://graph.facebook.com/<%= user.fb.id %>/picture?type=normal' width="40px" height="40px"></img>
+              <p>Hello, <%= user.fb.displayName %>.</p>
+              <!--<p>ID: <%= user.fb.id %></p>-->
+              <!--<p>Email: <%= user.fb.email %></p>-->
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Play</a></li>
+              <li><a href="#">Enroll activity</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Log out</a></li>
+            </ul>
+          </li>
+        </ul>
+      <% } %>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

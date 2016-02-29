@@ -1,4 +1,8 @@
 
+body {
+  padding-top: 70px; 
+}
+
 .fb-like {
     right: -15px;
     position: relative;

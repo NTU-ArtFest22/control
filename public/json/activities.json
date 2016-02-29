@@ -1,0 +1,16 @@
+{
+  "General": [
+    {
+      "name": "blow kite",
+      "artist_num": 5,
+      "attender_to_artist": 1
+    }
+  ],
+  "Special": [
+    {
+      "name": "blow kite poo",
+      "artist_num": 4,
+      "attender_to_artist": 2
+    }
+  ]
+}

@@ -3,62 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>NTUAF Chat Room </title>
-    
-  
+
   </head>
 
   <body>
-    <div id="fb-root"></div>
-    <script src="/javascripts/fb.js"></script>
 
-    <hr>
-    <table class="table" align="right">
-      <tr>
-        <td>
-          <div 
-            class="fb-like" 
-            data-href="http://amy-chatroom.herokuapp.com/" 
-            data-layout="standard" 
-            data-action="like" data-show-faces="true" data-share="true"></div>
-        </td>
-        <td>
-          <% if (! locals['user']) { %>
-            <div style="width:500px;height:180px;">
-              <h2 style="font-size:40px;">Welcome! Please log in.</h2>
-              <a href="/auth/facebook">
-                <img src="/images/fb-login.png" width="240px" height="115px">
-              </a>
-            </div>
-          <% } else { %>
-            <img src='http://graph.facebook.com/<%= user.fb.id %>/picture?type=normal' width="70px" height="70px"></img>
-            <h2>Hello, <%= user.fb.displayName %>.</h2>
-            <p>ID: <%= user.fb.id %></p>
-            <p>Email: <%= user.fb.email %></p>
-          <% } %>
-        </td>
-      </tr>
+    <%- include layout/navbar %>
 
-    </table>
-    <input type="text" id="session-id" placeholder="room-id" style="width: 100px;">
-    <button id="open">Open</button>
-    <button id="join">Join</button>
-    <hr>
-    <button id="share-file" disabled>Share File</button><hr>
-    <div id="container"></div>
-    <br><br>
 
-    <div id="chat-container">
-      <input type="text" id="input-text-chat" placeholder="Enter Text Chat" disabled><br>
-      <div class="chat-output"></div>
-    </div>
+    <%- include layout/fb-like %>
+    <%- include layout/links %>
 
-    <link rel="stylesheet" href="/stylesheets/style.css">
-
-    <script src="/reliable-signaler/signaler.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdn.webrtc-experiment.com/RTCMultiConnection.js"></script>
-    <script src="https://cdn.webrtc-experiment.com/FileBufferReader.js"></script>
-    <script src="/javascripts/videoChat.js"></script>
 
   </body>
 </html>

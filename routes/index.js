@@ -1,5 +1,8 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+  , router = express.Router();
+  //, keystone = require('keystone')
+  //, middleware  = require('./middleware')
+  //, importRoutes = keystone.importer(__dirname);
 
 
 
@@ -17,10 +20,14 @@ module.exports = function(passport){
 
   /* GET login page. */
   router.get('/', function(req, res) {
-    console.log("here");
     // Display the Login page with any flash message, if any
     res.render('index', { message: req.flash('message') , user: req.user});
   });
+
+  router.get('/about', function(req, res) {
+    console.log('Want to know us??');
+    res.render('about', { message: req.flash('message') , user: req.user});
+  })
 
   /* Handle Login POST */
   router.post('/auth', passport.authenticate('login', {
