@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>NTUAF Chat Room - activity</title>
+
+  </head>
+
+  <body>
+
+    <%- include layout/navbar %>
+
+    <% if(!local['user']) { %>
+      <div class="need-signin">
+        <h4> Oops! You have to sign in first  </h4>
+        <button type="button" class="btn btn-warning btn-lg btn-block" href="/auth/facebook">FB login</button>
+      </div>
+    <% } else { %>
+
+      <%- include layout/signup-form %>
+
+    <% } %>
+
+
+
+    <%- include layout/fb-like %>
+
+    <%- include layout/links %>
+
+  </body>
+</html>
+

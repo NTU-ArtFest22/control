@@ -1,0 +1,43 @@
+{
+  "name": "NTUAF-control",
+  "preferGlobal": true,
+  "version": "0.0.0",
+  "author": "Amy Lin <linamy85@gmail.com> ",
+  "description": "Web interface of NTUAF control project",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "main": "./server.js",
+  "keywords": [
+    "webrtc",
+    "signaler",
+    "signaling",
+    "reliable",
+    "javascript",
+    "rtcmulticonnection",
+    "NTUAF",
+    "Control"
+  ],
+  "analyze": false,
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "connect-ensure-login": "^0.1.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.3.5",
+    "crypto": "0.0.3",
+    "debug": "~2.2.0",
+    "ejs": "1.0.0",
+    "express": "~4.13.1",
+    "express-session": "1.7.6",
+    "mongoose": "^4.4.2",
+    "mongoose-validator": "^1.2.4",
+    "morgan": "~1.6.1",
+    "passport": "^0.2.2",
+    "passport-facebook": "^2.1.0",
+    "reliable-signaler": "1.0.2",
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^0.9.17",
+    "underscore": "^1.8.3"
+  }
+}
