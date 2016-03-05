@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="admin">
+  <head>
+    <meta charset="utf-8">
+    <title>NTUAF Chat Room </title>
+
+  </head>
+
+  <body >
+
+    <%- include layout/navbar %>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-primary btn-lg btn-block" href="/admin/user">User</button>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-success btn-lg btn-block" href="/admin/activity">Activity</button>
+      </div>
+
+
+    <%- include layout/links %>
+
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="/javascripts/ng-admin.js"></script>
+  </body>
+</html>
+

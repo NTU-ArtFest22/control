@@ -11,7 +11,10 @@ var express           =     require('express')
   , favicon           =     require('serve-favicon')
   , app               =     express()
   , DBconfig          =     require('./config/db')
-  , mongoose          =     require('mongoose');
+  , mongoose          =     require('mongoose')
+  , crypto            =     require('crypto')
+  , safety            =     require('./safety')
+  , User              =     require('./models/user');
 
 // connect to mongoDB database
 mongoose.connect(DBconfig.url);
@@ -23,15 +26,15 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 // TODO: why need this?
 app.use(session({ secret: 'amy22627683', key: 'ntuaf'}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
 
 
  // Using the flash middleware provided by connect-flash to store messages in session
@@ -44,10 +47,17 @@ app.use(flash());
 var initPassport = require('./passport/init');
 initPassport(passport);
 
+// add first admin
+User.findAndModify({'fb.id': '1247677651915123'},{"isAdmin": true}, function(err, doc ){
+  if(err)
+    console.log(err);
+});
 
 var routes = require('./routes/index')(passport);
 app.use('/', routes);
 
+
+require('./routes/data.js')( app );
 
 
 
@@ -81,6 +91,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 
 

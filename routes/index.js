@@ -1,10 +1,15 @@
 var express = require('express')
-  , router = express.Router();
-  //, keystone = require('keystone')
-  //, middleware  = require('./middleware')
-  //, importRoutes = keystone.importer(__dirname);
+  , router = express.Router()
+  , User = require('../models/user.js')
+  , Activity = require('../models/activity.js');
 
-
+var canAccessAdmin = function (req, res, next){
+  console.log(req);
+  if( req.user && req.user.isAdmin === true)
+    next();
+  else
+    res.send(401, 'Unauthorized');
+};
 
 var isAuthenticated = function (req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler 
@@ -24,10 +29,19 @@ module.exports = function(passport){
     res.render('index', { message: req.flash('message') , user: req.user});
   });
 
+  router.get('/admin', canAccessAdmin, function(req, res){
+    console.log("admin?");
+    res.render('admin', {user: req.user});
+  });
+
+  router.get('/admin/user', canAccessAdmin, function(req, res){
+    res.render('admin-user', { user: req.user });
+  });
+
   router.get('/about', function(req, res) {
     console.log('Want to know us??');
     res.render('about', { message: req.flash('message') , user: req.user});
-  })
+  });
 
   /* Handle Login POST */
   router.post('/auth', passport.authenticate('login', {
@@ -47,16 +61,23 @@ module.exports = function(passport){
   router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] } ));
 
   // handle the callback after facebook has authenticated the user
-  router.get('/auth/facebook/callback',
-             passport.authenticate('facebook', {
-               successRedirect : '/',
-               failureRedirect : '/'
-             })
-            );
+  router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect : '/profile/',
+    failureRedirect : '/'
+  }));
+
+  router.get('/profile', function(req, res){
+    if(!req.user)
+      res.redirect('/auth/facebook');
+    console.log('profile: ', req.user);
+    res.render('profile', { message: req.flash('message') , user: req.user});
+  });
 
 
-            //module.exports = router;
-            return router;
+
+
+  //module.exports = router;
+  return router;
 }
 
 

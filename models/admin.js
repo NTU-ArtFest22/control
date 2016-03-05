@@ -1,13 +1,9 @@
-var keystone = require('keystone'),
-    Types = keystone.Field.Types;
- 
-var Admin = new keystone.List('Admin');
- 
-Admin.add({
-    name: { type: Types.Name, required: true, index: true },
-    email: { type: Types.Email, initial: true, required: true, index: true },
-    password: { type: Types.Password, initial: true },
-    canAccessKeystone: { type: Boolean, initial: true }
+var mongoose = require('mongoose');
+
+var AdminSchema = new mongoose.Schema({
+  name: String, 
+  password: String,
+  pin: Number,
 });
- 
-Admin.register();
+
+module.exports = mongoose.model('Admin', AdminSchema);
