@@ -73,7 +73,6 @@
       <table class="table">
         <thead>
           <tr>
-            <th>no.</th>
             <th>Activity</th>
             <th>playerID</th>
             <th>&nbsp;</th>
@@ -81,7 +80,6 @@
         </thead>
         <tbody>
           <tr ng-repeat="useract in editUser.activities">
-            <td>{{ useract.id }}</td>
             <td>{{ useract.gameName }}</td>
             <td>{{ useract.player_id }}</td>
             <td><button class="btn btn-danger" ng-click="removeActivity( useract.id )">Remove</button></td>

@@ -161,20 +161,19 @@
           function(res){
             console.log('sucess removing group ', res);
 
-            if( !group.artist || Object.keys( group.artist ) ){
-              refresh_act();
-            } else {
+            if( group.artist && Object.keys( group.artist ) ) {
               // remove act from user
-              $http.delete( '/admin/userlist/' + group.artist.id + '/' + $scope.act.name ).then(
-                function(res){
-                  console.log('totally remove the group from user', res);
-                  refresh_act(); 
-                }, 
-                function(res){
-                  console.log('remove act from user failed: ', res);
-                }
+              $http.delete( '/admin/userlist/' + group.artist.id + '/' + $scope.act._id ).then(
+                function(res){ console.log('totally remove the group from user', res); }, 
+                function(res){ console.log('remove act from user failed: ', res); }
               );
             }
+            if( group.player && Object.keys( group.player ) ) {
+              $http.delete( '/admin/userlist/' + group.player.id + '/' + $scope.act._id ).success( function(res){
+                console.log(res);
+              });
+            }
+            refresh_act();
           },
           function(res){
             console.log('error remvoing group ', res);

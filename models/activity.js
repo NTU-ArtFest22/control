@@ -10,7 +10,7 @@ var actSchema = mongoose.Schema({
     },
     player: {
       id: String,
-      name: String
+      name: String,
     },
     character: String,
     stream: String,

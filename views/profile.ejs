@@ -8,7 +8,7 @@
     <script src="/javascripts/ng-profile.js"></script>
   </head>
 
-  <body>
+  <body ng-controller="ActivityCtrl">
 
     <%- include layout/navbar %>
 
@@ -21,7 +21,7 @@
       </div>
     <% } %>
 
-    <form ng-controller="ActivityCtrl">
+    <form >
       <h5>Activity</h5>
       <select name="ActivitySelect" ng-model="ctrl.act" ng-options="act as act.name for act in activitylist">
         <option value="" selected>-- Activity to add--</option>
@@ -43,12 +43,10 @@
         </tr>
       </thead>
       <tbody>
-        <% for( var i = 0 ; i < user.activities.length ; i++ ) { %>
-          <tr>
-            <td><%= user.activities[ i ].gameName %></td>
-            <td><%= user.activities[ i ].player_id %></td>
+          <tr ng-repeat="act in user.activities" >
+            <td>{{ act.gameName }}</td>
+            <td>{{ act.player_id }}</td>
           </tr>
-        <% } %>
       </tbody>
     </table>
 

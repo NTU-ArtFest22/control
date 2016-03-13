@@ -22,7 +22,8 @@ module.exports = function( app , db ){
   });
 
   app.post('/user/addActivity', function(req, res){
-    var player_id = safety.decrypt( req.body.act , req.body.code );
+    var act = req.body.act;
+    var player_id = safety.decrypt( act._id , req.body.code );
     if(! player_id ){
       res.render('/profile', {
         error: req.flash('error', 'The code is invalid'),
@@ -33,9 +34,9 @@ module.exports = function( app , db ){
 
       db.activities.findAndModify({
         query: { 
-          _id: mongojs.ObjectId( req.body.act ),
+          _id: mongojs.ObjectId( act._id ),
           group: {
-            "$elemMatch": { character: player_id }
+            "$elemMatch": { character: player_id.toString() }
           }
         },
         update: { 
@@ -51,13 +52,15 @@ module.exports = function( app , db ){
             });
           }
           else{
+            console.log('============== >>> Found character: ', player_id, ' in activity: ', act.name);
+            console.log(req.user);
             db.users.findAndModify({ 
-              query: { _id: mongojs.ObjectId( req.user._id ) },
+              query: { _id: mongojs.ObjectId( req.user._id.toString() ) },
               update: { 
                 $push: {
                   activities: {
-                    id: req.body.act,
-                    gameName: doc.name,
+                    id: act._id,
+                    gameName: act.name,
                     player_id: player_id,
                   }
                 } 
@@ -293,7 +296,7 @@ module.exports = function( app , db ){
     console.log(user);
     if( user.isArtist ){
       db.activities.findAndModify({
-      query: { 
+        query: { 
           _id: mongojs.ObjectId( req.params.id ),
           group: {
             "$elemMatch": { "artist.id": user._id }
@@ -313,11 +316,12 @@ module.exports = function( app , db ){
           }
         });
     }else{
+      console.log(' Removing player from activity....');
       db.activities.findAndModify({
-      query: { 
+        query: { 
           _id: mongojs.ObjectId( req.params.id ),
           group: {
-            "$elemMatch": { "player.id": user._id }
+            "$elemMatch": { "player.id": mongojs.ObjectId(user._id) }
           }
         },
         update: { 
@@ -329,7 +333,7 @@ module.exports = function( app , db ){
             console.log(err);
             res.send( 404, 'remove user from activity' );
           } else {
-            console.log(doc);
+            console.log( 'remove user from activity: ', doc);
             res.json( doc );
           }
         });
@@ -340,26 +344,26 @@ module.exports = function( app , db ){
     var group = req.body;
     db.activities.findAndModify({
       query: { 
-          _id: mongojs.ObjectId( req.params.id ),
-          group: {
-            "$elemMatch": { character: group.character }
-          }
-        },
-        update: { 
-          "$set": {
-            "group.$.artist.id": group.artist.id,
-            "group.$.artist.name": group.artist.name,
-            "group.$.stream": group.stream
-          } 
-        }, new: true }, function(err, doc){
-          if(err){
-            console.log(err);
-            res.send( 404, 'changing artist in activity' );
-          } else {
-            console.log(doc);
-            res.json( doc );
-          }
-        });
+        _id: mongojs.ObjectId( req.params.id ),
+        group: {
+          "$elemMatch": { character: group.character }
+        }
+      },
+      update: { 
+        "$set": {
+          "group.$.artist.id": group.artist.id,
+          "group.$.artist.name": group.artist.name,
+          "group.$.stream": group.stream
+        } 
+      }, new: true }, function(err, doc){
+        if(err){
+          console.log(err);
+          res.send( 404, 'changing artist in activity' );
+        } else {
+          console.log(doc);
+          res.json( doc );
+        }
+      });
   });
 
   app.post('/admin/activitylist', function( req, res ){
@@ -441,14 +445,14 @@ module.exports = function( app , db ){
         }
       }
     }, function( err, doc ){
-        if(err){
-          console.log( 'deleting group err: ', err );
-          res.send( 404, err );
-        } else {
-          console.log( 'removing group success: ', doc );
-          res.json( doc );
-        }
-      });
+      if(err){
+        console.log( 'deleting group err: ', err );
+        res.send( 404, err );
+      } else {
+        console.log( 'removing group success: ', doc );
+        res.json( doc );
+      }
+    });
   });
 
   // need: user id
@@ -493,15 +497,15 @@ module.exports = function( app , db ){
         }
       },
     },function( err, doc ){
-        if(err){
-          console.log('delete activity from user: ', err);
-          res.send( 404, err );
-        } else {
-          console.log('delect activity from user success: ', doc);
-          res.json( doc );
-        }
+      if(err){
+        console.log('delete activity from user: ', err);
+        res.send( 404, err );
+      } else {
+        console.log('delect activity from user success: ', doc);
+        res.json( doc );
       }
-    );
+    }
+                          );
   });
 
   app.get('/admin/invite/:act_id/:character', function(req, res){

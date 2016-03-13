@@ -5,7 +5,6 @@
     
     var refreshUser = function() {
       $http.get('/user').success(function(response) {
-        console.log("I got the data I requested");
         $scope.user = response;
         $scope.ctrl = "";
       });
@@ -18,10 +17,11 @@
       })
     };
 
+    refreshUser();
     refreshList();
 
     $scope.addActivity = function( uid , acid ){
-      $http.put('/user/addActivity', $scope.ctrl).success(function(response) {
+      $http.post('/user/addActivity', $scope.ctrl).success(function(response) {
         console.log(response);
         refreshUser();
       });
