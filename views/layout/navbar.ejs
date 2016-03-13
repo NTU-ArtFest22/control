@@ -1,7 +1,13 @@
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" href="/">
         <img alt="Home" src="/images/NTUAF-copy.png" width="48px" height="27px">
       </a>
@@ -26,6 +32,7 @@
         <li><a href="/contact">Ping us</a></li>
       </ul>
 
+
       <!-- log in -->
       <% if (! locals['user']) { %>
         <ul class="nav navbar-nav navbar-right">
@@ -39,15 +46,17 @@
       <% } else { %>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <img src='http://graph.facebook.com/<%= user.fb.id %>/picture?type=normal' width="40px" height="40px"></img>
-              <p>Hello, <%= user.fb.displayName %>.</p>
-              <!--<p>ID: <%= user.fb.id %></p>-->
-              <!--<p>Email: <%= user.fb.email %></p>-->
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+              <!--<div class="pull-right navbar-text">-->
+                <!--<img src='http://graph.facebook.com/<%= user.fb.id %>/picture?type=normal' ></img>-->
+                <%= user.fb.displayName %>
+                <!--<p>ID: <%= user.fb.id %></p>-->
+                <!--<p>Email: <%= user.fb.email %></p>-->
+                <!--</div>-->
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
+              <li><a href="/profile">Profile</a></li>
               <li><a href="#">Enroll activity</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Log out</a></li>

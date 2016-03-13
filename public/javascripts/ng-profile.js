@@ -1,22 +1,31 @@
 (function(){
-  var app = angular.module('profile', [ '$scope', '$http' ]);
+  var app = angular.module('profile', [ ]);
 
-  var refresh = function() {
-    $http.get('/user').success(function(response) {
-      console.log("I got the data I requested");
-      $scope.user = response;
-      $scope.ctrl = "";
-    });
-  }
-
-  app.controller('ActivityCtrl', function($scope){
-    $scope.addActivity = function( uid , acid ){
-      $http.put('/user/addActivity', $scope.ctrl).success(function(response) {
-        console.log(response);
-        refresh();
+  app.controller('ActivityCtrl', function($scope, $http){
+    
+    var refreshUser = function() {
+      $http.get('/user').success(function(response) {
+        console.log("I got the data I requested");
+        $scope.user = response;
+        $scope.ctrl = "";
       });
     };
 
+    var refreshList = function(){
+      console.log('refreshing activity list');
+      $http.get('/activitylist').success(function(res){
+        $scope.activitylist = res;
+      })
+    };
+
+    refreshList();
+
+    $scope.addActivity = function( uid , acid ){
+      $http.put('/user/addActivity', $scope.ctrl).success(function(response) {
+        console.log(response);
+        refreshUser();
+      });
+    };
 
   });
 

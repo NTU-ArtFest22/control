@@ -1,11 +1,19 @@
-var moogoose = require('mongoose');
+var mongoose = require('mongoose');
 
-module.exports = moogoose.model('Activity', {
+var actSchema = mongoose.Schema({
   name: String,
   time: Date,
   group: [ {
-    artist: String,
-    player: String,
+    artist: {
+      id: String,
+      name: String,
+    },
+    player: {
+      id: String,
+      name: String
+    },
+    character: String,
     stream: String,
   } ],
-}); 
+}, { collection: 'activities' })
+module.exports = mongoose.model('Activity', actSchema); 

@@ -1,0 +1,98 @@
+<div class="modal-header">
+  <h3 class="modal-title">Edit user</h3>
+</div>
+<div class="modal-body" >
+
+  <div class="row">
+    <div class="col-xs-6 col-md-4" align="center">
+      <h4 class="data-title">name</h4>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8" align="center">
+      <h4 class="data-content">{{ editUser.fb.displayName }}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-md-4"  align="center">
+      <h4 class="data-title">facebook ID</h4>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8" align="center">
+      <h4 class="data-content">{{ editUser.fb.id }}</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-md-4" align="center">
+      <h4 class="data-title">Join time</h4>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8" align="center">
+      <h4 class="data-content">{{ editUser.time | date:'yyyy-MM-dd HH:mm:ss'}}</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-md-4" align="center">
+      <h4 class="data-title">Admin auth</h4>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8" align="center">
+      <h4 class="data-content"  style="display:inline-block;">{{ editUser.isAdmin ? "yes" : "no" }}</h4>
+      <button class="btn btn-danger btn-small"  style="display:inline-block;" ng-click="makeAdmin()">{{ editUser.isAdmin ? "Take away" : "Give auth" }}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-md-4" align="center">
+      <h4 class="data-title">Artist</h4>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8" align="center">
+      <h4 class="data-content"  style="display:inline-block;">{{ editUser.isArtist ? "yes" : "no" }}</h4>
+      <button class="btn btn-danger btn-small" style="display:inline-block;" ng-click="makeArtist()">{{ editUser.isArtist ? "Abort" : "Magic!" }}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <br>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-md-4" >
+      <img ng-src="http://graph.facebook.com/{{ editUser.fb.id }}/picture?type=normal" width="120px" height="120px"></img>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8" >
+      <div style="align: center;">
+        <form>
+          <select name="ActivitySelect" ng-model="ctrl.act" ng-options="act as act.name for act in activitylist" ng-change="actChange(ctrl.act)">
+            <option value="" selected>-- 活動 --</option>
+          </select>
+          <select name="CharacterSelect" ng-model="ctrl.character" ng-options="group.character as group.character for group in grouplist | filter: showOption">
+            <option value="" selected>-- 角色 --</option>
+          </select>
+
+          <button class="btn btn-primary" ng-click="addActivity()">Add Activity</button>
+        </form>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>no.</th>
+            <th>Activity</th>
+            <th>playerID</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="useract in editUser.activities">
+            <td>{{ useract.id }}</td>
+            <td>{{ useract.gameName }}</td>
+            <td>{{ useract.player_id }}</td>
+            <td><button class="btn btn-danger" ng-click="removeActivity( useract.id )">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>

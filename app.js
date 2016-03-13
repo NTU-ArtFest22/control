@@ -1,5 +1,6 @@
 var express           =     require('express')
   , passport          =     require('passport')
+  , mongoose          =     require('mongoose')
   , util              =     require('util')
   , FacebookStrategy  =     require('passport-facebook').Strategy
   , session           =     require('express-session')
@@ -11,13 +12,15 @@ var express           =     require('express')
   , favicon           =     require('serve-favicon')
   , app               =     express()
   , DBconfig          =     require('./config/db')
-  , mongoose          =     require('mongoose')
+  , mongojs           =     require('mongojs')
   , crypto            =     require('crypto')
-  , safety            =     require('./safety')
-  , User              =     require('./models/user');
+  , mongojs           =     require('mongojs')
+  , db                =     mongojs(DBconfig.url, [ 'users' , 'activities']);
 
-// connect to mongoDB database
 mongoose.connect(DBconfig.url);
+
+
+
 
 
 // view engine setup
@@ -37,8 +40,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
- // Using the flash middleware provided by connect-flash to store messages in session
- // and displaying in templates
+// Using the flash middleware provided by connect-flash to store messages in session
+// and displaying in templates
 var flash = require('connect-flash');
 app.use(flash());
 
@@ -47,17 +50,12 @@ app.use(flash());
 var initPassport = require('./passport/init');
 initPassport(passport);
 
-// add first admin
-User.findAndModify({'fb.id': '1247677651915123'},{"isAdmin": true}, function(err, doc ){
-  if(err)
-    console.log(err);
-});
 
 var routes = require('./routes/index')(passport);
 app.use('/', routes);
 
 
-require('./routes/data.js')( app );
+require('./routes/data.js')( app , db );
 
 
 

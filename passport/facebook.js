@@ -8,7 +8,8 @@ module.exports = function(passport) {
     clientID        : FBconfig.api_key,
     clientSecret    : FBconfig.api_secret,
     callbackURL     : FBconfig.callback_url,
-    profileFields   : ['id', 'displayName', 'emails']
+    profileFields   : ['id', 'displayName', 'emails'],
+    enableProof     : true
   },
 
   // facebook will send back the tokens and profile
@@ -20,17 +21,19 @@ module.exports = function(passport) {
     process.nextTick(function() {
 
       // find the user in the database based on their facebook id
-      User.findOne({ 'id' : profile.id }, function(err, user) {
+      User.findOne({ 'fb.id' : profile.id }, function(err, user) {
 
         // if there is an error, stop everything and return that
         // ie an error connecting to the database
-        if (err)
+        if (err){
           return done(err);
-
+        }
         // if the user is found, then log them in
         if (user) {
+          console.log('=========================== user ', profile.displayName ,' found in database');
           return done(null, user); // user found, return that user
         } else {
+          console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& new user ', profile.displayName ,' join us!!!!');
           // if there is no user found with that facebook id, create them
           var newUser = new User();
 
@@ -39,6 +42,9 @@ module.exports = function(passport) {
           newUser.fb.access_token =   profile.access_token; // we will save the token that facebook provides to the user
           newUser.fb.displayName  =   profile.displayName;
           newUser.fb.email        =   profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+          newUser.time            =   new Date().toISOString();
+          newUser.isAdmin         =   false;
+          newUser.isArtist        =   false;
 
           // save our user to the database
           newUser.save(function(err) {

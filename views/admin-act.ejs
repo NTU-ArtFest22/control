@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="admin-act">
+  <head>
+    <meta charset="utf-8">
+    <title>Control - Admin [ Activity ] </title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.1.js"></script>
+    <script src="/javascripts/ng-admin-act.js"></script>
+    <script src="/javascripts/lib/datetimepicker.js"></script>
+    
+    <link href="https://cdn.rawgit.com/zhaber/datetimepicker/master/datetimepicker.css" type="text/css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400italic' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <%- include layout/navbar %>
+
+
+    <div ng-controller="adminActCtrl">
+
+
+      <script type="text/ng-template" id="edit-act-modal.html">
+        <%- include layout/edit-act-modal %> 
+      </script>
+
+      <script type="text/ng-template" id="new-act-modal.html">
+        <%- include layout/new-act-modal %>
+      </script>
+
+      <a class="btn btn-primary" ng-click="newact()">New</a>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>         
+            <th>Date</th>
+            <th>Participant</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="act in actlist">
+            <td>{{ act.name }}</td>
+            <td>{{ act.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ act.group.length }}</td>
+            <td>
+              <button class="btn btn-warning" ng-click="open( act )" >Edit</button>
+              <button class="btn btn-danger" ng-click="remove( act._id)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+
+

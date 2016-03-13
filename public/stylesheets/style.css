@@ -1,6 +1,27 @@
+/*.navbar-nav > li > a {padding-top:10px !important; padding-bottom:10px !important;}*/
+/*.navbar {min-height:20px !important}*/
 
 body {
   padding-top: 70px; 
+}
+
+select {
+  width: auto;
+}
+
+.navbar-text img {
+  max-height:20px;
+  width:auto;
+  vertical-align:middle;
+}
+
+.data-title {
+  color: orange;
+  font-family: 'Alegreya Sans', sans-serif, italic;
+} 
+
+.data-content {
+  font-family: 'Alegreya Sans', sans-serif;
 }
 
 .fb-like {
