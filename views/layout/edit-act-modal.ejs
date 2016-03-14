@@ -1,0 +1,106 @@
+<div class="modal-header">
+  <h3 class="modal-title">Edit activity</h3>
+</div>
+<div class="modal-body" >
+
+  <form name="demo"> 
+    <div class="row">
+      <div class="col-xs-6 col-md-4">
+        <h4 class="data-title">name</h4>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-8">
+        <input class="form-control" ng-model="act.name" required />
+      </div>
+    </div>
+    <div >
+      <h4 class="data-title">Date & Time</h4>
+    </div>
+    <div align="center">
+      <pre>Selected time and date is: <em>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</em></pre>
+
+    <datetimepicker 
+    min-date="minDate" 
+    hour-step="hourStep" 
+    minute-step="minuteStep" ng-model="act.time" show-meridian="showMeridian" 
+    date-format="{{format}}" date-options="dateOptions"
+    date-disabled="disabled(date, mode)" 
+    datepicker-append-to-body="false"
+    readonly-date="false"
+    hidden-time="false"
+    hidden-date="false" 
+    name="datetimepicker"
+    show-spinners="true"
+    readonly-time="false"
+    date-opened="dateOpened"
+    >
+    <!-- Use date-ng-click="open($event, opened)" to override date ng-click -->
+    </datetimepicker>
+  </div>
+  <div class="form-group" align="right">
+    <strong>Gadget &nbsp;</strong>
+    <button class="btn btn-default btn-sm" ng-click="dateTimeNow()" tooltip="Set date and time to now">Now</button>
+    <button class="btn btn-default btn-sm" ng-click="timeToggleMode()">12H / 24H</button>
+    <button class="btn btn-default btn-sm" ng-click="resetMinute()">Reset minute</button>
+    <button class="btn btn-default btn-sm" ng-click="restore()">Restore time</button>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>Remember!</strong> Update or Add for each group!
+  </div>
+
+  <table class="table tableSection">
+    <thead>
+      <tr>
+        <th><span class="text">Artist</span></th>
+        <th><span class="text">Character</span></th>
+        <th><span class="text">Player</span></th>
+        <th><span class="text">Stream</span></th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <select name="ArtistSelect" ng-model="newgroup.artist" ng-options="artist as artist.fb.displayName for artist in artistlist">
+            <option value="" selected>-- Select --</option>
+          </select>
+        </td>
+        <td><input class="form-control" ng-model="newgroup.character" placeholder="stupid name" ng-disabled="isEditing"></td>
+        <!--<td><input class="form-control" ng-model="newgroup.player" placeholder="player _id"></td>-->
+        <td style="text-align: center;" >x</td>
+        <td><input class="form-control" ng-model="newgroup.stream"></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td><button class="btn btn-primary" ng-click="addGroup()" ng-disabled="isEditing">Add</button></td>
+        <td><button class="btn btn-info" ng-click="updateGroup()" ng-disabled="!isEditing">Update</button></td>
+        <td><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+      </tr>
+      <tr ng-repeat="group in act.group">
+        <td>{{ group.artist.name }}</td>
+        <td>{{ group.character }}</td>
+        <td ng-show="group.player">{{ group.player.name }}</td>
+        <td ng-hide="group.player"><button class="btn btn-info" ng-click="invite( group.character )">Invite</button></td>
+        <td>{{ group.stream }}</td>
+        <td><button class="btn btn-danger" ng-click="remove(group)">Del</button></td>
+        <td><button class="btn btn-warning" ng-click="edit(group)">Edit</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="submit" ng-click="saveEdit()">Save</button> 
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+
+</form>
+
+

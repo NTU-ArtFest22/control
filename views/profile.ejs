@@ -1,53 +1,58 @@
 <!DOCTYPE html>
-<html>
-  <head ng-app="profile">
+<html ng-app="profile">
+  <head>
     <meta charset="utf-8">
     <title>NTUAF Chat Room </title>
 
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="/javascripts/ng-profile.js"></script>
   </head>
 
-  <body>
+  <body ng-controller="ActivityCtrl">
 
     <%- include layout/navbar %>
 
-    <table class="table">
-      <tr><%= user.fb.displayName %></tr>
-      <tr>---- Activities ----</tr>
-      <tr>
-        <td>Activity</td>
-        <td>Character</td>
-      </tr>
-      <% for( var i = 0 ; i < user.activities.length ; i++ ) { %>
-        <% if( user.activities[ i ].isAttend ) { %>
-          <tr>
-            <td><%= user.activities[ i ].gameName %></td>
-            <td><%= user.activities[ i ].player_id %></td>
-          </tr>
-        <% } %>
-      <% } %>
-      <% if( typeof error !== 'undefined') { %>
-        <div class="alert alert-danger" role="alert">
-          <strong>Oh snap!</strong> Change the inviting code or selected activity and try submitting again.
-        </div>
-      <% } %>
-      <tr>
-        <form ng-controller="ActivityCtrl">
-          <h5>Activity</h5>
-          <select name="ActivitySelect" ng-model="ctrl.act" ng-options="act._id as act.name for act in activities">
-            <option value="" selected>-- Please select your activity --</option>
-          </select>
-          <h5>The code given</h5>
-          <input class="form" ng-model="ctrl.code" required></input>
-          <button class="btn btn-primary" ng-click="addActivity()">Add Activity</button>
+    <h3><%= user.fb.displayName %></h3>
 
-        </form>
-      </tr>
+    <br>
+    <% if( typeof error !== 'undefined') { %>
+      <div class="alert alert-danger" role="alert">
+        <strong>Oh snap!</strong> Change the inviting code or selected activity and try submitting again.
+      </div>
+    <% } %>
+
+    <form >
+      <h5>Activity</h5>
+      <select name="ActivitySelect" ng-model="ctrl.act" ng-options="act as act.name for act in activitylist">
+        <option value="" selected>-- Activity to add--</option>
+      </select>
+      <h5>The code given</h5>
+      <input class="form" ng-model="ctrl.code" required></input>
+      <button class="btn btn-primary" ng-click="addActivity()">Add Activity</button>
+
+    </form>
+
+    <h4>Activities</h4>
+
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Activity</th>
+          <th>Character</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="act in user.activities" >
+            <td>{{ act.gameName }}</td>
+            <td>{{ act.player_id }}</td>
+          </tr>
+      </tbody>
     </table>
 
     <%- include layout/fb-like %>
     <%- include layout/links %>
 
-    <script type="/javascripts/ng-profile.js"></script>
   </body>
 </html>
 

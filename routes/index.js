@@ -1,12 +1,13 @@
 var express = require('express')
   , router = express.Router()
   , User = require('../models/user.js')
-  , Activity = require('../models/activity.js');
+  , Activity = require('../models/activity.js')
+  , config = require('../config/config.js');
 
 var canAccessAdmin = function (req, res, next){
-  console.log(req);
-  if( req.user && req.user.isAdmin === true)
-    next();
+  //console.log(req);
+  if( req.user && ( req.user.isAdmin === true || req.user.fb.id === config.rootadmin_fbid ) )
+      next();
   else
     res.send(401, 'Unauthorized');
 };
@@ -36,6 +37,10 @@ module.exports = function(passport){
 
   router.get('/admin/user', canAccessAdmin, function(req, res){
     res.render('admin-user', { user: req.user });
+  });
+
+  router.get('/admin/activity', canAccessAdmin, function(req, res){
+    res.render('admin-act', { user: req.user });
   });
 
   router.get('/about', function(req, res) {

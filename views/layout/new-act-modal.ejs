@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <h3 class="modal-title">New activity</h3>
+</div>
+<div class="modal-body" >
+
+  <form name="demo"> 
+    <div class="row">
+      <div class="col-xs-6 col-md-4">
+        <h4 class="data-title">name</h4>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-8">
+        <input class="form-control" ng-model="act.name" placeholder="name" required />
+      </div>
+    </div>
+    <div >
+      <h4 class="data-title">Date & Time</h4>
+    </div>
+    <div align="center">
+      <pre>Selected time and date is: <em>{{act.time | date:'shortTime' }}, {{act.time | date:'fullDate' }}</em></pre>
+
+    <datetimepicker 
+    min-date="minDate" 
+    hour-step="hourStep" 
+    minute-step="minuteStep" ng-model="act.time" show-meridian="showMeridian" 
+    date-format="{{format}}" date-options="dateOptions"
+    date-disabled="disabled(date, mode)" 
+    datepicker-append-to-body="false"
+    readonly-date="false"
+    hidden-time="false"
+    hidden-date="false" 
+    name="datetimepicker"
+    show-spinners="true"
+    readonly-time="false"
+    date-opened="dateOpened"
+    >
+    <!-- Use date-ng-click="open($event, opened)" to override date ng-click -->
+    </datetimepicker>
+  </div>
+  <div class="form-group" align="right">
+    <strong>Gadget &nbsp;</strong>
+    <button class="btn btn-default btn-sm" ng-click="dateTimeNow()" tooltip="Set date and time to now">Now</button>
+    <button class="btn btn-default btn-sm" ng-click="timeToggleMode()">12H / 24H</button>
+    <button class="btn btn-default btn-sm" ng-click="resetMinute()">Reset minute</button>
+  </div>
+
+
+
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="submit" ng-click="save()">Save</button> 
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+
+</form>
+
