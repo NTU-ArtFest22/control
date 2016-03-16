@@ -77,3 +77,41 @@ button[disabled], input[disabled], select[disabled] {
 video {
     width: 26%;
 }
+
+
+.localStream {
+  display: inline-block;
+  top: 15px;
+  right: 15px;
+  float: right;
+}
+
+.localStream video {
+    border: 5px solid rgb(119, 119, 119);
+    outline: 0px none;
+    height: 240px;
+    width: 320px;
+}
+
+.remoteStreams{
+  display: inline-block;
+  top: 15px;
+  right: 15px;
+  float: left;
+  text-align: center;
+}
+
+.remoteStreams td:hover {
+  cursor: pointer;
+  background-color: #aaa;
+}
+
+.remoteStreams .selected {
+  background-color: #444 !important;
+  text-shadow:none;
+  border-right-color: #aaa;
+  border-left: none;
+  border-radius: 3px 3px 3px 3px; 
+  box-shadow:inset 1px 2px 6px #070707;
+}
+

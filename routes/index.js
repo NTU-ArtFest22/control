@@ -22,7 +22,7 @@ var isAuthenticated = function (req, res, next) {
   res.redirect('/');
 }
 
-module.exports = function(passport){
+module.exports = function(passport, streams){
 
   /* GET login page. */
   router.get('/', function(req, res) {
@@ -78,6 +78,25 @@ module.exports = function(passport){
     res.render('profile', { message: req.flash('message') , user: req.user});
   });
 
+  router.get('/streams.json', function(req, res){
+    var streamList = streams.getStreams();
+    // JSON exploit to clone streamList.public
+    var data = (JSON.parse(JSON.stringify(streamList))); 
+
+    res.status(200).json(data);
+  });
+
+  router.get('/stream', function(req, res){
+    res.render('stream', { user: req.user });
+  });
+
+  router.get('/stream/trial', function(req, res){
+    res.render('stream-talk', { user: req.user , username: 'UserName', share: 'Why need share?'});
+  })
+
+  router.get('/stream/:id', function(req, res){
+    res.render('stream-talk', { user: req.user, stream_id: req.params.id , username: 'UserName'});
+  })
 
 
 

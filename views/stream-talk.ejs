@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="stream-window">
+  <head>
+    <meta charset="utf-8">
+    <title>NTUAF Chat Room </title>
+
+    <base href="/" />
+
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/javascripts/lib/adapter.js"></script>
+    <script type="text/javascript" src="/javascripts/lib/rtcClient.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script type="text/javascript" src="/javascripts/ng-stream.js"></script>
+  </head>
+
+  <body>
+    <%- include layout/navbar %>
+
+
+    <% if( locals['stream_id'] ) { %>
+      <%= stream_id %>
+    <% } %>
+
+  	<%- include layout/local %>
+
+  	<%- include layout/remote %>
+
+
+
+
+
+    <%- include layout/fb-like %>
+
+    <%- include layout/links %>
+
+  </body>
+</html>
+

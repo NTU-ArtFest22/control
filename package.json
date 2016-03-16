@@ -5,7 +5,8 @@
   "author": "Amy Lin <linamy85@gmail.com> ",
   "description": "Web interface of NTUAF control project",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node app.js",
+    "stop": "forever stopall"
   },
   "main": "./server.js",
   "keywords": [
@@ -14,9 +15,12 @@
     "signaling",
     "reliable",
     "javascript",
-    "rtcmulticonnection",
+    "projectRTC",
     "NTUAF",
-    "Control"
+    "Control",
+    "bootstrap",
+    "angularJS",
+    "express"
   ],
   "analyze": false,
   "license": "MIT",
@@ -28,8 +32,11 @@
     "crypto": "0.0.3",
     "debug": "~2.2.0",
     "ejs": "1.0.0",
+    "errorhandler": "^1.4.3",
     "express": "~4.13.1",
     "express-session": "1.7.6",
+    "forever": "^0.15.1",
+    "method-override": "^2.3.5",
     "mongojs": "^2.3.0",
     "mongoose": "^4.4.2",
     "mongoose-validator": "^1.2.4",
@@ -38,7 +45,7 @@
     "passport-facebook": "^2.1.0",
     "reliable-signaler": "1.0.2",
     "serve-favicon": "~2.3.0",
-    "socket.io": "^0.9.17",
+    "socket.io": "^1.4.5",
     "underscore": "^1.8.3"
   }
 }
