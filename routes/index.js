@@ -61,15 +61,22 @@ module.exports = function(passport){
     res.redirect('/');
   });
 
-  router.get('/api/login/:access_token', function(req,res){
-    var access_token = req.params.access_token;
+  router.get('/api/login/:access_id', function(req,res){
+    var access_id = req.params.access_id;
     return User
-    .findOne({fb: {access_token: access_token}})
+    .findOne({"fb.id": access_id}, function(err, user){
+      return res.json(user)
+    })
+  });
+
+  router.get('/api/usr/get_all/', function(req,res){
+    
+    return User
+    .find()
     .then(function(user){
       return res.json(user)
     })
-  })
-
+  });
   // route for facebook authentication and login
   // different scopes while logging in
   router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] } ));

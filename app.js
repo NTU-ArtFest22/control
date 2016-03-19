@@ -35,7 +35,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // TODO: why need this?
-app.use(session({ secret: 'amy22627683', key: 'ntuaf'}));
+app.use(session({ secret: 'amy22627683', key: 'ntuaf', resave: true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
