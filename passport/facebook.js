@@ -16,6 +16,7 @@ module.exports = function(passport) {
   function(accessToken, refreshToken, profile, done) {
 
     console.log('profile', profile);
+    console.log(accessToken);
 
     // asynchronous
     process.nextTick(function() {
@@ -39,7 +40,7 @@ module.exports = function(passport) {
 
           // set all of the facebook information in our user model
           newUser.fb.id           =   profile.id; // set the users facebook id
-          newUser.fb.access_token =   profile.access_token; // we will save the token that facebook provides to the user
+          newUser.fb.access_token =   accessToken; // we will save the token that facebook provides to the user
           newUser.fb.displayName  =   profile.displayName;
           newUser.fb.email        =   profile.emails[0].value; // facebook can return multiple emails so we'll take the first
           newUser.time            =   new Date().toISOString();
