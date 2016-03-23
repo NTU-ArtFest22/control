@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
 		email: String
 	},
   activities: [ {
-    id: mongoose.Schema.Types.ObjectId,
+    id: {type:mongoose.Schema.Types.ObjectId, ref:'Activity'},
     gameName: String,
     player_id: String,
   } ], // Number as the hash of activity
