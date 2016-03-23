@@ -1,8 +1,15 @@
 module.exports = function(io, streams) {
+  console.log('ready for connection');
+
 
   io.on('connection', function(client) {
-    console.log('-- ' + client.id + ' joined --');
+    var userid = client.request.session.passport.user;
+
+    console.log('----------------------');
+    console.log(userid);
+    console.log('-- ' + client.id + '  aka  ' + userid + ' joined --');
     client.emit('id', client.id);
+
 
     client.on('message', function (details) {
       var otherClient = io.sockets.connected[details.to];
@@ -17,7 +24,7 @@ module.exports = function(io, streams) {
       
     client.on('readyToStream', function(options) {
       console.log('-- ' + client.id + ' is ready to stream --');
-      
+      //userToClientId[ userid ] = client.id;  
       streams.addStream(client.id, options.name); 
     });
     

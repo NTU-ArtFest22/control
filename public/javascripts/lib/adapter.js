@@ -226,6 +226,7 @@ function requestUserMedia(constraints) {
     } catch (e) {
       reject(e);
     }
+
   });
 }
 

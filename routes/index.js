@@ -90,14 +90,7 @@ module.exports = function(passport, streams){
     res.render('stream', { user: req.user });
   });
 
-  router.get('/stream/trial', function(req, res){
-    res.render('stream-talk', { user: req.user , username: 'UserName', share: 'Why need share?'});
-  })
-
-  router.get('/stream/:id', function(req, res){
-    res.render('stream-talk', { user: req.user, stream_id: req.params.id , username: 'UserName'});
-  })
-
+  
 
 
   //module.exports = router;

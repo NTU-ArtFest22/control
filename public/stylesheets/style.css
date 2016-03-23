@@ -74,11 +74,6 @@ button[disabled], input[disabled], select[disabled] {
 }
 
 
-video {
-    width: 26%;
-}
-
-
 .localStream {
   display: inline-block;
   top: 15px;

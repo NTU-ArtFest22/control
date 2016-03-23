@@ -41,7 +41,7 @@ module.exports = function( app , db ){
         },
         update: { 
           "$set": {
-            "group.$.player.id": req.user._id,
+            "group.$.player.id": req.user._id.toString(),
             "group.$.player.name": req.user.fb.displayName
           } 
         }, new: true }, function (err, doc) {
@@ -321,7 +321,7 @@ module.exports = function( app , db ){
         query: { 
           _id: mongojs.ObjectId( req.params.id ),
           group: {
-            "$elemMatch": { "player.id": mongojs.ObjectId(user._id) }
+            "$elemMatch": { "player.id": user._id }
           }
         },
         update: { 
@@ -467,7 +467,7 @@ module.exports = function( app , db ){
       },
       update: {
         $set: {
-          "group.$.player.id": player.id,
+          "group.$.player.id": player.id.toString(),
           "group.$.player.name": player.name
         }
       }, 
@@ -511,4 +511,47 @@ module.exports = function( app , db ){
   app.get('/admin/invite/:act_id/:character', function(req, res){
     res.json( safety.encrypt( req.params.act_id, req.params.character ) );
   });
+
+  /* type: artist / [ character ] */
+  app.get('/profile/:act/:type', function(req, res){
+    
+    var query = ( req.params.type == "artist" ) ? 
+      { "_id": mongojs.ObjectId( req.params.act ), "group.artist.id": req.user._id.toString() }
+    : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
+    
+    console.log( "query", query );
+      
+    db.activities.findOne(
+      query,
+      { 'group.$': 1 },
+      function(err, act){
+        if(err){
+          console.log('find activity group error: ', err);
+          res.send( 404, err );
+        } else {
+          console.log('                   got act  :', act);
+          console.log('got user activity group: ', act.group[0]);
+          res.render('stream-talk', { group:  act.group[0] , user: req.user});
+        }
+    })  
+  });
+
+  /* type: artist / [ character ] */
+  app.get('/group/:act/:type', function(req, res){
+    
+    var query = ( req.params.type == "artist" ) ? 
+      { "_id": mongojs.ObjectId( req.params.act ), "group.artist.id": req.user._id.toString() }
+    : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
+      
+    db.activities.findOne(
+      query,
+      { 'group.$': 1 },
+      function(err, act){
+        if(err){
+          res.send( 404, err );
+        } else {
+          res.json( act.group[0] );
+        }
+    })  
+  })
 };

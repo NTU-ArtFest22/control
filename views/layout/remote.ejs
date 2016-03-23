@@ -3,23 +3,31 @@
 
 	<div id="remoteVideosContainer"></div>
 
-	<table>
-    	<thead>
-    		<tr>
-        		<th>Stream</th><th>1-way</th><th>2-way</th>
-   			</tr>
-   		</thead>
-    	<tbody>
-    		<tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
-        		<td><a>{{stream.name}}</a></td>
-                <td ng-click="rtc.view(stream)"><a>View</a></td>
-                <td ng-click="rtc.call(stream)"><a>Call</a></td>
-    		</tr>
-		</tbody>
-	</table>
+  
+  <!-- if the stream url is invalid, press reload -->
+      <a class="btn btn-primary" href="{{ rtc.group.stream }}" ng-show="rtc.group.stream">Check In</a>
+      <a class="btn btn-primary" ng-click="rtc.reloadGroup()" ng-show="rtc.group">Reload</a>
+  
 
-	<li ng-click="rtc.loadData()" style="width: 240px">
-        <a href>Refresh</a>
-    </li>
-<div class="remoteStreams">
+
+  <div ng-click="rtc.loadData()" style="width: 240px">
+    <a class="btn btn-primary" href>Refresh</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Stream</th><th>1-way</th><th>2-way</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
+        <td><a>{{stream.name}}</a></td>
+        <td ng-click="rtc.view(stream)"><a>View</a></td>
+        <td ng-click="rtc.call(stream)"><a>Call</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="remoteStreams">
 

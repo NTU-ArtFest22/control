@@ -40,12 +40,14 @@
         <tr>
           <th>Activity</th>
           <th>Character</th>
+          <th>Go</th>
         </tr>
       </thead>
       <tbody>
           <tr ng-repeat="act in user.activities" >
             <td>{{ act.gameName }}</td>
             <td>{{ act.player_id }}</td>
+            <td><a class="btn btn-primary" href="/profile/{{ act.id }}/{{ act.player_id }}">Go</a></td>
           </tr>
       </tbody>
     </table>
