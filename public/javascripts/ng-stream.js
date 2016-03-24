@@ -11,6 +11,8 @@
         }
     };
 
+    var loc = window.location.pathname;
+    var param = loc.split('/');
 
     app.factory('camera', ['$rootScope', '$window', function($rootScope, $window){
     	var camera = {};
@@ -70,74 +72,90 @@
         return;
       }
       $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
+        if(!data)
+          return;
         rtc.group = data;        
         console.log( rtc.group );
+        if( rtc.group.stream ){
+          var found = false;
+          for( var astream in rtc.remoteStreams ){
+            if( astream.id == rtc.group.stream ){
+              found = true;
+            }
+          }
+          if(!found){
+            rtc.group.stream = "";
+            $http.put('/group/' + param[2] + '/artist', { "link": '' }).success(function(data){
+              console.log(data);
+            });
+          }
+        }
       });
     };
 
-    rtc.reloadGroup();
 
-    
+
     rtc.loadData = function () {
-			// get list of streams from the server
-			$http.get('/streams.json').success(function(data){
+      // get list of streams from the server
+      $http.get('/streams.json').success(function(data){
         console.log('=========================');
         console.log(data);
         console.log('=========================');
-				// filter own stream
-				var streams = data.filter(function(stream) {
-			      	return stream.id != client.getId();
-			    });
-			    // get former state
-			    for(var i=0; i<streams.length;i++) {
-			    	var stream = getStreamById(streams[i].id);
-			    	streams[i].isPlaying = (!!stream) ? stream.isPLaying : false;
-			    }
-			    // save new streams
-			    rtc.remoteStreams = streams;
-			});
-		};
+        // filter own stream
+        var streams = data.filter(function(stream) {
+          return stream.id != client.getId();
+        });
+        // get former state
+        for(var i=0; i<streams.length;i++) {
+          var stream = getStreamById(streams[i].id);
+          streams[i].isPlaying = (!!stream) ? stream.isPLaying : false;
+        }
+        // save new streams
+        rtc.remoteStreams = streams;
+      });
+    };
 
-		rtc.view = function(stream){
-			client.peerInit(stream.id);
-			stream.isPlaying = !stream.isPlaying;
-		};
-		rtc.call = function(stream){
-			/* If json isn't loaded yet, construct a new stream 
-			 * This happens when you load <serverUrl>/<socketId> : 
-			 * it calls socketId immediatly.
-			**/
-			if(!stream.id){
-				stream = {id: stream, isPlaying: false};
-				rtc.remoteStreams.push(stream);
-			}
-			if(camera.isOn){
-				client.toggleLocalStream(stream.id);
-				if(stream.isPlaying){
-					client.peerRenegociate(stream.id);
-				} else {
-					client.peerInit(stream.id);
-				}
-				stream.isPlaying = !stream.isPlaying;
-			} else {
-				camera.start()
-				.then(function(result) {
-					client.toggleLocalStream(stream.id);
-					if(stream.isPlaying){
-						client.peerRenegociate(stream.id);
-					} else {
-						client.peerInit(stream.id);
-					}
-					stream.isPlaying = !stream.isPlaying;
-				})
-				.catch(function(err) {
-					console.log(err);
-				});
-			}
-		};
+    rtc.view = function(stream){
+      client.peerInit(stream.id);
+      stream.isPlaying = !stream.isPlaying;
+    };
+    rtc.call = function(stream){
+      /* If json isn't loaded yet, construct a new stream 
+       * This happens when you load <serverUrl>/<socketId> : 
+       * it calls socketId immediatly.
+       **/
+      if(!stream.id){
+        stream = {id: stream, isPlaying: false};
+        rtc.remoteStreams.push(stream);
+      }
+      if(camera.isOn){
+        client.toggleLocalStream(stream.id);
+        if(stream.isPlaying){
+          client.peerRenegociate(stream.id);
+        } else {
+          client.peerInit(stream.id);
+        }
+        stream.isPlaying = !stream.isPlaying;
+      } else {
+        camera.start()
+        .then(function(result) {
+          client.toggleLocalStream(stream.id);
+          if(stream.isPlaying){
+            client.peerRenegociate(stream.id);
+          } else {
+            client.peerInit(stream.id);
+          }
+          stream.isPlaying = !stream.isPlaying;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+      }
+    };
 
-		//initial load
+    //initial load
     rtc.loadData();
+    rtc.reloadGroup();
     if($location.url() != '/stream/trial' && ! $location.url().startsWith('/profile/')){
       rtc.call($location.url().slice(8));
     };
@@ -150,8 +168,7 @@
     localStream.cameraIsOn = false;
 
 
-    var loc = window.location.pathname;
-    var param = loc.split('/');
+
 
     $scope.$on('cameraIsOn', function(event,data) {
       $scope.$apply(function() {

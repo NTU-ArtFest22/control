@@ -20,14 +20,13 @@ var express           =     require('express')
   , db                =     mongojs(DBconfig.url, [ 'users' , 'activities'])
   , port              =     normalizePort(process.env.PORT || '5000')
   , debug             =     require('debug')('passport-mongo')
-  , http              =     require('http')
-  , connectMongo      =     require('connect-mongo/es5')
-  , sessionMiddle     =     session({
-                                name: 'control',
-                                store: new (require("connect-mongo")(session))({ url: DBconfig.url }),
-                                secret: 'oh my goddddd'
-                            });
-
+  , http              =     require('http');
+  //, connectMongo      =     require('connect-mongo')
+  //, sessionMiddle     =     session({
+                                //name: 'control',
+                                ////store: new (require("connect-mongo")(session))({ url: DBconfig.url }),
+                                //secret: 'oh my goddddd'
+                            //});
 
   mongoose.connect(DBconfig.url);
 
@@ -45,7 +44,8 @@ var express           =     require('express')
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(methodOverride());
   // TODO: why need this?
-  app.use(sessionMiddle);
+  //app.use(sessionMiddle);
+  app.use(session({ secret: 'amy22627683', key: 'ntuaf'}));
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -105,10 +105,10 @@ var express           =     require('express')
   var server = http.createServer(app);
   var io = require('socket.io').listen(server);
 
-  io.use(function(socket, next){
-    // Wrap the express middleware
-    sessionMiddle(socket.request, {}, next);
-  })
+  //io.use(function(socket, next){
+    //// Wrap the express middleware
+    //sessionMiddle(socket.request, {}, next);
+  //})
 
   server.listen( port, function(){
     console.log("server listening on port", port);
