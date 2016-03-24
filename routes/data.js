@@ -579,4 +579,37 @@ module.exports = function( app , db ){
       }
     });
   });
+  app.get('/api/act/update_stream/:access_id/:act_id/:callid', function(req,res){
+    var access_id = req.params.access_id;
+    var act_id = req.params.act_id;
+    var callid = req.params.callid;
+
+    User.findOne({"fb.id": access_id}, function(err, user){
+        
+        db.activities.findAndModify({
+          query: { 
+            "_id": mongojs.ObjectId(act_id), 
+            "group": { 
+              $elemMatch: { "artist.id": user._id.toString() }
+            }
+          },
+          update: {
+            $set: {
+              "group.$.stream": callid
+            }
+          }, 
+          new: true
+        }, function(err, doc){
+          if(err){
+            console.log('putting character error: ', err);
+            res.send( 404, err );
+          } else {
+            console.log('putting character: ', doc);
+            res.json( doc );
+          }
+        });
+      
+    });
+    
+  });
 };

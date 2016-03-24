@@ -21,7 +21,7 @@ var express           =     require('express')
   , port              =     normalizePort(process.env.PORT || '5000')
   , debug             =     require('debug')('passport-mongo')
   , http              =     require('http')
-  , connectMongo      =     require('connect-mongo')
+  , connectMongo      =     require('connect-mongo/es5')
   , sessionMiddle     =     session({
                                 name: 'control',
                                 store: new (require("connect-mongo")(session))({ url: DBconfig.url }),

@@ -76,7 +76,6 @@ module.exports = function(passport, streams){
     
     return User
     .find()
-    .populate('Activity')
     .exec(function(err, doc){
       return res.json(doc)
     })
@@ -84,13 +83,11 @@ module.exports = function(passport, streams){
   router.get('/api/act/get_all/:access_id', function(req,res){
     var access_id = req.params.access_id;
     return User
-    .findOne({"fb.id": access_id}, function(err, user){
-
-
-      return res.json(user.activities);
-    });
-    
+    .findOne({"fb.id":access_id}, function(err, user){
+      return res.json(user.activities)
+    })
   });
+  
   // route for facebook authentication and login
   // different scopes while logging in
   router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] } ));
