@@ -3,11 +3,9 @@ module.exports = function(io, streams) {
 
 
   io.on('connection', function(client) {
-    var userid = client.request.session.passport.user;
+    //var userid = client.request.session.passport.user;
 
-    console.log('----------------------');
-    console.log(userid);
-    console.log('-- ' + client.id + '  aka  ' + userid + ' joined --');
+    console.log('-- ' + client.id);
     client.emit('id', client.id);
 
 
