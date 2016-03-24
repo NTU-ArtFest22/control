@@ -1,6 +1,7 @@
 {
   "name": "NTUAF-control",
   "preferGlobal": true,
+  "private": true,
   "version": "0.0.0",
   "author": "Amy Lin <linamy85@gmail.com> ",
   "description": "Web interface of NTUAF control project",
@@ -48,5 +49,8 @@
     "serve-favicon": "~2.3.0",
     "socket.io": "1.0",
     "underscore": "^1.8.3"
+  },
+  "repository": {
+    "type": "git",   "url": "git://github.com/NTU-ArtFest22/control.git" 
   }
 }

@@ -50,7 +50,6 @@ var express           =     require('express')
   app.use(passport.initialize());
   app.use(passport.session());
 
-
   // Using the flash middleware provided by connect-flash to store messages in session
   // and displaying in templates
   var flash = require('connect-flash');
@@ -60,7 +59,6 @@ var express           =     require('express')
   // Initialize Passport
   var initPassport = require('./passport/init');
   initPassport(passport);
-
 
   var routes = require('./routes/index')(passport, streams);
   app.use('/', routes);

@@ -5,11 +5,11 @@ var actSchema = mongoose.Schema({
   time: Date,
   group: [ {
     artist: {
-      id: String,
+      id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
       name: String,
     },
     player: {
-      id: String,
+      id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
       name: String,
     },
     character: String,

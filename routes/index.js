@@ -60,7 +60,37 @@ module.exports = function(passport, streams){
     req.logout();
     res.redirect('/');
   });
+  
+  router.get('/api/login/:access_id', function(req,res){
+    var access_id = req.params.access_id;
+    return User
+    .findOne({"fb.id": access_id}, function(err, user){
 
+
+      return res.json(user);
+    });
+    
+  });
+
+  router.get('/api/usr/get_all/', function(req,res){
+    
+    return User
+    .find()
+    .populate('Activity')
+    .exec(function(err, doc){
+      return res.json(doc)
+    })
+  });
+  router.get('/api/act/get_all/:access_id', function(req,res){
+    var access_id = req.params.access_id;
+    return User
+    .findOne({"fb.id": access_id}, function(err, user){
+
+
+      return res.json(user.activities);
+    });
+    
+  });
   // route for facebook authentication and login
   // different scopes while logging in
   router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] } ));
