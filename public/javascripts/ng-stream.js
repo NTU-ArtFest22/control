@@ -143,11 +143,15 @@
     };
   }]);
 
-  app.controller('LocalStreamController',['camera', '$scope', '$window', function(camera, $scope, $window){
+  app.controller('LocalStreamController',['camera', '$scope', '$window', '$http', function(camera, $scope, $window, $http){
     var localStream = this;
     localStream.name = 'Guest';
     localStream.link = '';
     localStream.cameraIsOn = false;
+
+
+    var loc = window.location.pathname;
+    var param = loc.split('/');
 
     $scope.$on('cameraIsOn', function(event,data) {
       $scope.$apply(function() {
@@ -157,11 +161,21 @@
     });
 
     $scope.addStreamUrl = function(){
-
+      if(localStream.link){
+        var llink = localStream.link;
+        var linkparam = llink.split('/');
+        $http.put('/group/' + param[2] + '/artist', { "link": linkparam[ linkparam.length-1 ] }).success(function(data){
+          console.log(data);
+        });
+      }else{
+        return;
+      }
     };
 
     $scope.removeStreamUrl = function(){
-
+      $http.put('/group/' + param[2] + '/artist', { "link": '' }).success(function(data){
+        console.log(data);
+      });
     };
 
     localStream.toggleCam = function(){

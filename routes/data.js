@@ -554,4 +554,29 @@ module.exports = function( app , db ){
         }
     })  
   })
+
+  app.put('/group/:act/artist', function(req, res){
+    db.activities.findAndModify({
+      query: { 
+        "_id": mongojs.ObjectId( req.params.act ), 
+        "group": { 
+          $elemMatch: { "artist.id": req.user._id.toString() }
+        }
+      },
+      update: {
+        $set: {
+          "group.$.stream": req.body.link
+        }
+      }, 
+      new: true
+    }, function(err, doc){
+      if(err){
+        console.log('putting character error: ', err);
+        res.send( 404, err );
+      } else {
+        console.log('putting character: ', doc);
+        res.json( doc );
+      }
+    });
+  });
 };
