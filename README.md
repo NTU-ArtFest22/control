@@ -11,3 +11,4 @@ Usage:
   and perhaps,
   + config/db.js      ->  url ( mongodb url & port )
   
+**Please make sure `mongo` is running**
