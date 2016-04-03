@@ -613,9 +613,9 @@ module.exports = function( app , db ){
     
   });
 app.post('/git/autosync', function(req, res){
-    var content = req.body;
+    var content = req.body.ref;
     console.log(content);
-    return res.json(true);
+    return res.json(content=='refs/heads/master');
     // test commit
   });
   
