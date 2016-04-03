@@ -4,3 +4,4 @@ npm-debug.log
 *.crt
 *.key
 *.csr
+fb.js
