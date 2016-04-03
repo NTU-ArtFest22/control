@@ -34,6 +34,7 @@ var express           =     require('express')
   var options = {
     key: fs.readFileSync('./file.key'),
     cert: fs.readFileSync('./1_ntuaf.ddns.net_bundle.crt')
+    passphrase: ''
   };
 
   // view engine setup
