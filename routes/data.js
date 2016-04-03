@@ -612,4 +612,11 @@ module.exports = function( app , db ){
     });
     
   });
+app.post('/git/autosync', function(req, res){
+    var act = req.body;
+    console.log(res.json(act));
+    
+  });
+  
+
 };
