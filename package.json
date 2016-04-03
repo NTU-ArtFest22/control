@@ -6,7 +6,7 @@
   "author": "Amy Lin <linamy85@gmail.com> ",
   "description": "Web interface of NTUAF control project",
   "scripts": {
-    "start": "supervisor app.js",
+    "start": "nodejs app.js",
     "stop": "forever stopall"
   },
   "main": "./server.js",
