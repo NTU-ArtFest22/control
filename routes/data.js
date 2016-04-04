@@ -615,6 +615,7 @@ module.exports = function( app , db ){
   // auto sync by github webhook..
   app.post('/git/autosync', function(req, res){
     var content = req.body.ref;
+    console.log(req.body);
     if (content=='refs/heads/master') {
       console.log("=====code update=====");
       console.log("commit by "+'unknown');
