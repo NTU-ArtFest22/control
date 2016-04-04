@@ -616,12 +616,10 @@ module.exports = function( app , db ){
   app.post('/git/autosync', function(req, res){
     var content = req.body.ref;
     if (content=='refs/heads/master') {
-      var author = req.body.commits.committer;
       console.log("=====code update=====");
-      console.log("commit by "+author);
+      console.log("commit by "+'unknown');
       console.log("time: "+(new Date()).toString());
       console.log("updating...");
-      console.log(req.body);
       test  = new run_cmd(
           'git', ['pull'],
           function (me, buffer) { me.stdout += buffer.toString() },
