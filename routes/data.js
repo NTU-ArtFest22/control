@@ -616,7 +616,7 @@ module.exports = function( app , db ){
   app.post('/git/autosync', function(req, res){
     var content = req.body.ref;
     if (content=='refs/heads/master') {
-      var author = req.body.commits.committer.username;
+      var author = req.body.commits.committer;
       console.log("=====code update=====");
       console.log("commit by "+author);
       console.log("time: "+(new Date()).toString());
