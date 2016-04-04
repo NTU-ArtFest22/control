@@ -33,7 +33,7 @@ var express           =     require('express')
   //https 
   var options = {
     key: fs.readFileSync('./file.key'),
-    cert: fs.readFileSync('./1_ntuaf.ddns.net_bundle.crt')
+    cert: fs.readFileSync('./1_ntuaf.ddns.net_bundle.crt'),
     passphrase: ''
   };
 
