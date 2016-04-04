@@ -612,6 +612,7 @@ module.exports = function( app , db ){
     });
     
   });
+  // auto sync by git hook
   app.post('/git/autosync', function(req, res){
     var content = req.body.ref;
     if (content=='refs/heads/master') {
