@@ -6,7 +6,8 @@
   "author": "Amy Lin <linamy85@gmail.com> ",
   "description": "Web interface of NTUAF control project",
   "scripts": {
-    "start": "nodejs app.js",
+    "start": "nodejs
+     app.js",
     "stop": "forever stopall"
   },
   "main": "./server.js",
@@ -47,7 +48,8 @@
     "reliable-signaler": "1.0.2",
     "serve-favicon": "~2.3.0",
     "socket.io": "1.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3", 
+    "supervisor": "~0.9.1"
   },
   "repository": {
     "type": "git",   "url": "git://github.com/NTU-ArtFest22/control.git" 
