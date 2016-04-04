@@ -616,7 +616,9 @@ module.exports = function( app , db ){
   app.post('/git/autosync', function(req, res){
     var content = req.body.ref;
     if (content=='refs/heads/master') {
+      var author = req.body.commits.committer.name;
       console.log("=====code update=====");
+      console.log("commit by "+author);
       console.log("updating...");
       test  = new run_cmd(
           'git', ['pull'],
