@@ -616,9 +616,11 @@ module.exports = function( app , db ){
     var content = req.body.ref;
     if (content=='refs/heads/master') {
       console.log(true);
-      test = run_cmd("git", ['pull'], function (me, buffer){
-        console.log(buffer.toString());
-      });
+      test  = new run_cmd(
+          'git', ['pull'],
+          function (me, buffer) { me.stdout += buffer.toString() },
+          function () { console.log(test.stdout) }
+      );
     }
     // 
     return res.json(true);
@@ -626,3 +628,10 @@ module.exports = function( app , db ){
   });
 }
 
+function run_cmd(cmd, args, cb, end) {
+    var spawn = require('child_process').spawn,
+        child = spawn(cmd, args),
+        me = this;
+    child.stdout.on('data', function (buffer) { cb(me, buffer) });
+    child.stdout.on('end', end);
+}
