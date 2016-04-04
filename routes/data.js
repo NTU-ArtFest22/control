@@ -612,18 +612,17 @@ module.exports = function( app , db ){
     });
     
   });
-app.post('/git/autosync', function(req, res){
+  app.post('/git/autosync', function(req, res){
     var content = req.body.ref;
     if (content=='refs/heads/master') {
       console.log(true);
-      run_cmd("git", ['pull'], function (me, buffer){
+      test = run_cmd("git", ['pull'], function (me, buffer){
         console.log(buffer.toString());
-      );
+      });
     }
     
     return res.json(true);
     // test commit
   });
-  
+}
 
-};
