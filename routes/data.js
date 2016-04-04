@@ -615,14 +615,15 @@ module.exports = function( app , db ){
   app.post('/git/autosync', function(req, res){
     var content = req.body.ref;
     if (content=='refs/heads/master') {
-      console.log("code updating...");
+      console.log("=====code update=====");
+      console.log("updating...");
       test  = new run_cmd(
           'git', ['pull'],
           function (me, buffer) { me.stdout += buffer.toString() },
-          function () { console.log("git sync finished...");console.log(test.stdout) }
+          function () { console.log("git sync finished...");console.log(test.stdout);console.log("=====code update=====\n\n"); }
       );
     }
-    
+
     return res.json(true);
     // test commit
   });
