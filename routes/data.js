@@ -621,6 +621,7 @@ module.exports = function( app , db ){
       console.log("commit by "+author);
       console.log("time: "+(new Date()).toString());
       console.log("updating...");
+      console.log(req.body);
       test  = new run_cmd(
           'git', ['pull'],
           function (me, buffer) { me.stdout += buffer.toString() },
