@@ -623,9 +623,7 @@ module.exports = function( app , db ){
           function () { console.log("git sync finished...");console.log(test.stdout);console.log("=====code update=====\n\n"); }
       );
     }
-
     return res.json(true);
-    // test commit
   });
 }
 
