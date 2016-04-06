@@ -20,7 +20,8 @@ var isAuthenticated = function (req, res, next) {
     return next();
   // if the user is not authenticated then redirect him to the login page
   res.redirect('/');
-}
+};
+
 
 module.exports = function(passport, streams){
 
@@ -65,8 +66,6 @@ module.exports = function(passport, streams){
     var access_id = req.params.access_id;
     return User
     .findOne({"fb.id": access_id}, function(err, user){
-
-
       return res.json(user);
     });
     
@@ -90,13 +89,21 @@ module.exports = function(passport, streams){
   
   // route for facebook authentication and login
   // different scopes while logging in
-  router.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] } ));
+  router.get('/auth/facebook',
+    passport.authenticate('facebook', { scope : ['public_profile', 'email'] } )
+  );
 
   // handle the callback after facebook has authenticated the user
-  router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect : '/profile/',
-    failureRedirect : '/'
-  }));
+  router.get('/auth/facebook/callback', function(req, res){
+    console.log('---------------------------- hi there!!!! ----------------------------- : ', req.session.redirect_url);
+    //var redirect = req.session.redirect_url ? req.session.redirect_url : '/profile';
+    //delete req.session.redirect_url;
+    var redirect = '/profile';
+    passport.authenticate('facebook', {
+      successRedirect : redirect,
+      failureRedirect : '/'
+    })
+  });
 
   router.get('/profile', function(req, res){
     if(!req.user)

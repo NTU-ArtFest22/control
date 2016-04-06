@@ -13,6 +13,12 @@ var canAccessAdmin = function (req, res, next){
     res.send(401, 'Unauthorized');
 };
 
+var errorfunc = function( req, res ){
+  res.render('/profile', {
+    error: req.flash('error', 'The code is invalid, please check the url or contact us'),
+    user: req.user
+  });
+};
 
 module.exports = function( app , db ){
 
@@ -20,6 +26,86 @@ module.exports = function( app , db ){
     console.log('getting user: ', req.user);
     res.json(req.user);
   });
+
+  app.get('/register/:act_id/:code', function(req,res){
+    var act_id = req.params.act_id;
+    var code = req.params.code;
+
+    if( !req.user ){
+      req.session.redirect_url = '/register/' + act_id + '/' + code;
+      res.redirect('/auth/facebook');
+    }else{
+      var player_id = safety.decrypt( act_id , code );
+      if(! player_id ){
+        errorfunc(req, res);
+      }else{
+        console.log(req.body.code , ' --> ', player_id);
+        db.activities.find(
+          { "_id": mongojs.ObjectId( act_id ) },
+          function( err, act ){
+            if(err || !act){
+              console.log(err);
+              errorfunc(req, res);
+            } else {
+              var act_name = act.name;
+              for( var group in act.group ){
+                if( group.character == player_id ){
+                  if( group.player && group.player.name )
+                    errorfunc(req, res);
+                  else
+                    break;
+                }
+              }
+
+              db.activities.findAndModify({
+                query: { 
+                  _id: mongojs.ObjectId( act_id ),
+                  group: {
+                    "$elemMatch": { character: player_id.toString() }
+                  }
+                },
+                update: { 
+                  "$set": {
+                    "group.$.player.id": req.user._id.toString(),
+                    "group.$.player.name": req.user.fb.displayName
+                  } 
+                }, new: true }, function (err, doc) {
+                  if(err){
+                    errorfunc(req, res);
+                  }
+                  else{
+                    console.log('============== >>> Found character: ', player_id, ' in activity: ', act_name);
+                    console.log(req.user);
+                    db.users.findAndModify({ 
+                      query: { _id: mongojs.ObjectId( req.user._id.toString() ) },
+                      update: { 
+                        $push: {
+                          activities: {
+                            id: act_id,
+                            gameName: act_name,
+                            player_id: player_id,
+                          }
+                        } 
+                      }, new: true
+                    }, function( err, doc ){
+                      if(err){
+                        console.log('user add activity error: ', err);
+                        res.send( 404, 'user add activity error' );
+                      } else {
+                        res.render( '/profile', { user: req.user } );
+                        console.log( doc );
+                      }
+                    });
+                  }
+                });
+            }
+          }
+        )
+
+      }
+    }
+  });
+
 
   app.post('/user/addActivity', function(req, res){
     var act = req.body.act;
@@ -113,14 +199,14 @@ module.exports = function( app , db ){
   app.get('/admin/artistlist/:act_id', function(req, res){
     User.find(
       { $nor: [ 
-          { isArtist: false },
-          { group: 
-            { $elemMatch: {
-              "id": mongojs.ObjectId( req.params.act_id )
-              }
-            }  
-          } 
-        ]
+        { isArtist: false },
+        { group: 
+          { $elemMatch: {
+          "id": mongojs.ObjectId( req.params.act_id )
+        }
+        }  
+        } 
+      ]
       },
       function(err, list){
         if(err){
@@ -514,45 +600,45 @@ module.exports = function( app , db ){
 
   /* type: artist / [ character ] */
   app.get('/profile/:act/:type', function(req, res){
-    
+
     var query = ( req.params.type == "artist" ) ? 
       { "_id": mongojs.ObjectId( req.params.act ), "group.artist.id": req.user._id.toString() }
-    : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
-    
-    console.log( "query", query );
-      
-    db.activities.findOne(
-      query,
-      { 'group.$': 1 },
-      function(err, act){
-        if(err){
-          console.log('find activity group error: ', err);
-          res.send( 404, err );
-        } else {
-          console.log('                   got act  :', act);
-          console.log('got user activity group: ', act.group[0]);
-          res.render('stream-talk', { group:  act.group[0] , user: req.user});
-        }
-    })  
+        : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
+
+        console.log( "query", query );
+
+        db.activities.findOne(
+          query,
+          { 'group.$': 1 },
+          function(err, act){
+            if(err){
+              console.log('find activity group error: ', err);
+              res.send( 404, err );
+            } else {
+              console.log('                   got act  :', act);
+              console.log('got user activity group: ', act.group[0]);
+              res.render('stream-talk', { group:  act.group[0] , user: req.user});
+            }
+          })  
   });
 
   /* type: artist / [ character ] */
   app.get('/group/:act/:type', function(req, res){
-    
+
     var query = ( req.params.type == "artist" ) ? 
       { "_id": mongojs.ObjectId( req.params.act ), "group.artist.id": req.user._id.toString() }
-    : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
-      
-    db.activities.findOne(
-      query,
-      { 'group.$': 1 },
-      function(err, act){
-        if(err){
-          res.send( 404, err );
-        } else {
-          res.json( act.group[0] );
-        }
-    })  
+        : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
+
+        db.activities.findOne(
+          query,
+          { 'group.$': 1 },
+          function(err, act){
+            if(err){
+              res.send( 404, err );
+            } else {
+              res.json( act.group[0] );
+            }
+          })  
   })
 
   app.put('/group/:act/artist', function(req, res){
@@ -585,31 +671,31 @@ module.exports = function( app , db ){
     var callid = req.params.callid;
 
     User.findOne({"fb.id": access_id}, function(err, user){
-        
-        db.activities.findAndModify({
-          query: { 
-            "_id": mongojs.ObjectId(act_id), 
-            "group": { 
-              $elemMatch: { "artist.id": user._id.toString() }
-            }
-          },
-          update: {
-            $set: {
-              "group.$.stream": callid
-            }
-          }, 
-          new: true
-        }, function(err, doc){
-          if(err){
-            console.log('putting character error: ', err);
-            res.send( 404, err );
-          } else {
-            console.log('putting character: ', doc);
-            res.json( doc );
+
+      db.activities.findAndModify({
+        query: { 
+          "_id": mongojs.ObjectId(act_id), 
+          "group": { 
+            $elemMatch: { "artist.id": user._id.toString() }
           }
-        });
-      
+        },
+        update: {
+          $set: {
+            "group.$.stream": callid
+          }
+        }, 
+        new: true
+      }, function(err, doc){
+        if(err){
+          console.log('putting character error: ', err);
+          res.send( 404, err );
+        } else {
+          console.log('putting character: ', doc);
+          res.json( doc );
+        }
+      });
+
     });
-    
+
   });
 };
