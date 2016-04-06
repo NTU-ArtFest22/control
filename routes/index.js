@@ -94,10 +94,17 @@ module.exports = function(passport, streams){
   );
 
   // handle the callback after facebook has authenticated the user
-  router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-      successRedirect : '/profile',
-      failureRedirect : '/'
-    }));
+  router.get('/auth/facebook/callback', 
+      passport.authenticate('facebook', {  failureRedirect : '/' } ),
+      function(req, res){
+        var redirect = '/profile';
+        if( req.session.redirect_url ){
+          redirect = req.session.redirect_url;
+          delete req.session.redirect_url;
+        }
+        res.redirect( redirect );
+      }
+  );
   /* 
    function(req, res){
     console.log('---------------------------- hi there!!!! ----------------------------- : ', req.session.redirect_url);
