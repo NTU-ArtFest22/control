@@ -47,7 +47,8 @@ module.exports = function(passport) {
           newUser.fb.id           =   profile.id; // set the users facebook id
           newUser.fb.access_token =   accessToken; // we will save the token that facebook provides to the user
           newUser.fb.displayName  =   profile.displayName;
-          newUser.fb.email        =   profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+          if( profile.emails && profile.emails.length > 0 )
+            newUser.fb.email        =   profile.emails[0].value; // facebook can return multiple emails so we'll take the first
           newUser.time            =   new Date().toISOString();
           newUser.isAdmin         =   false;
           newUser.isArtist        =   false;
