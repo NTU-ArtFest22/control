@@ -698,4 +698,28 @@ module.exports = function( app , db ){
     });
 
   });
-};
+  // auto sync by github webhook.
+  app.post('/git/autosync', function(req, res){
+    var content = req.body.ref;
+    if (content=='refs/heads/master') {
+      console.log("=====code update=====");
+      console.log("commit by "+'unknown');
+      console.log("time: "+(new Date()).toString());
+      console.log("updating...");
+      test  = new run_cmd(
+          'git', ['pull'],
+          function (me, buffer) { me.stdout += buffer.toString() },
+          function () { console.log("git sync finished...");console.log(test.stdout);console.log("=====code update=====\n\n"); }
+      );
+    }
+    return res.json(true);
+  });
+}
+
+function run_cmd(cmd, args, cb, end) {
+    var spawn = require('child_process').spawn,
+        child = spawn(cmd, args),
+        me = this;
+    child.stdout.on('data', function (buffer) { cb(me, buffer) });
+    child.stdout.on('end', end);
+}

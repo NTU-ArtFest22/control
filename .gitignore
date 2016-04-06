@@ -1,3 +1,7 @@
 node_modules/
 record.md
 npm-debug.log
+*.crt
+*.key
+*.csr
+config/fb.js

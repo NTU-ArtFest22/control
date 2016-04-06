@@ -18,9 +18,10 @@ var express           =     require('express')
   ,	methodOverride    =     require('method-override')
   ,	errorHandler      =     require('errorhandler')
   , db                =     mongojs(DBconfig.url, [ 'users' , 'activities'])
-  , port              =     normalizePort(process.env.PORT || '5000')
+  , port              =     normalizePort(process.env.PORT || '443')
   , debug             =     require('debug')('passport-mongo')
-  , http              =     require('http');
+  , https              =     require('https')
+  , fs                =     require('fs');
   //, connectMongo      =     require('connect-mongo')
   //, sessionMiddle     =     session({
                                 //name: 'control',
@@ -29,7 +30,12 @@ var express           =     require('express')
                             //});
 
   mongoose.connect(DBconfig.url);
-
+  //https 
+  var options = {
+    key: fs.readFileSync('./file.key'),
+    cert: fs.readFileSync('./1_ntuaf.ddns.net_bundle.crt'),
+    passphrase: ''
+  };
 
   // view engine setup
   app.set('views', path.join(__dirname, 'views'));
@@ -102,7 +108,7 @@ var express           =     require('express')
     });
   });
 
-  var server = http.createServer(app);
+  var server = https.createServer(options, app);
   var io = require('socket.io').listen(server);
 
   //io.use(function(socket, next){
