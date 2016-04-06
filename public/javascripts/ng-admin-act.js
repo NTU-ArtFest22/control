@@ -193,7 +193,7 @@
     $scope.invite = function( character ){
       $http.get('/admin/invite/' + $scope.act._id + '/' + character).then(
         function(res){
-          $window.prompt('Here is invite code: (Ctrl + c)' , res.data);
+          $window.prompt('Here is invite link: (Ctrl + c)' , 'https://ntuaf.ddns.net/register/' + $scope.act._id + '/' + res.data);
         }, function(res){
           console.log('invite failed');
         }
