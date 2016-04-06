@@ -14,7 +14,7 @@ var canAccessAdmin = function (req, res, next){
 };
 
 var errorfunc = function( req, res ){
-  res.render('/profile', {
+  res.render('profile', {
     error: req.flash('error', 'The code is invalid, please check the url or contact us'),
     user: req.user
   });
@@ -92,7 +92,7 @@ module.exports = function( app , db ){
                         console.log('user add activity error: ', err);
                         res.send( 404, 'user add activity error' );
                       } else {
-                        res.render( '/profile', { user: req.user } );
+                        res.redirect( '/profile');
                         console.log( doc );
                       }
                     });
@@ -111,7 +111,7 @@ module.exports = function( app , db ){
     var act = req.body.act;
     var player_id = safety.decrypt( act._id , req.body.code );
     if(! player_id ){
-      res.render('/profile', {
+      res.render('profile', {
         error: req.flash('error', 'The code is invalid'),
         user: req.user
       });
@@ -132,7 +132,7 @@ module.exports = function( app , db ){
           } 
         }, new: true }, function (err, doc) {
           if(err){
-            res.render('/profile', {
+            res.render('profile', {
               error: req.flash('error', 'The code is invalid'),
               user: req.user,
             });
