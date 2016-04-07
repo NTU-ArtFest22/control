@@ -21,13 +21,25 @@ var express           =     require('express')
   , port              =     normalizePort(process.env.PORT || '443')
   , debug             =     require('debug')('passport-mongo')
   , https              =     require('https')
-  , fs                =     require('fs');
+  , fs                =     require('fs')
+  , http              =     require('http');
   //, connectMongo      =     require('connect-mongo')
   //, sessionMiddle     =     session({
                                 //name: 'control',
                                 ////store: new (require("connect-mongo")(session))({ url: DBconfig.url }),
                                 //secret: 'oh my goddddd'
                             //});
+
+// For redirect to https
+  var http = express.createServer();
+  // set up a route to redirect http to https
+  http.get('*',function(req,res){  
+      res.redirect('https://'+req.headers['host']+req.url)
+  })
+  http.listen(80);
+  // finish
+
+
 
   mongoose.connect(DBconfig.url);
   //https 
