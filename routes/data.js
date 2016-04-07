@@ -626,7 +626,7 @@ module.exports = function( app , db ){
 
         db.activities.findOne(
           query,
-          { 'group.$': 1 },
+          { 'group.$': 1 , 'isRunning':1},
           function(err, act){
             if(err){
               console.log('find activity group error: ', err);
