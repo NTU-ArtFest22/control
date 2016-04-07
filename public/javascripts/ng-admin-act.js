@@ -157,6 +157,7 @@
       var put = $scope.act.isRunning ? 'n' : 'y';
       $http.put('/admin/activitylist/' + $scope.act._id + '/' + put).success( function( res ){
         console.log('put activity to ', put, 'result: ' , res);
+        refresh_act();
       });
     }
 
