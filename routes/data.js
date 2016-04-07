@@ -634,7 +634,10 @@ module.exports = function( app , db ){
             } else {
               console.log('                   got act  :', act);
               console.log('got user activity group: ', act.group[0]);
-              res.render('stream-talk', { group:  act.group[0] , user: req.user});
+              if( act.isRunning )
+                res.render('stream-talk', { group:  act.group[0] , user: req.user});
+              else
+                res.render('profile', { warning: 'hasnot start' });
             }
           })  
   });

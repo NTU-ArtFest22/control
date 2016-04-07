@@ -21,6 +21,11 @@
       </div>
     <% } %>
 
+    <% if( typeof warning !== 'undefined' ){ %>
+      <div class="alert alert-danger" role="alert">
+        <strong>Sorry!</strong> 活動還沒開始呦！
+      </div>
+    <% } %>
     <form >
       <h5>Activity</h5>
       <select name="ActivitySelect" ng-model="ctrl.act" ng-options="act as act.name for act in activitylist">
@@ -47,7 +52,7 @@
           <tr ng-repeat="act in user.activities" >
             <td>{{ act.gameName }}</td>
             <td>{{ act.player_id }}</td>
-            <td><a class="btn btn-primary" href="/profile/{{ act.id }}/{{ act.player_id }}">Go</a></td>
+            <td><a class="btn btn-primary" ng-href="/profile/{{ act.id }}/{{ act.player_id }}">Go</a></td>
           </tr>
       </tbody>
     </table>

@@ -105,19 +105,7 @@ module.exports = function(passport, streams){
         res.redirect( redirect );
       }
   );
-  /* 
-   function(req, res){
-    console.log('---------------------------- hi there!!!! ----------------------------- : ', req.session.redirect_url);
-    //var redirect = req.session.redirect_url ? req.session.redirect_url : '/profile';
-    //delete req.session.redirect_url;
-    var redirect = '/profile';
-    passport.authenticate('facebook', {
-      successRedirect : redirect,
-      failureRedirect : '/'
-    })
-  } 
-  */
-
+  
   router.get('/profile', function(req, res){
     if(!req.user)
       res.redirect('/auth/facebook');
