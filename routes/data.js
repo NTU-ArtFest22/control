@@ -362,7 +362,7 @@ module.exports = function( app , db ){
 
   app.put('/admin/activitylist/:id/:put', function(req, res){
     var setput = req.params.put == 'y' ? true : false;
-    db.activities.findAndModify(
+    db.activities.findAndModify({
       query: { "_id": mongojs.ObjectId( req.params.id ) },
       update: { $set: {
         isRunning: setput
