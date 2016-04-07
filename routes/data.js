@@ -637,7 +637,7 @@ module.exports = function( app , db ){
               if( act.isRunning )
                 res.render('stream-talk', { group:  act.group[0] , user: req.user});
               else
-                res.render('profile', { warning: 'hasnot start' });
+                res.render('profile', { warning: 'hasnot start' , user: req.user});
             }
           })  
   });
