@@ -43,11 +43,13 @@ module.exports = function( app , db ){
         db.activities.find(
           { "_id": mongojs.ObjectId( act_id ) },
           function( err, act ){
+            console.log( act )
             if(err || !act){
               console.log(err);
               errorfunc(req, res);
             } else {
               var act_name = act.name;
+              console.log('============================ found: ' , act_name ,'  =====================================');
               for( var group in act.group ){
                 if( group.character == player_id ){
                   if( group.player && group.player.name )
