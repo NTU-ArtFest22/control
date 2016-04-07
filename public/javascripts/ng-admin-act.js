@@ -153,6 +153,14 @@
      * time function end 
      ************/
 
+    $scope.toggleAct = function(){
+      var put = $scope.act.isRunning ? 'n' : 'y';
+      $http.put('/admin/activitylist/' + $scope.act._id + '/' + put).success( function( res ){
+        console.log('put activity to ', put, 'result: ' , res);
+      });
+    }
+
+
     $scope.remove = function( group ){
       var ans = $window.confirm('Are you sure to remove the group ' + group.character + '?');
       if( ans ){

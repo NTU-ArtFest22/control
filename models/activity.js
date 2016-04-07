@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var actSchema = mongoose.Schema({
   name: String,
   time: Date,
+  isRunning: Boolean,
   group: [ {
     artist: {
       id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
