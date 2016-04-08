@@ -25,7 +25,8 @@
           $scope.activitylist = res;
 
           for( var i = 0 ; i < $scope.user.activities.length ; i++ ){
-            for( var act in $scope.activitylist ){
+            for( var act_i in $scope.activitylist ){
+              var act = $scope.activitylist[ act_i ];
               if( act._id == $scope.user.activities[i].id ){
                 $scope.user.activities[i].location = act.location;
                 $scope.user.activities[i].time = act.time;
