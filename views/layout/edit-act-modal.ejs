@@ -88,7 +88,7 @@
         <td>{{ group.character }}</td>
         <td ng-show="group.player">{{ group.player.name }}</td>
         <td ng-hide="group.player"><button class="btn btn-info" ng-click="invite( group.character )">Invite</button></td>
-        <td>{{ group.stream }}</td>
+        <td>{{ group.stream ? 'V' : '---'}}</td>
         <td><button class="btn btn-danger" ng-click="remove(group)">Del</button></td>
         <td><button class="btn btn-warning" ng-click="edit(group)">Edit</button></td>
       </tr>
