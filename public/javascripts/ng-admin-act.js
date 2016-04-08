@@ -316,8 +316,8 @@
      *********************/
 
     $scope.saveEdit = function(){
-      if( ! $scope.act.name ){
-        console.log('no name orz');
+      if( ! $scope.act.name || ! $scope.act.location ){
+        console.log('no name or location orz');
         return;
       }
       $http.put( '/admin/activitylist/' + $scope.act._id , $scope.act).then(

@@ -11,6 +11,9 @@
       <div class="col-xs-12 col-sm-6 col-md-8">
         <input class="form-control" ng-model="act.name" required />
       </div>
+      <div class="col-xs-12 col-sm-6 col-md-8">
+        <input class="form-control" ng-model="act.location" required />
+      </div>
     </div>
     <div>
       <a class="btn btn-warning btn-block" ng-click="toggleAct()" >{{ act.isRunning ? "Close Activity" : "Run Activity" }}</a>
@@ -45,6 +48,8 @@
     <button class="btn btn-default btn-sm" ng-click="resetMinute()">Reset minute</button>
     <button class="btn btn-default btn-sm" ng-click="restore()">Restore time</button>
   </div>
+
+    <button class="btn btn-primary" align="right" type="submit" ng-click="saveEdit()">Save</button> 
 
   <div class="alert alert-info">
     <strong>Remember!</strong> Update or Add for each group!
@@ -99,7 +104,6 @@
 
 
   <div class="modal-footer">
-    <button class="btn btn-primary" type="submit" ng-click="saveEdit()">Save</button> 
     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
   </div>
 

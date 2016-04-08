@@ -44,15 +44,19 @@
       <thead>
         <tr>
           <th>Activity</th>
+          <th>Time</th>
           <th>Character</th>
+          <th>Location</th>
           <th>Go</th>
         </tr>
       </thead>
       <tbody>
           <tr ng-repeat="act in user.activities" >
             <td>{{ act.gameName }}</td>
+            <td>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</td>
             <td>{{ act.player_id }}</td>
-            <td><a class="btn btn-primary" ng-href="/profile/{{ act.id }}/{{ act.player_id }}">Go</a></td>
+            <td>{{ act.location }}</td>
+            <td><a class="btn btn-primary" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a></td>
           </tr>
       </tbody>
     </table>

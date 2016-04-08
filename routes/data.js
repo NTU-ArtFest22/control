@@ -383,6 +383,7 @@ module.exports = function( app , db ){
       update: { $set: {
         name: req.body.name,
         time: req.body.time,
+        location: req.body.location,
       }}, new: true}, function(err, doc){
         if(err){
           console.log('put err: ', err);

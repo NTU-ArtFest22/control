@@ -4,6 +4,7 @@ var actSchema = mongoose.Schema({
   name: String,
   time: Date,
   isRunning: Boolean,
+  location: String,
   group: [ {
     artist: {
       id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
