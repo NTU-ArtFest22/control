@@ -80,6 +80,8 @@
         rtc.group = data.group[0];        
         $scope.act = data;
         console.log( 'reload group: ', rtc.group );
+        if( rtc.group.stream )
+          rtc.call( rtc.group.stream );
         // if( rtc.group.stream ){
         //   var found = false;
         //   for( var astream in rtc.remoteStreams ){
