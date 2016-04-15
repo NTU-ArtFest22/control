@@ -687,12 +687,11 @@ module.exports = function( app , db ){
       }
     });
   });
-  app.get('/api/act/update_stream/:access_id/:act_id/:callid/:battery', function(req,res){
+  app.get('/api/act/update_stream/:access_id/:act_id/:callid', function(req,res){
     var access_id = req.params.access_id;
     var act_id = req.params.act_id;
     var callid = req.params.callid;
-    var battery = req.params.battery;
-    var time = new Date();
+
     User.findOne({"fb.id": access_id}, function(err, user){
 
       db.activities.findAndModify({
@@ -704,10 +703,7 @@ module.exports = function( app , db ){
         },
         update: {
           $set: {
-            "group.$.artist.gps.longi": longi,
-            "group.$.artist.gps.lati": lati,
-            "group.$.artist.gps.battery": battery,
-            "group.$.artist.gps.time": time,
+            "group.$.stream": callid
           }
         }, 
         new: true
@@ -717,7 +713,7 @@ module.exports = function( app , db ){
           res.send( 404, err );
         } else {
           console.log('putting character: ', doc);
-          res.json( true );
+          res.json( doc );
         }
       });
 
@@ -740,11 +736,12 @@ module.exports = function( app , db ){
     }
     return res.json(true);
   });
-  app.get('/api/act/gpslog/:act_id/:artist_id/:longi/:lati', function(req, res){
+  app.get('/api/act/gpslog/:act_id/:artist_id/:longi/:lati/:battery', function(req, res){
     var act_id = req.params.act_id;
     var access_id = req.params.artist_id;
     var longi = req.params.longi;
     var lati = req.params.lati;
+    var battery = req.params.battery;
     var time = new Date();
     User.findOne({"fb.id": access_id}, function(err, user){
 
@@ -760,6 +757,7 @@ module.exports = function( app , db ){
             "group.$.artist.gps.longi": longi,
             "group.$.artist.gps.lati": lati,
             "group.$.artist.gps.time": time,
+            "group.$.artist.gps.battery": battery,
 
           }
         }, 
