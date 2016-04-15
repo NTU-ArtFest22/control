@@ -645,7 +645,7 @@ module.exports = function( app , db ){
   });
 
   /* type: artist / [ character ] */
-  app.get('/group/:act/:type', function(req, res){
+  app.get('/group/:act/:type', isAuthenticated, function(req, res){
 
     var query = ( req.params.type == "artist" ) ? 
       { "_id": mongojs.ObjectId( req.params.act ), "group.artist.id": req.user._id.toString() }
@@ -663,7 +663,7 @@ module.exports = function( app , db ){
           })  
   })
 
-  app.put('/group/:act/artist', function(req, res){
+  app.put('/group/:act/artist', isAuthenticated, function(req, res){
     db.activities.findAndModify({
       query: { 
         "_id": mongojs.ObjectId( req.params.act ), 
