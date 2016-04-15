@@ -53,7 +53,7 @@
 		return camera;
     }]);
 
-	app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', function(camera, $location, $http, $timeout){
+	app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
 
 		var rtc = this;
 
