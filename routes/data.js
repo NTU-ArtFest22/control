@@ -767,8 +767,9 @@ module.exports = function( app , db ){
           console.log('putting character error: ', err);
           res.send( 404, err );
         } else {
-          console.log('putting character: ', doc);
-          res.json( doc );
+          console.log('GPS-logger', 'act_id:'+act_id+', artist_id:'+artist_id+', '+time)
+          
+          res.json( true );
         }
       });
 
