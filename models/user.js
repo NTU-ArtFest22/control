@@ -17,6 +17,7 @@ var UserSchema = new mongoose.Schema({
   time: Date,
   isAdmin: Boolean,
   isArtist: Boolean,
+  isDoll: Boolean,
 });
 
 //User.plugin(passportLocalMongoose);

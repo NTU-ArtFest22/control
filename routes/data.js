@@ -220,7 +220,8 @@ module.exports = function( app , db ){
     )
   });
 
-  app.put('/admin/makeadmin/:id', function(req, res){
+  app.put('/admin/:cmd/:id', function(req, res){
+
     var id = req.params.id;
     User.findOne(
       { "_id": mongojs.ObjectId( id ) },
@@ -228,10 +229,17 @@ module.exports = function( app , db ){
         if(err)
           console.log(err, "**********************************");
         else{
-          console.log(user, "**********************************");
-          console.log( "put makeAdmin" );
-
-          user.isAdmin = !user.isAdmin;
+          if( req.params.cmd == 'makeadmin' )
+            user.isAdmin = !user.isAdmin;
+          else if (req.params.cmd == 'makeartist')
+            user.isArtist = !user.isArtist;
+          else if( req.params.cmd == 'makedoll' ){
+            if( user.isDoll )
+              user.isDoll = false;
+            else
+              user.isDoll = true;
+          }
+            
 
           user.save(function(err, doc){
             if(err){
@@ -244,30 +252,6 @@ module.exports = function( app , db ){
       }
     );
 
-  });
-
-  app.put('/admin/makeartist/:id', function(req, res){
-    var id = req.params.id;
-    User.findOne(
-      { "_id": mongojs.ObjectId( id ) },
-      function(err, user){
-        if(err)
-          console.log(err, ' error make artist..........');
-        else{
-          console.log(user, ' sucuccess make artist..........');
-          console.log( "put makeAdmin" );
-
-          user.isArtist = !user.isArtist;
-          user.save(function(err, doc){
-            if(err){
-              res.send(500, 'user.save error');
-            }else{
-              res.json( doc );
-            }
-          });
-        }
-      }
-    );
   });
 
   // no creation of user
@@ -608,8 +592,7 @@ module.exports = function( app , db ){
         console.log('delect activity from user success: ', doc);
         res.json( doc );
       }
-    }
-                          );
+    });
   });
 
   app.get('/admin/invite/:act_id/:character', function(req, res){
@@ -652,7 +635,7 @@ module.exports = function( app , db ){
 
         db.activities.findOne(
           query,
-          { 'group.$': 1 },
+          { 'group.$': 1 , 'name': 1 },
           function(err, act){
             if(err){
               res.send( 404, err );

@@ -53,9 +53,12 @@
 		return camera;
     }]);
 
-	app.controller('RemoteStreamsController', ['camera', '$location', '$http', function(camera, $location, $http){
+	app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', function(camera, $location, $http, $timeout){
 
 		var rtc = this;
+
+    $scope.countTime = 0;
+
 		rtc.remoteStreams = [];
 		function getStreamById(id) {
 		    for(var i=0; i<rtc.remoteStreams.length;i++) {
@@ -63,7 +66,7 @@
 		    }
 		}
 
-    
+
     rtc.reloadGroup = function(){
       var loc = window.location.pathname;
       var param = loc.split('/');
@@ -74,7 +77,8 @@
       $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
         if(!data)
           return;
-        rtc.group = data;        
+        rtc.group = data.group[0];        
+        $scope.act = data;
         console.log( rtc.group );
         if( rtc.group.stream ){
           var found = false;
@@ -152,6 +156,25 @@
         });
       }
     };
+
+    $scope.onTimeout = function(){
+      $scope.countTime++;
+      if( $scope.countTime == 20){
+        rtc.loadData();
+        rtc.reloadGroup();  
+        $scope.countTime = 0;
+      }
+      mytimeout = $timeout($scope.onTimeout,1000);
+    };
+
+    var mytimeout = $timeout( $scope.onTimeout, 1000);
+
+    rtc.userReloadGroup() = function(){
+      rtc.loadData();
+      rtc.reloadGroup();
+      $scope.countTime = 0;
+      $timeout($scope.onTimeout, 1000);
+    }
 
     //initial load
     rtc.loadData();

@@ -9,7 +9,6 @@
     "start": "supervisor app.js",
     "stop": "forever stopall"
   },
-  "main": "./server.js",
   "keywords": [
     "webrtc",
     "signaler",

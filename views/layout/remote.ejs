@@ -3,30 +3,16 @@
 
   <div id="remoteVideosContainer"></div>
 
-
-  <table>
-
-  </table>
-
-
   <div class="table-responsive" align="center">
+    <a class="btn btn-primary"  ng-click="rtc.loadData()" href>  Refresh Now! </a>
     <table class="table-striped">
       <thead>
         <tr>
-          <th>
-            <!-- if the stream url is invalid, press reload -->
-            <a class="btn btn-success" ng-href="/stream/{{ rtc.group.stream }}" ng-show="rtc.group.stream">    Check In    </a>
-          </th>
-          <th><a class="btn btn-warning" ng-click="rtc.reloadGroup()" ng-show="rtc.group">  Reload  </a></th>
-          <th>
-            <a class="btn btn-primary"  ng-click="rtc.loadData()" href>  Refresh  </a>
-          </th>
+          <th>Stream</th><th>1-way</th><th>2-way</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Stream</td><td>1-way</td><td>2-way</td>
-        </tr>
+  
         <tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
           <td><a>{{stream.name}}</a></td>
           <td ng-click="rtc.view(stream)"><a>View</a></td>

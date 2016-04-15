@@ -16,15 +16,29 @@
   <body>
     <%- include layout/navbar %>
 
-
-
   	<%- include layout/local %>
 
-  	<%- include layout/remote %>
+  	<div class="remoteStreams" ng-controller="RemoteStreamsController as rtc">
+    <h2>Remote Streams</h2>
 
+  <div id="remoteVideosContainer"></div>
 
+  <h3>{{ rtc.group.character }} @ {{ act.name }}</h3>
 
+  <div class="row">
+    <div class="col-md-4">
+      <!-- if the stream url is invalid, press reload -->
+      <a class="btn btn-success" ng-click="rtc.call( rtc.group.stream )" ng-show="rtc.group.stream">Show time!</a>
+    </div>
+    <div class="col-md-4">
+      <h5>{{ countTime }}s for auto-reload</h5>
+    </div>
+    <div class="col-md-4">
+      <a class="btn btn-primary"  ng-click="rtc.userReloadGroup()">Refresh Now!</a>
+    </div>
+  </div>
 
+  <div class="remoteStreams">
 
     <%- include layout/fb-like %>
 
