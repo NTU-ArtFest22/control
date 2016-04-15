@@ -9,6 +9,7 @@ var actSchema = mongoose.Schema({
     artist: {
       id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
       name: String,
+      gps: {longi:String, lati:String, rectime:Date}
     },
     player: {
       id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
