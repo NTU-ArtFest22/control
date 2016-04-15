@@ -231,39 +231,7 @@ module.exports = function( app , db ){
     )
   });
 
-  app.put('/admin/:cmd/:id', function(req, res){
-
-    var id = req.params.id;
-    User.findOne(
-      { "_id": mongojs.ObjectId( id ) },
-      function(err, user){
-        if(err)
-          console.log(err, "**********************************");
-        else{
-          if( req.params.cmd == 'makeadmin' )
-            user.isAdmin = !user.isAdmin;
-          else if (req.params.cmd == 'makeartist')
-            user.isArtist = !user.isArtist;
-          else if( req.params.cmd == 'makedoll' ){
-            if( user.isDoll )
-              user.isDoll = false;
-            else
-              user.isDoll = true;
-          }
-            
-
-          user.save(function(err, doc){
-            if(err){
-              res.send(500, 'user.save error');
-            }else{
-              res.json( doc );
-            }
-          });
-        }
-      }
-    );
-
-  });
+  
 
   // no creation of user
 
@@ -610,6 +578,44 @@ module.exports = function( app , db ){
   app.get('/admin/invite/:act_id/:character', function(req, res){
     res.json( safety.encrypt( req.params.act_id, req.params.character ) );
   });
+
+  app.put('/admin/:cmd/:id', function(req, res){
+
+    var id = req.params.id;
+    User.findOne(
+      { "_id": mongojs.ObjectId( id ) },
+      function(err, user){
+        if(err)
+          console.log(err, "**********************************");
+        else{
+          if( req.params.cmd == 'makeadmin' )
+            user.isAdmin = !user.isAdmin;
+          else if (req.params.cmd == 'makeartist')
+            user.isArtist = !user.isArtist;
+          else if( req.params.cmd == 'makedoll' ){
+            if( user.isDoll )
+              user.isDoll = false;
+            else
+              user.isDoll = true;
+          }
+            
+
+          user.save(function(err, doc){
+            if(err){
+              res.send(500, 'user.save error');
+            }else{
+              res.json( doc );
+            }
+          });
+        }
+      }
+    );
+
+  });
+
+
+
+
 
   /* type: artist / [ character ] */
   app.get('/profile/:act/:type', isAuthenticated, function(req, res){
