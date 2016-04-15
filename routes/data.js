@@ -384,6 +384,7 @@ module.exports = function( app , db ){
           console.log('put err: ', err);
           res.send(404, 'put activity error');
         } else {
+          console.log( 'edit act : ', doc);
           res.json( doc );
         }
       });
