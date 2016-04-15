@@ -90,7 +90,7 @@
           if(!found){
             rtc.group.stream = "";
             $http.put('/group/' + param[2] + '/artist', { "link": '' }).success(function(data){
-              console.log(data);
+              console.log('remove old stream', data);
             });
           }
         }
@@ -160,11 +160,9 @@
     $scope.onTimeout = function(){
       $scope.countTime++;
       if( $scope.countTime == 20){
-        rtc.loadData();
-        rtc.reloadGroup();  
-        $scope.countTime = 0;
-      }
-      mytimeout = $timeout($scope.onTimeout,1000);
+        rtc.userReloadGroup();
+      }else
+        mytimeout = $timeout($scope.onTimeout,1000);
     };
 
     var mytimeout = $timeout( $scope.onTimeout, 1000);
@@ -173,7 +171,8 @@
       rtc.loadData();
       rtc.reloadGroup();
       $scope.countTime = 0;
-      $timeout($scope.onTimeout, 1000);
+      if( !rtc.group.stream )
+        $timeout($scope.onTimeout, 1000);
     }
 
     //initial load
