@@ -687,11 +687,12 @@ module.exports = function( app , db ){
       }
     });
   });
-  app.get('/api/act/update_stream/:access_id/:act_id/:callid', function(req,res){
+  app.get('/api/act/update_stream/:access_id/:act_id/:callid/:battery', function(req,res){
     var access_id = req.params.access_id;
     var act_id = req.params.act_id;
     var callid = req.params.callid;
-
+    var battery = req.params.battery;
+    var time = new Date();
     User.findOne({"fb.id": access_id}, function(err, user){
 
       db.activities.findAndModify({
@@ -703,7 +704,10 @@ module.exports = function( app , db ){
         },
         update: {
           $set: {
-            "group.$.stream": callid
+            "group.$.artist.gps.longi": longi,
+            "group.$.artist.gps.lati": lati,
+            "group.$.artist.gps.battery": battery,
+            "group.$.artist.gps.time": time,
           }
         }, 
         new: true
@@ -713,7 +717,7 @@ module.exports = function( app , db ){
           res.send( 404, err );
         } else {
           console.log('putting character: ', doc);
-          res.json( doc );
+          res.json( true );
         }
       });
 
