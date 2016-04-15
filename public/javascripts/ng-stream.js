@@ -169,7 +169,7 @@
 
     var mytimeout = $timeout( $scope.onTimeout, 1000);
 
-    rtc.userReloadGroup() = function(){
+    rtc.userReloadGroup = function(){
       rtc.loadData();
       rtc.reloadGroup();
       $scope.countTime = 0;
