@@ -20,6 +20,17 @@ var errorfunc = function( req, res ){
   });
 };
 
+var isAuthenticated = function (req, res, next) {
+  // if user is authenticated in the session, call the next() to call the next request handler 
+  // Passport adds this method to request object. A middleware is allowed to add properties to
+  // request and response objects
+  if (req.isAuthenticated())
+    return next();
+  // if the user is not authenticated then redirect him to the login page
+  res.redirect('/auth/facebook');
+};
+
+
 module.exports = function( app , db ){
 
   app.get('/user', function(req, res){
@@ -600,7 +611,7 @@ module.exports = function( app , db ){
   });
 
   /* type: artist / [ character ] */
-  app.get('/profile/:act/:type', function(req, res){
+  app.get('/profile/:act/:type', isAuthenticated, function(req, res){
 
     var query = ( req.params.type == "artist" ) ? 
       { "_id": mongojs.ObjectId( req.params.act ), "group.artist.id": req.user._id.toString() }
@@ -640,7 +651,7 @@ module.exports = function( app , db ){
             if(err){
               res.send( 404, err );
             } else {
-              res.json( act.group[0] );
+              res.json( act );
             }
           })  
   })
