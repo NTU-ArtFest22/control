@@ -161,7 +161,7 @@
 
     $scope.onTimeout = function(){
       $scope.countTime++;
-      if( $scope.countTime == 20){
+      if( $scope.countTime == 10){
         rtc.userReloadGroup();
       }else
         mytimeout = $timeout($scope.onTimeout,1000);
@@ -173,8 +173,7 @@
       rtc.loadData();
       rtc.reloadGroup();
       $scope.countTime = 0;
-      if( !rtc.group.stream )
-        $timeout($scope.onTimeout, 1000);
+      $timeout($scope.onTimeout, 1000);
     }
 
     //initial load
