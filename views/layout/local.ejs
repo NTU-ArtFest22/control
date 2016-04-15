@@ -10,7 +10,7 @@
 		<a>{{ localStream.link }}</a>
     
     <br>
-    <% if( locals[ 'user' ] && user.isAdmin ) { %>
+    <% if( locals[ 'user' ] && ( user.isAdmin || user.isArtist || user.isDoll ) ) { %>
       <a class="btn btn-primary" ng-click="addStreamUrl()">Add Stream URL</a>
       <a class="btn btn-primary" ng-click="removeStreamUrl()">Remove Stream URL</a>
     <% } %>

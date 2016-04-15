@@ -26,20 +26,20 @@
   <h3>{{ rtc.group.character }} @ {{ act.name }}</h3>
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <!-- if the stream url is invalid, press reload -->
       <a class="btn btn-success" ng-click="rtc.call( rtc.group.stream )" ng-show="rtc.group.stream">Show time!</a>
     </div>
-    <div class="col-md-4" ng-hide="rtc.group.stream"> 
-      <h5>{{ 20 - countTime }}s for auto-reload</h5>
-    </div>
-    <div class="col-md-4">
-      <a class="btn btn-primary"  ng-click="rtc.userReloadGroup()">Refresh Now!</a>
+    
+    <div class="col-md-6">
+      <a class="btn btn-primary"  ng-click="rtc.userReloadGroup()" ng-hide="rtc.group.stream">Refresh Now!</a>
+      <a class="btn btn-primary"  ng-click="rtc.userReloadGroup()" ng-show="rtc.group.stream">Click here if losing video!</a>
     </div>
   </div>
 
-  <div class="remoteStreams">
-
+  <div class="col-md-4" > 
+      <h6>{{ 10 - countTime }}s for auto-reload</h6>
+  </div>
     <%- include layout/fb-like %>
 
     <%- include layout/links %>
