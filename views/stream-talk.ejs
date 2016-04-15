@@ -30,7 +30,7 @@
       <!-- if the stream url is invalid, press reload -->
       <a class="btn btn-success" ng-click="rtc.call( rtc.group.stream )" ng-show="rtc.group.stream">Show time!</a>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" ng-hide="rtc.group.stream"> 
       <h5>{{ 20 - countTime }}s for auto-reload</h5>
     </div>
     <div class="col-md-4">

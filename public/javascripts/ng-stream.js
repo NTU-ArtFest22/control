@@ -79,21 +79,23 @@
           return;
         rtc.group = data.group[0];        
         $scope.act = data;
-        console.log( rtc.group );
-        if( rtc.group.stream ){
-          var found = false;
-          for( var astream in rtc.remoteStreams ){
-            if( astream.id == rtc.group.stream ){
-              found = true;
-            }
-          }
-          if(!found){
-            rtc.group.stream = "";
-            $http.put('/group/' + param[2] + '/artist', { "link": '' }).success(function(data){
-              console.log('remove old stream', data);
-            });
-          }
-        }
+        console.log( 'reload group: ', rtc.group );
+        // if( rtc.group.stream ){
+        //   var found = false;
+        //   for( var astream in rtc.remoteStreams ){
+        //     if( astream.id == rtc.group.stream ){
+        //       found = true;
+        //     }
+        //   }
+          
+        //   if(!found){
+        //     rtc.group.stream = "";
+        //     $http.put('/group/' + param[2] + '/artist', { "link": '' }).success(function(data){
+        //       console.log('remove old stream', data);
+        //     });
+        //   }
+
+        // }
       });
     };
 
