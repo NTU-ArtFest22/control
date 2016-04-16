@@ -736,6 +736,46 @@ module.exports = function( app , db ){
     }
     return res.json(true);
   });
+  app.get('/api/act/gpslog/:act_id/:artist_id/:longi/:lati/:battery', function(req, res){
+    var act_id = req.params.act_id;
+    var access_id = req.params.artist_id;
+    var longi = req.params.longi;
+    var lati = req.params.lati;
+    var battery = req.params.battery;
+    var time = new Date();
+    User.findOne({"fb.id": access_id}, function(err, user){
+
+      db.activities.findAndModify({
+        query: { 
+          "_id": mongojs.ObjectId(act_id), 
+          "group": { 
+            $elemMatch: { "artist.id": user._id.toString() }
+          }
+        },
+        update: {
+          $push: {
+            "group.$.artist.gps":{
+              "longi": longi,
+              "lati": lati,
+              "time": time,
+              "battery": battery,
+            }
+          }
+        }, 
+        new: true
+      }, function(err, doc){
+        if(err){
+          console.log('putting character error: ', err);
+          res.send( 404, err );
+        } else {
+          console.log('GPS-logger', 'act_id:'+act_id+', artist_id:'+access_id+', '+time)
+          
+          res.json( true );
+        }
+      });
+
+    });
+  });
 }
 
 function run_cmd(cmd, args, cb, end) {
