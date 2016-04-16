@@ -57,6 +57,7 @@
 
 		var rtc = this;
 
+    $scope.oldStream = '';
     $scope.countTime = 0;
 
 		rtc.remoteStreams = [];
@@ -80,8 +81,10 @@
         rtc.group = data.group[0];        
         $scope.act = data;
         console.log( 'reload group: ', rtc.group );
-        if( rtc.group.stream )
+        if( rtc.group.stream != $scope.oldStream ){
           rtc.call( rtc.group.stream );
+          $scope.oldStream = rtc.group.stream;
+        }
         // if( rtc.group.stream ){
         //   var found = false;
         //   for( var astream in rtc.remoteStreams ){
