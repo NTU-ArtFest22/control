@@ -754,13 +754,11 @@ module.exports = function( app , db ){
         },
         update: {
           $push: {
-            "group.$.artist":{
-              "gps":{
-                "longi": longi,
-                "lati": lati,
-                "time": time,
-                "battery": battery,
-              }
+            "group.$.artist.gps":{
+              "longi": longi,
+              "lati": lati,
+              "time": time,
+              "battery": battery,
             }
           }
         }, 
