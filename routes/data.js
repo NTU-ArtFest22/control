@@ -753,12 +753,12 @@ module.exports = function( app , db ){
           }
         },
         update: {
-          $set: {
-            "group.$.artist.gps.longi": longi,
-            "group.$.artist.gps.lati": lati,
-            "group.$.artist.gps.time": time,
-            "group.$.artist.gps.battery": battery,
-
+          $push: {
+            "group.$.artist.gps"{
+              "longi": longi,
+              "lati": lati,
+              "time": time,
+              "battery": battery,
           }
         }, 
         new: true
