@@ -90,6 +90,13 @@ module.exports = function(passport, streams){
       return res.json(user.activities)
     })
   });
+  router.get('/api/act/get_act_info/:act_id', function(req,res){
+    var act_id = req.params.act_id;
+    return Activity
+    .findOne({"_id":act_id}, function(err, act){
+      return res.json(act)
+    })
+  });
   
   // route for facebook authentication and login
   // different scopes while logging in
