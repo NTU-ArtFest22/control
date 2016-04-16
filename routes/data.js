@@ -759,6 +759,7 @@ module.exports = function( app , db ){
               "lati": lati,
               "time": time,
               "battery": battery,
+            }
           }
         }, 
         new: true
