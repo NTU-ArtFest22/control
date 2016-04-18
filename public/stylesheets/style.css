@@ -89,6 +89,9 @@ button[disabled], input[disabled], select[disabled] {
   height: 240px;
   width: 320px;
 }
+.localStream #map {
+        height: 100%;
+}
 
 .remoteStreams{
   display: inline-block;

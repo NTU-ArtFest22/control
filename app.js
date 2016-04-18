@@ -23,12 +23,7 @@ var express           =     require('express')
   , https              =     require('https')
   , fs                =     require('fs')
   , http              =     require('http');
-  //, connectMongo      =     require('connect-mongo')
-  //, sessionMiddle     =     session({
-                                //name: 'control',
-                                ////store: new (require("connect-mongo")(session))({ url: DBconfig.url }),
-                                //secret: 'oh my goddddd'
-                            //});
+ 
 
   // For redirect to https
   // set up a route to redirect http to https
@@ -125,7 +120,12 @@ var express           =     require('express')
   //})
 
   server.listen( port, function(){
-    console.log("server listening on port", port);
+    console.log('+==================================================================+');
+    console.log('|                                                                  |');
+    console.log("|                 server listening on port", port, "                   |");
+    console.log('|  Remember to replace GPS API code in views/layout/local.ejs!!    |');
+    console.log('|                                                                  |');
+    console.log('+==================================================================+');
   });
 
   server.on('error', onError);
