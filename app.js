@@ -122,8 +122,8 @@ var express           =     require('express')
   server.listen( port, function(){
     console.log('+==================================================================+');
     console.log('|                                                                  |');
-    console.log("|                 server listening on port", port, "                   |");
-    console.log('|  Remember to replace GPS API code in views/layout/local.ejs!!    |');
+    console.log("|                 server listening on port", port, "                    |");
+    console.log('|  Remember to replace GPS API code in ./views/stream-talk.ejs!!   |');
     console.log('|                                                                  |');
     console.log('+==================================================================+');
   });
