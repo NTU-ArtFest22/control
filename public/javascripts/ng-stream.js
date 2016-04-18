@@ -81,6 +81,9 @@
         rtc.group = data.group[0];        
         $scope.act = data;
         console.log( 'reload group: ', rtc.group );
+        if( ! rtc.group.stream ){
+          return;
+        }
         if( rtc.group.stream != $scope.oldStream ){
           rtc.call( rtc.group.stream );
           $scope.oldStream = rtc.group.stream;
