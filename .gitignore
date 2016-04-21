@@ -5,3 +5,5 @@ npm-debug.log
 *.key
 *.csr
 config/fb.js
+app.js
+fb.js

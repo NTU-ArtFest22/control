@@ -13,13 +13,14 @@
     <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400italic' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/style.css" rel="stylesheet">
     <link href="/stylesheets/dashboard.css" rel="stylesheet">
-    
+
   </head>
 
   <body>
     <%- include layout/navbar %>
     <div class="row">
-      <%- include layout/admin_sidebar %>
+      <%- include('layout/admin_sidebar', {active: 1}) %>
+      
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 

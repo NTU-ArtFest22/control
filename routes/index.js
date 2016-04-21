@@ -9,7 +9,8 @@ var canAccessAdmin = function (req, res, next){
   if( req.user && ( req.user.isAdmin === true || req.user.fb.id === config.rootadmin_fbid ) )
       next();
   else
-    res.send(401, 'Unauthorized');
+    // res.send(401, 'Unauthorized');
+    res.redirect('/');
 };
 
 var isAuthenticated = function (req, res, next) {
@@ -37,11 +38,11 @@ module.exports = function(passport, streams){
   });
 
   router.get('/admin/user', canAccessAdmin, function(req, res){
-    res.render('admin-user', { user: req.user });
+    res.render('admin-user', { user: req.user});
   });
 
   router.get('/admin/activity', canAccessAdmin, function(req, res){
-    res.render('admin-act', { user: req.user });
+    res.render('admin-act', { user: req.user});
   });
 
   router.get('/admin/stream', canAccessAdmin, function(req, res){
