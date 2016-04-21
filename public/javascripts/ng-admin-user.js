@@ -30,6 +30,7 @@
     $scope.open = function ( user ) {
       var modalInstance = $uibModal.open({
         animation: true,
+        size: 'lg',
         templateUrl: 'edit-user-modal.html',
         controller: 'userModalCtrl',
         //scope: $scope,
