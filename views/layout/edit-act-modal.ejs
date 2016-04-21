@@ -62,16 +62,18 @@
         <div class="alert alert-info">
           <strong>Remember!</strong> Update or Add for each group!
         </div>
-
-        <table class="table tableSection" style="width:100%">
+        <div class="btn-group pull-right">
+            <button class="btn btn-primary" ng-click="addGroup()" ng-disabled="isEditing">Add</button>
+            <button class="btn btn-info" ng-click="updateGroup()" ng-disabled="!isEditing">Update</button>
+            <button class="btn btn-warning" ng-click="deselect()">Clear</button>
+          </div>
+        <table class="table tableSection" style="text-align: center;vertical-align: middle;">
           <thead>
             <tr>
               <th><span class="text">Artist</span></th>
               <th><span class="text">Character</span></th>
               <th><span class="text">Player</span></th>
               <th><span class="text">Stream</span></th>
-              <th>&nbsp;</th>
-              <th>&nbsp;</th>
             </tr>
           </thead>
 
@@ -89,24 +91,18 @@
               <td>&nbsp;</td>
               <td>&nbsp;</td>
             </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td><button class="btn btn-primary" ng-click="addGroup()" ng-disabled="isEditing">Add</button></td>
-              <td><button class="btn btn-info" ng-click="updateGroup()" ng-disabled="!isEditing">Update</button></td>
-              <td><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
-            </tr>
           </tbody>
           </table>
-          <table class="table tableSection" style="width:100%">
+          <hr>
+          <table class="table tableSection" style="text-align: center;vertical-align: middle;">
           <thead>
             <tr>
               <th><span class="text">Artist</span></th>
               <th><span class="text">Character</span></th>
               <th><span class="text">Player</span></th>
               <th><span class="text">Stream</span></th>
-              <th>&nbsp;</th>
-              <th>&nbsp;</th>
+              <th>Remove</th>
+              <th>Edit</th>
             </tr>
           </thead>
 
@@ -116,7 +112,7 @@
               <td>{{ group.character }}</td>
               <td ng-show="group.player">{{ group.player.name }}</td>
               <td ng-hide="group.player"><button class="btn btn-link" ng-click="invite( group.character )" title="invite"><span class="glyphicon glyphicon-link"></span></button></td>
-              <td>{{ group.stream ? 'V' : '---'}}</td>
+              <td><span class='glyphicon glyphicon-{{ group.stream ? "ok" : "minus"}}'></span></td>
               <td><button class="btn btn-link" title="remove" ng-click="remove(group)"><span class="glyphicon glyphicon-remove"></span></button></td>
               <td><button title="edit"class="btn btn-link" ng-click="edit(group)"> <span class="glyphicon glyphicon-pencil"></span></button></td>
             </tr>
