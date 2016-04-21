@@ -58,6 +58,10 @@
             <ul class="dropdown-menu">
               <li><a href="/profile">Profile</a></li>
               <li><a href="#">Enroll activity</a></li>
+              <% if(user.isAdmin){%>
+              <li role="separator" class="divider"></li>
+              <li><a href="/admin">Admin</a></li>
+              <% } %>
               <li role="separator" class="divider"></li>
               <li><a href="/signout">Log out</a></li>
             </ul>
