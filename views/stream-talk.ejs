@@ -29,7 +29,7 @@
           <div ng-controller="LocalStreamController as localStream">
             <video id="localVideo" muted="muted" autoplay="true"></video>
             <br/>
-            <a class="btn btn-primary" ng-click="localStream.toggleCam()" href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a>
+            <!-- <a class="btn btn-primary" ng-click="localStream.toggleCam()" href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a> -->
             <div class="btn-group" ng-show="localStream.cameraIsOn">    
               <% if( locals[ 'user' ] && ( user.isAdmin || user.isArtist || user.isDoll ) ) { %>
                 <a class="btn btn-primary" ng-click="addStreamUrl()">Add Stream URL</a>
@@ -38,8 +38,7 @@
             </div>
           </div>
           <hr>
-          <h6>{{ 10 - countTime }}s for auto-reload</h6>
-          <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
+          <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? ("Disconnect!!! Auto refresh in "+(10-countTime)s) : "Refresh Now!" }}</a>
         </div>
 
       </div>
