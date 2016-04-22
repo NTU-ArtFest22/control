@@ -211,7 +211,7 @@
         rtc.loadData();
         rtc.reloadGroup();
         $scope.countTime = 0;
-        $timeout.flush();
+        $timeout.cancel( mytimeout );
         mytimeout = $timeout($scope.onTimeout, 1000);
       }
 
