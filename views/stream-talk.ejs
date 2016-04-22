@@ -11,30 +11,20 @@
   <body>
     <%- include layout/navbar %>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-9">
         <div class="remoteStreams" ng-controller="RemoteStreamsController as rtc">
           <div class="remoteStreams">
             <h2>Remote Streams</h2>
-
             <div id="remoteVideosContainer"></div>
-
-            <h3>{{ rtc.group.character }} @ {{ act.name }}</h3>
-
-            <div class="row">
-              <div class="col-md-6" > 
-                <h6>{{ 10 - countTime }}s for auto-reload</h6>
-              </div>  
-              <div class="col-md-6">
-                <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="localStream">
           <br>
+          <h3>{{ rtc.group.character }} @ {{ act.name }}</h3>
+          <hr>
           <div id="map"></div>
           <hr>
           <div ng-controller="LocalStreamController as localStream">
@@ -50,6 +40,9 @@
 
             </div>
           </div>
+          <hr>
+          <h6>{{ 10 - countTime }}s for auto-reload</h6>
+          <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
         </div>
 
       </div>
@@ -61,7 +54,7 @@
 
 
 
-    <%- include layout/fb-like %>
+    <!-- <%- include layout/fb-like %> -->
     <%- include layout/links %>
 
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>

@@ -107,7 +107,9 @@ button[disabled], input[disabled], select[disabled] {
   text-align: center;
   width: 100%
 }
-
+.remoteStreams video{
+  width: 100%;
+}
 .remoteStreams td:hover {
   cursor: pointer;
   background-color: #aaa;
