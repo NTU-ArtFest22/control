@@ -10,9 +10,9 @@
 
   <body>
     <%- include layout/navbar %>
-    <div class="row">
+    <div class="row" ng-controller="RemoteStreamsController as rtc">
       <div class="col-md-9">
-        <div class="remoteStreams" ng-controller="RemoteStreamsController as rtc">
+        <div class="remoteStreams">
           <div class="remoteStreams">
             <h2>Remote Streams</h2>
             <div id="remoteVideosContainer"></div>
