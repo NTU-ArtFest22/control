@@ -87,16 +87,16 @@ button[disabled], input[disabled], select[disabled] {
 .localStream video {
   border: 5px solid rgb(119, 119, 119);
   outline: 0px none;
-  height: 240px;
-  width: 320px;
+  height: 250px;
+  width: 100%;
 }
 
 
 #map {
   border: 5px solid rgb(119, 51, 204);
   outline: 0px none;
-  height: 480px;
-  width: 540px;
+  height: 100%;
+  width: 250px;
 }
 
 .remoteStreams{

@@ -30,12 +30,13 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="col-md-4">
         <div class="localStream">
+          <br>
           <div id="map"></div>
+          <hr>
           <div ng-controller="LocalStreamController as localStream">
             <video id="localVideo" muted="muted" autoplay="true"></video>
             <br/>
@@ -69,7 +70,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 
     <script type="text/javascript" src="/javascripts/ng-stream.js"></script>
-    <%- include utility/mapjs %>s
+    <%- include utility/mapjs %>
     <script src="/javascripts/bootstrap-3.3.6/bootstrap.min.js"></script>
 </body>
 </html>
