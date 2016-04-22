@@ -67,7 +67,7 @@
 		    }
 		}
 
-    var map, poly, oldlatlng;
+    var map, poly, oldlatlng, marker;
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -106,8 +106,12 @@
       // and it will automatically appear.
       path.push( latlng );
 
+      if(marker){
+        marker.setMap(null);
+        delete marker;
+      }
       // Add a new marker at the new plotted point on the polyline.
-      var marker = new google.maps.Marker({
+      marker = new google.maps.Marker({
         position: latlng,
         place: gps.rectime,
         map: map
