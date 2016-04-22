@@ -459,6 +459,7 @@ module.exports = function( app , db ){
     act.location = req.body.location;
     act.time = req.body.time;
     act.acttype = req.body.acttype
+    console.log('act type: ', act.acttype);
     act.save(function(err, doc){
       if(err){
         res.send(500, err);
