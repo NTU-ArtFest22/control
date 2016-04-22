@@ -52,6 +52,7 @@
     $scope.open = function ( act ) {
       var modalInstance = $uibModal.open({
         animation: true,
+        size: 'lg',
         templateUrl: 'edit-act-modal.html',
         controller: 'actModalCtrl',
         //scope: $scope,

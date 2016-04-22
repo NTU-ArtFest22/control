@@ -14,49 +14,57 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400italic' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/dashboard.css" rel="stylesheet">
 
   </head>
 
   <body>
 
     <%- include layout/navbar %>
+    <div class="row">
+      <%- include('layout/admin_sidebar', {active: 2}) %>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <br>
+
+        <div ng-controller="adminActCtrl">
 
 
-    <div ng-controller="adminActCtrl">
+          <script type="text/ng-template" id="edit-act-modal.html">
+            <%- include layout/edit-act-modal %> 
+          </script>
 
+          <script type="text/ng-template" id="new-act-modal.html">
+            <%- include layout/new-act-modal %>
+          </script>
 
-      <script type="text/ng-template" id="edit-act-modal.html">
-        <%- include layout/edit-act-modal %> 
-      </script>
+          <a class="btn btn-primary" ng-click="newact()">New</a>
 
-      <script type="text/ng-template" id="new-act-modal.html">
-        <%- include layout/new-act-modal %>
-      </script>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>         
+                <th>Date</th>
+                <th>Participant</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="act in actlist">
+                <td>{{ act.name }}</td>
+                <td>{{ act.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>{{ act.group.length }}</td>
+                <td>
+                  <button class="btn btn-warning" ng-click="open( act )" >Edit</button>
+                  <button class="btn btn-danger" ng-click="remove( act._id)">Remove</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <a class="btn btn-primary" ng-click="newact()">New</a>
-
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>         
-            <th>Date</th>
-            <th>Participant</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="act in actlist">
-            <td>{{ act.name }}</td>
-            <td>{{ act.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-            <td>{{ act.group.length }}</td>
-            <td>
-              <button class="btn btn-warning" ng-click="open( act )" >Edit</button>
-              <button class="btn btn-danger" ng-click="remove( act._id)">Remove</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        
+      </div> <!--main-->
+    </div> <!--row-->
   </body>
 </html>
 

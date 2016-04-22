@@ -437,6 +437,7 @@ module.exports = function( app , db ){
   app.post('/admin/activitylist', function( req, res ){
     var act = new Activity();
     act.name = req.body.name;
+    act.location = req.body.location;
     act.time = req.body.time;
     act.save(function(err, doc){
       if(err){

@@ -9,13 +9,10 @@
   <body >
 
     <%- include layout/navbar %>
-    
-        <a href="/admin/user" class="btn btn-primary btn-block" >User</a>
-        <a href="/admin/activity" class="btn btn-success btn-block" >Activity</a>
-        <a href="/admin/stream" class="btn btn-success btn-block" >Stream</a>
-
+    <div class="row">
+      <%- include('layout/admin_sidebar', {active: 0}) %>
+    </div>
     <%- include layout/links %>
-
     <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
   </body>
 </html>
