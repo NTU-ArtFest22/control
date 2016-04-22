@@ -333,6 +333,10 @@
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.acttypeModel = [ {id:1, name:"Beyond @ 寶藏巖"}, 
+                            {id:2, name:"Beyond @ 大稻程"}, 
+                            {id:3, name:"Ear Worm"}, ]
   });
 
 
