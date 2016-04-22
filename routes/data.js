@@ -474,6 +474,7 @@ module.exports = function( app , db ){
   });
 
   app.post('/admin/activitylist/:id', function(req, res){
+    console.log("act sclass"+req.body.sclass);
     db.activities.findAndModify({
       query: { _id: mongojs.ObjectId( req.params.id ) },
       update: { $push: {
