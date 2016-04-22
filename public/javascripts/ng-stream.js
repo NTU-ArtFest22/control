@@ -94,7 +94,7 @@
         gps = rtc.group.artist.gps;
         if( oldgps && oldgps.rectime == gps.rectime )
           return;
-        latlng = { lat: gps.lati, lng: gps.longi };
+        latlng = { lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) };
       }
       var path = poly.getPath();
       console.log('--------------------------');
