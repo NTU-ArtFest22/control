@@ -17,7 +17,7 @@ var actSchema = mongoose.Schema({
       name: String,
     },
     character: String,
-    sclass:{type:Number, min:0, max:6} //0: unset, 1:farmer, 2, merchant, 3:geisha, 4:mock, 5:king 6, fortune teller
+    sclass:{type:Number, min:0, max:6}, //0: unset, 1:farmer, 2, merchant, 3:geisha, 4:mock, 5:king 6, fortune teller
     stream: String,
   } ],
 }, { collection: 'activities' })
