@@ -67,7 +67,7 @@
 		    }
 		}
 
-    var map, path, oldgps = {};
+    var map, path, oldgps;
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -112,6 +112,8 @@
         place: gps.rectime,
         map: map
       });
+
+      oldgps = gps;
     };
 
       rtc.reloadGroup = function(){
