@@ -5,6 +5,7 @@ var actSchema = mongoose.Schema({
   time: Date,
   isRunning: Boolean,
   location: String,
+  acttype:{type:Number, min:1, max:3}, //1 for beyond the map @paotsunyan 2 for beyond @ dadochen, 3 for ear worm
   group: [ {
     artist: {
       id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
