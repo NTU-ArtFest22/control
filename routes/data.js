@@ -366,6 +366,7 @@ module.exports = function( app , db ){
         name: req.body.name,
         time: req.body.time,
         location: req.body.location,
+        acttype: req.body.acttype,
       }}, new: true}, function(err, doc){
         if(err){
           console.log('put err: ', err);
