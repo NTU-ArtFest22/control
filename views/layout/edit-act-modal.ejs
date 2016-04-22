@@ -87,8 +87,8 @@
               <th><span class="text">Artist</span></th>
               <th><span class="text">Character</span></th>
               <th><span class="text">Player</span></th>
-              <th><span class="text">Stream</span><%=typeof(act)%></th>
-              <% if(typeof(act) !== "undefined"&&act.acttype==1){%><th>class</th><% } %>
+              <th><span class="text">Stream</span></th>
+              <th><span class="text">class</span></th>
             </tr>
           </thead>
 
@@ -103,7 +103,7 @@
               <!--<td><input class="form-control" ng-model="newgroup.player" placeholder="player _id"></td>-->
               <td style="text-align: center;" >x</td>
               <td><input class="form-control" ng-model="newgroup.stream"></td>
-              <% if(typeof(act) !== "undefined"&&act.acttype==1){%><td><input class="form-control" ng-model="newgroup.sclass"></td><% } %>
+              <td><input class="form-control" ng-model="newgroup.sclass"></td>
               <td>&nbsp;</td>
               <td>&nbsp;</td>
             </tr>
@@ -117,7 +117,7 @@
               <th><span class="text">Character</span></th>
               <th><span class="text">Player</span></th>
               <th><span class="text">Stream</span></th>
-              <% if(typeof(act) !== "undefined"&&act.acttype==1){%><th>class</th><% } %>
+              <th>class</th>
               <th>Remove</th>
               <th>Edit</th>
             </tr>
@@ -130,7 +130,7 @@
               <td ng-show="group.player">{{ group.player.name }}</td>
               <td ng-hide="group.player"><button class="btn btn-link" ng-click="invite( group.character )" title="invite"><span class="glyphicon glyphicon-link"></span></button></td>
               <td><span class='glyphicon glyphicon-{{ group.stream ? "ok" : "minus"}}'></span></td>
-              <% if(typeof(act) !== "undefined"&&act.acttype==1){%><td>{{group.sclass}}</td><% } %>
+              <td>{{ group.sclass }}</td>
               <td><button class="btn btn-link" title="remove" ng-click="remove(group)"><span class="glyphicon glyphicon-remove"></span></button></td>
               <td><button title="edit"class="btn btn-link" ng-click="edit(group)"> <span class="glyphicon glyphicon-pencil"></span></button></td>
             </tr>
