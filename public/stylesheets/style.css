@@ -76,18 +76,6 @@ button[disabled], input[disabled], select[disabled] {
 }
 
 
-
-#map {
-  display: inline-block;
-  top: 15px;
-  right: 15px;
-  float: right;
-  border: 5px solid rgb(119, 51, 204);
-  outline: 0px none;
-  height: 480px;
-  width: 540px;
-}
-
 .localStream {
   display: inline-block;
   top: 15px;
@@ -101,6 +89,18 @@ button[disabled], input[disabled], select[disabled] {
   outline: 0px none;
   height: 240px;
   width: 320px;
+}
+
+
+#map {
+  display: inline-block;
+  top: 15px;
+  right: 15px;
+  float: right;
+  border: 5px solid rgb(119, 51, 204);
+  outline: 0px none;
+  height: 480px;
+  width: 540px;
 }
 
 .remoteStreams{
