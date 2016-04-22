@@ -312,6 +312,25 @@ module.exports = function( app , db ){
     });
   });
 
+  app.delete('/admin/clearall', function(req, res){
+    db.activities.remove({}, function(err, docs){
+      if(err){
+        console.log(err);
+        res.send(404, err);
+      }else{
+        User.update({}, { $set: { activities: [] } }, function(err, doc){
+          if(err){
+            console.log(err);
+            res.send(404, err);
+          }else{
+            console.log(doc);
+            res.json(doc);
+          }
+        });
+      }
+    });
+  })
+
   app.get('/admin/activitylist/:id', function( req, res ){
     db.activities.findOne({ "_id": mongojs.ObjectId( req.params.id ) }, function(err, doc){
       if(err){
@@ -498,7 +517,7 @@ module.exports = function( app , db ){
         if(group.artist){
           db.users.findAndModify({
             query: { "_id": mongojs.ObjectId( group.artist.id ) },
-            update: { $pull: { 'activities': { 'id': req.params.act_id } } },
+            update: { $pull: { 'activities': { 'id': req.params.id } } },
           },function( err, doc ){
             if(err)
               console.log('delete activity from user: ', err);
@@ -507,7 +526,7 @@ module.exports = function( app , db ){
         if(group.player){
           db.users.findAndModify({
             query: { "_id": mongojs.ObjectId( group.player.id ) },
-            update: { $pull: { 'activities': { 'id': req.params.act_id } } },
+            update: { $pull: { 'activities': { 'id': req.params.id } } },
           },function( err, doc ){
             if(err)
               console.log('delete activity from user: ', err);
