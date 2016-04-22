@@ -110,7 +110,7 @@ module.exports = function(passport, streams){
       passport.authenticate('facebook', {  failureRedirect : '/' } ),
       function(req, res){
         // var redirect = '/profile';
-        var redirect = '/admin';
+        var redirect = '/admin/activity';
         if( req.session.redirect_url ){
           redirect = req.session.redirect_url;
           delete req.session.redirect_url;
