@@ -67,7 +67,7 @@
 		    }
 		}
 
-    var map, path, oldgps;
+    var map, poly, oldgps;
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -76,14 +76,14 @@
         mapTypeId: google.maps.MapTypeId.TERRAIN
       });
 
-      path = new google.maps.Polyline({
+      poly = new google.maps.Polyline({
         //geodesic: true,
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
         strokeWeight: 2
       });
 
-      path.setMap(map);
+      poly.setMap(map);
     };
 
     var addPoint = function(){
