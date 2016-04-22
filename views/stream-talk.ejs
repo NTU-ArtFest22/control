@@ -11,7 +11,6 @@
   <body>
     <%- include layout/navbar %>
 
-    <div id="map"></div>
 
 
     <div class="remoteStreams" ng-controller="RemoteStreamsController as rtc">
@@ -31,20 +30,26 @@
       </div>
 
 
-      <div class="localStream" ng-controller="LocalStreamController as localStream">
-        <video id="localVideo" muted="muted" autoplay="true"></video>
+      <div class="localStream">
 
-        <br/>
-        <a class="btn btn-primary" ng-click="localStream.toggleCam()" href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a>
+        <div id="map"></div>
 
-        <div ng-show="localStream.cameraIsOn">		
+        <div class="localStream" ng-controller="LocalStreamController as localStream">
 
-          <br>
-          <% if( locals[ 'user' ] && ( user.isAdmin || user.isArtist || user.isDoll ) ) { %>
-            <a class="btn btn-primary" ng-click="addStreamUrl()">Add Stream URL</a>
-            <a class="btn btn-primary" ng-click="removeStreamUrl()">Remove Stream URL</a>
-          <% } %>
+          <video id="localVideo" muted="muted" autoplay="true"></video>
 
+          <br/>
+          <a class="btn btn-primary" ng-click="localStream.toggleCam()" href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a>
+
+          <div ng-show="localStream.cameraIsOn">		
+
+            <br>
+            <% if( locals[ 'user' ] && ( user.isAdmin || user.isArtist || user.isDoll ) ) { %>
+              <a class="btn btn-primary" ng-click="addStreamUrl()">Add Stream URL</a>
+              <a class="btn btn-primary" ng-click="removeStreamUrl()">Remove Stream URL</a>
+            <% } %>
+
+          </div>
         </div>
       </div>
 
