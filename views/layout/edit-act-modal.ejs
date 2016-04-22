@@ -2,7 +2,7 @@
   <h3 class="modal-title">Edit activity</h3>
 </div>
 <div class="modal-body" >
-
+<% if (locals['act']) { %>
   <form name="demo"> 
     <div class="row">
       <div class="col-xs-5">
@@ -88,8 +88,8 @@
               <th><span class="text">Character</span></th>
               <th><span class="text">Player</span></th>
               <th><span class="text">Stream</span></th>
-<!--               <% if(act.acttype==1){%><th>class</th><% } %>
- -->            </tr>
+              <% if(act.acttype==1){%><th>class</th><% } %>
+            </tr>
           </thead>
 
           <tbody>
@@ -141,7 +141,7 @@
   </form>
   
 
-  
+<% } %>  
 </div>
 <div class="modal-footer">
   <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
