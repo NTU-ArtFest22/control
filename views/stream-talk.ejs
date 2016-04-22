@@ -38,7 +38,8 @@
             </div>
           </div>
           <hr>
-          <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? ("Disconnect!!! Auto refresh in "+(10-countTime)s) : "Refresh Now!" }}</a>
+          <h6>{{ 10 - countTime }}s for auto-reload</h6>
+          <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
         </div>
 
       </div>
