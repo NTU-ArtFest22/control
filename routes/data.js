@@ -453,7 +453,7 @@ module.exports = function( app , db ){
         }
       });
   });
-
+// new activity
   app.post('/admin/activitylist', function( req, res ){
     var act = new Activity();
     act.name = req.body.name;
