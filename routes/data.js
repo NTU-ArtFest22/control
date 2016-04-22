@@ -441,7 +441,8 @@ module.exports = function( app , db ){
         "$set": {
           "group.$.artist.id": group.artist.id,
           "group.$.artist.name": group.artist.name,
-          "group.$.stream": group.stream
+          "group.$.stream": group.stream,
+          "group.$.sclass": group.sclass
         } 
       }, new: true }, function(err, doc){
         if(err){
@@ -482,7 +483,8 @@ module.exports = function( app , db ){
             name: req.body.artist.name
           },
           character: req.body.character,
-          stream: req.body.stream
+          stream: req.body.stream,
+          sclass: req.body.sclass
         }
       }},
       new: true,
