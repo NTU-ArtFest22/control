@@ -71,7 +71,7 @@
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 7,
+        zoom: 8,
         center: {lat:  25.038085 , lng:121.538231},
         mapTypeId: google.maps.MapTypeId.TERRAIN
       });
@@ -97,6 +97,10 @@
         latlng = { lat: gps.lati, lng: gps.longi };
       }
       var path = poly.getPath();
+      console.log('--------------------------');
+      console.log(path);
+      console.log('--------------------------');
+
 
       // Because path is an MVCArray, we can simply append a new coordinate
       // and it will automatically appear.
@@ -105,10 +109,7 @@
       // Add a new marker at the new plotted point on the polyline.
       var marker = new google.maps.Marker({
         position: latlng,
-        title: '#' + path.getLength(),
-        attribution:{
-          place: gps.rectime
-        },
+        place: gps.rectime,
         map: map
       });
     };
