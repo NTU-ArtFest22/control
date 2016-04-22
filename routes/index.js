@@ -55,8 +55,9 @@ module.exports = function(passport, streams){
   });
 
   /* Handle Login POST */
+  // a cheat to access admin page
   router.post('/auth', passport.authenticate('login', {
-    successRedirect: '/',
+    successRedirect: '/admin',
     failureRedirect: '/',
     failureFlash : true  
   }));

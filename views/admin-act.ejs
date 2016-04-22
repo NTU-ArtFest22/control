@@ -55,7 +55,7 @@
             <tbody>
               <tr ng-repeat="act in actlist">
                 <td>{{ act.name }}</td>
-                <td>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕', 'Ear Wrom'))}}</td>
+                <td>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}</td>
                 <td>{{ act.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                 <td>{{ act.group.length }}</td>
                 <td>
