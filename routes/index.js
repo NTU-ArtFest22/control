@@ -55,9 +55,8 @@ module.exports = function(passport, streams){
   });
 
   /* Handle Login POST */
-  // a cheat to access admin page
   router.post('/auth', passport.authenticate('login', {
-    successRedirect: '/admin',
+    successRedirect: '/',
     failureRedirect: '/',
     failureFlash : true  
   }));
@@ -110,7 +109,8 @@ module.exports = function(passport, streams){
   router.get('/auth/facebook/callback', 
       passport.authenticate('facebook', {  failureRedirect : '/' } ),
       function(req, res){
-        var redirect = '/profile';
+        // var redirect = '/profile';
+        var redirect = '/admin';
         if( req.session.redirect_url ){
           redirect = req.session.redirect_url;
           delete req.session.redirect_url;
