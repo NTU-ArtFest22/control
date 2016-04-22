@@ -211,8 +211,9 @@
         rtc.loadData();
         rtc.reloadGroup();
         $scope.countTime = 0;
-      mytimeout = $timeout($scope.onTimeout, 1000);
-    }
+        $timeout.flush();
+        mytimeout = $timeout($scope.onTimeout, 1000);
+      }
 
     //initial load
     rtc.loadData();

@@ -76,12 +76,6 @@ button[disabled], input[disabled], select[disabled] {
 }
 
 
-.localStream {
-  display: inline-block;
-  top: 15px;
-  right: 15px;
-  float: right;
-}
 
 #map {
   display: inline-block;
@@ -93,6 +87,14 @@ button[disabled], input[disabled], select[disabled] {
   height: 480px;
   width: 540px;
 }
+
+.localStream {
+  display: inline-block;
+  top: 15px;
+  right: 15px;
+  float: right;
+}
+
 
 .localStream video {
   border: 5px solid rgb(119, 119, 119);
