@@ -14,7 +14,6 @@
       <div class="col-md-9">
         <div class="remoteStreams">
           <div class="remoteStreams">
-            <h2>Remote Streams</h2>
             <div id="remoteVideosContainer"></div>
           </div>
         </div>
@@ -31,13 +30,11 @@
             <video id="localVideo" muted="muted" autoplay="true"></video>
             <br/>
             <a class="btn btn-primary" ng-click="localStream.toggleCam()" href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a>
-            <div ng-show="localStream.cameraIsOn">    
-              <br>
+            <div class="btn-group" ng-show="localStream.cameraIsOn">    
               <% if( locals[ 'user' ] && ( user.isAdmin || user.isArtist || user.isDoll ) ) { %>
                 <a class="btn btn-primary" ng-click="addStreamUrl()">Add Stream URL</a>
                 <a class="btn btn-primary" ng-click="removeStreamUrl()">Remove Stream URL</a>
               <% } %>
-
             </div>
           </div>
           <hr>

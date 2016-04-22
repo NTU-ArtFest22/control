@@ -71,7 +71,7 @@
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
+        zoom: 18,
         center: {lat:  25.038085 , lng:121.538231},
         mapTypeId: google.maps.MapTypeId.TERRAIN
       });
@@ -79,7 +79,7 @@
       poly = new google.maps.Polyline({
         //geodesic: true,
         strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
+        strokeOpacity: 0.5,
         strokeWeight: 2
       });
 
@@ -116,6 +116,8 @@
         place: gps.rectime,
         map: map
       });
+      // move map center at the new point
+      map.panTo(latlng);
 
       oldlatlng = latlng;
     };
