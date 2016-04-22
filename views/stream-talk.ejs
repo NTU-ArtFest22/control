@@ -11,36 +11,38 @@
   <body>
     <%- include layout/navbar %>
 
-  	<%- include layout/local %>
+    <div id="map"></div>
 
-  	<div class="remoteStreams" ng-controller="RemoteStreamsController as rtc">
-    <h2>Remote Streams</h2>
 
-  <div id="remoteVideosContainer"></div>
+    <div class="remoteStreams" ng-controller="RemoteStreamsController as rtc">
+      <h2>Remote Streams</h2>
 
-  <h3>{{ rtc.group.character }} @ {{ act.name }}</h3>
+      <div id="remoteVideosContainer"></div>
 
-  <div class="row">
-    <div class="col-md-6" > 
-      <h6>{{ 10 - countTime }}s for auto-reload</h6>
-    </div>  
-    <div class="col-md-6">
-      <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
-    </div>
-  </div>
+      <h3>{{ rtc.group.character }} @ {{ act.name }}</h3>
 
-  
-    <%- include layout/fb-like %>
+      <div class="row">
+        <div class="col-md-6" > 
+          <h6>{{ 10 - countTime }}s for auto-reload</h6>
+        </div>  
+        <div class="col-md-6">
+          <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
+        </div>
+      </div>
 
-    <%- include layout/links %>
+      <%- include layout/local %>
 
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="/javascripts/lib/adapter.js"></script>
-    <script type="text/javascript" src="/javascripts/lib/rtcClient.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <script type="text/javascript" src="/javascripts/ng-stream.js"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&signed_in=true&callback=initMap"></script>
+      <%- include layout/fb-like %>
+
+      <%- include layout/links %>
+
+      <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+      <script type="text/javascript" src="/javascripts/lib/adapter.js"></script>
+      <script type="text/javascript" src="/javascripts/lib/rtcClient.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+      <script type="text/javascript" src="/javascripts/ng-stream.js"></script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&signed_in=true&callback=initMap"></script>
   </body>
 </html>
 

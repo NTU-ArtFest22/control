@@ -83,7 +83,11 @@ button[disabled], input[disabled], select[disabled] {
   float: right;
 }
 
-.localStream #map {
+#map {
+  display: inline-block;
+  top: 15px;
+  right: 15px;
+  float: right;
   border: 5px solid rgb(119, 51, 204);
   outline: 0px none;
   height: 480px;
