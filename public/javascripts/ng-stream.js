@@ -67,7 +67,7 @@
 		    }
 		}
 
-    var map, poly, oldgps;
+    var map, poly, oldlatlng;
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -92,9 +92,9 @@
         return;
       else{
         gps = rtc.group.artist.gps;
-        if( oldgps && oldgps.rectime == gps.rectime )
+        latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
+        if( oldlatlng && oldlatlng.equals( latlng ) )
           return;
-        latlng = { lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) };
       }
       var path = poly.getPath();
       console.log('--------------------------');
@@ -113,7 +113,7 @@
         map: map
       });
 
-      oldgps = gps;
+      oldlatlng = latlng;
     };
 
       rtc.reloadGroup = function(){
