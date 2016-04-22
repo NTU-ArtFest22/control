@@ -21,6 +21,8 @@
           <div class="col-xs-12 col-sm-6 col-md-8">
             <input class="form-control" ng-model="act.location" required />
           </div>
+        </div>
+        <div class="row">
           <div class="col-xs-6 col-md-4"><h4 class="data-title">Type</h4></div>
           <div class="col-xs-12 col-sm-6 col-md-8">
             <select class="form-control" name="TypeSelect" ng-model="act.acttype">
@@ -30,9 +32,7 @@
               <option value="3">Ear Worm</option>
             </select>  
           </div>
-          
-        </div>
-        
+        </div>        
         <div ><h4 class="data-title">Date & Time</h4></div>
         <div align="center">
           <pre>Current setting:<br><b>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</b></pre>

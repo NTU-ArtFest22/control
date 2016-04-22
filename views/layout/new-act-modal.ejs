@@ -11,16 +11,29 @@
       <div class="col-xs-12 col-sm-6 col-md-8">
         <input class="form-control" ng-model="act.name" placeholder="name" required />
       </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-md-4"><h4 class="data-title">location</h4></div>
       <div class="col-xs-12 col-sm-6 col-md-8">
         <input class="form-control" ng-model="act.location" placeholder="location" required />
       </div>
-      
     </div>
+    <div class="row">
+          <div class="col-xs-6 col-md-4"><h4 class="data-title">Type</h4></div>
+          <div class="col-xs-12 col-sm-6 col-md-8">
+            <select class="form-control" name="TypeSelect" ng-model="act.acttype">
+              <option value="">-- Select --</option>
+              <option value="1">Beyond @ 寶藏巖</option>
+              <option value="2">Beyond @ 大稻程</option>
+              <option value="3">Ear Worm</option>
+            </select>  
+          </div>
+        </div> 
     <div >
       <h4 class="data-title">Date & Time</h4>
     </div>
     <div align="center">
-      <pre>Selected time and date is: <em>{{act.time | date:'shortTime' }}, {{act.time | date:'fullDate' }}</em></pre>
+      <pre>Selected time and date is: <b>{{act.time | date:'shortTime' }}, {{act.time | date:'fullDate' }}</b></pre>
 
     <datetimepicker 
     min-date="minDate" 
