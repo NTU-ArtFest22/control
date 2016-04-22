@@ -493,6 +493,28 @@ module.exports = function( app , db ){
   });
 
   app.delete('/admin/activitylist/:id', function(req, res){
+    db.activities.findOne({"_id": mongojs.ObjectId(req.params.id)}, function(err, doc){
+      for(var group in doc){
+        if(group.artist){
+          db.users.findAndModify({
+            query: { "_id": mongojs.ObjectId( group.artist.id ) },
+            update: { $pull: { 'activities': { 'id': req.params.act_id } } },
+          },function( err, doc ){
+            if(err)
+              console.log('delete activity from user: ', err);
+          });
+        }
+        if(group.player){
+          db.users.findAndModify({
+            query: { "_id": mongojs.ObjectId( group.player.id ) },
+            update: { $pull: { 'activities': { 'id': req.params.act_id } } },
+          },function( err, doc ){
+            if(err)
+              console.log('delete activity from user: ', err);
+          });
+        }
+      }
+    });
     db.activities.remove({ "_id": mongojs.ObjectId( req.params.id )}, function( err, doc ){
       if(err){
         res.send(404, 'remove activity error: ', err);
@@ -599,7 +621,7 @@ module.exports = function( app , db ){
             else
               user.isDoll = true;
           }
-            
+
 
           user.save(function(err, doc){
             if(err){
@@ -730,8 +752,8 @@ module.exports = function( app , db ){
       console.log("time: "+(new Date()).toString());
       console.log("updating...");
       test  = new run_cmd(
-          'git', ['pull'],
-          function (me, buffer) { me.stdout += buffer.toString() },
+        'git', ['pull'],
+        function (me, buffer) { me.stdout += buffer.toString() },
           function () { console.log("git sync finished...");console.log(test.stdout);console.log("=====code update=====\n\n"); }
       );
     }
@@ -768,7 +790,7 @@ module.exports = function( app , db ){
           res.send( 404, err );
         } else {
           console.log('GPS-logger', 'act_id:'+act_id+', artist_id:'+access_id+', '+time)
-          
+
           res.json( true );
         }
       });
@@ -778,9 +800,9 @@ module.exports = function( app , db ){
 }
 
 function run_cmd(cmd, args, cb, end) {
-    var spawn = require('child_process').spawn,
-        child = spawn(cmd, args),
-        me = this;
-    child.stdout.on('data', function (buffer) { cb(me, buffer) });
-    child.stdout.on('end', end);
+  var spawn = require('child_process').spawn,
+    child = spawn(cmd, args),
+    me = this;
+  child.stdout.on('data', function (buffer) { cb(me, buffer) });
+  child.stdout.on('end', end);
 }
