@@ -224,7 +224,8 @@
           "artist": {
             "id": $scope.newgroup.artist._id,
             "name": $scope.newgroup.artist.fb.displayName
-          }
+          },
+          "sclass":$scope.newgroup.sclass,
         };
 
         $http.post('/admin/userlist/' + $scope.newgroup.artist._id , tmp).then(
