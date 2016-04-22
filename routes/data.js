@@ -513,7 +513,7 @@ module.exports = function( app , db ){
 
   app.delete('/admin/activitylist/:id', function(req, res){
     db.activities.findOne({"_id": mongojs.ObjectId(req.params.id)}, function(err, doc){
-      for(var group in doc){
+      for(var group in doc.group){
         if(group.artist){
           db.users.findAndModify({
             query: { "_id": mongojs.ObjectId( group.artist.id ) },
