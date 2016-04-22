@@ -513,9 +513,8 @@ module.exports = function( app , db ){
 
   app.delete('/admin/activitylist/:id', function(req, res){
     db.activities.findOne({"_id": mongojs.ObjectId(req.params.id)}, function(err, doc){
-      console.log('[[[[[[[[[[[[[[[[[[[[[[[[    ', doc);
-      for(var group in doc.group){
-        console.log(']]]]]]]]]]]]]]]]     ', group);
+      for(var groupid in doc.group){
+        var group = doc.group[ groupid ];
         if(group.artist){
           db.users.findAndModify({
             query: { "_id": mongojs.ObjectId( group.artist.id ) },
