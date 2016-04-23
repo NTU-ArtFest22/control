@@ -330,6 +330,7 @@
             }else{
               console.log('group is not defined')
               rtc.group[i] = $scope.act.group[i]
+              console.log(rtc.group[i])
               rtc.view( rtc.group[i].stream );  
             }
             $scope.oldStream[i] = rtc.group[i].stream;
