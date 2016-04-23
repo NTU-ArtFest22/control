@@ -272,7 +272,7 @@
 
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
           console.log(gps.lati+' '+gps.longi);
-          if (oldlatlng[i]&&!oldlatlng.equals(latlng)) {
+          if (oldlatlng[i]&&!oldlatlng[i].equals(latlng)) {
             if(marker[i]){
               marker[i].setMap(null);
               delete marker[i];
