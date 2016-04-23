@@ -82,8 +82,8 @@ button[disabled], input[disabled], select[disabled] {
   right: 15px;
   float: right;
 }
-.streamadmin video{
-  
+.adminStream video{
+  width: 50%
 }
 
 .localStream video {
