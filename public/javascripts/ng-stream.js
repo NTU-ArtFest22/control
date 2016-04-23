@@ -260,9 +260,9 @@
     var addPoint = function(){
       var gps, latlng;
       var temp = [0., 0.];
-      for (var i = act.group.length - 1; i >= 0; i--) {
-        if(act.group[i].artist.gps){
-          gps = act.group[i].artist.gps;
+      for (var i = $scope.act.group.length - 1; i >= 0; i--) {
+        if($scope.act.group[i].artist.gps){
+          gps = $scope.act.group[i].artist.gps;
           temp[0]+=parseFloat(gps.lati);
           temp[1]+=parseFloat(gps.longi);
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
@@ -280,7 +280,7 @@
           }
         }
       }
-      center = new google.maps.LatLng({lat: temp[0]/act.group.length, lng: temp[1]/act.group.length});
+      center = new google.maps.LatLng({lat: temp[0]/$scope.act.group.length, lng: temp[1]/$scope.act.group.length});
       map.panTo(center);
 
       
@@ -297,10 +297,10 @@
           if(!data)
             return;
           $scope.act = data;
-          console.log( 'reload act: ', act.name );
+          console.log( 'reload act: ', $scope.act.name );
           
-          for (var i = act.group.length - 1; i >= 0; i--) {
-            if(act.group[i].stream){
+          for (var i = $scope.act.group.length - 1; i >= 0; i--) {
+            if($scope.act.group[i].stream){
               if( rtc.group[i].stream != $scope.oldStream[i] ){
                 rtc.call( rtc.group[i].stream );
                 $scope.oldStream[i] = rtc.group[i].stream;
