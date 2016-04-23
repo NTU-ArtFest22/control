@@ -82,7 +82,9 @@ button[disabled], input[disabled], select[disabled] {
   right: 15px;
   float: right;
 }
-
+.streamadmin video{
+  
+}
 
 .localStream video {
   border: 5px solid rgb(119, 119, 119);
