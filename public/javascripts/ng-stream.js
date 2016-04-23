@@ -319,6 +319,7 @@
                 if (rtc.group[i].stream != $scope.oldStream[i]) {
                   rtc.group[i] = $scope.act.group[i]
                   console.log('video update');
+                  console.log(rtc.group[i])
                   rtc.view( rtc.group[i].stream ); 
                 }
               }else{
