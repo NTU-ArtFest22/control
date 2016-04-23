@@ -664,7 +664,29 @@ module.exports = function( app , db ){
     );
 
   });
+  app.get('/admin/stream/:act', function(req, res){
 
+    var query = ( req.params.type == "artist" ) ? 
+      
+        : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
+
+        console.log( "query", query );
+
+        db.activities.findOne(
+          { "_id": mongojs.ObjectId( req.params.act )},
+          function(err, act){
+            if(err){
+              console.log('find activity error: ', err);
+              res.send( 404, err );
+            } else {
+              console.log('                   got act  :', act);
+              if( act.isRunning )
+                res.render('stream', { act: act});
+              else
+                res.redirect('/admin/activity')
+            }
+          })  
+  });
 
 
 

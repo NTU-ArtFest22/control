@@ -1,7 +1,9 @@
 <div class="row"  ng-controller="RemoteStreamsControllerforAdmin as rtc">
   <div class="col-md-8">
     <div class="remoteStreams">
-      <!-- <h2>Remote Streams</h2> -->
+      <div class="alert {{ act.isRunning ? 'alert-success' : 'alert-danger' }}">
+        <strong>{{act.name}}({{ act.isRunning ? "Activity is now running" : "Activity is now closed" }})</strong>
+      </div>
 
       <div id="remoteVideosContainer"></div>
 
