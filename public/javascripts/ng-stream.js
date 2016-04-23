@@ -306,9 +306,12 @@
         $scope.act = data;
         console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
         console.log( 'reload act: ', $scope.act.name );
-        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
+        
+        console.log('video updating');
         for (var i = $scope.act.group.length - 1; i >= 0; i--) {
+          console.log('#'+i);
           if($scope.act.group[i].stream){
+            console.log('stream is defined');
             if (rtc.group[i]) {
               if( rtc.group[i].stream ){
                 if (rtc.group[i].stream != $scope.oldStream[i]) {
@@ -322,6 +325,7 @@
                 rtc.view( rtc.group[i].stream ); 
               }
             }else{
+              console.log('group is not defined')
               rtc.group[i] = $scope.act.group[i]
               rtc.view( rtc.group[i].stream );  
             }
@@ -329,6 +333,7 @@
 
           }
         }
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
       });
     };
 
