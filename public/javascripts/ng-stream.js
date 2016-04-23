@@ -261,13 +261,14 @@
     var addPoint = function(){
       var gps, latlng;
       var temp = [0., 0.];
+      var counter = 0
       console.log('```````````````````````````');
       for (var i = $scope.act.group.length - 1; i >= 0; i--) {
         if($scope.act.group[i].artist.gps){
           gps = $scope.act.group[i].artist.gps;
           temp[0]+=parseFloat(gps.lati);
           temp[1]+=parseFloat(gps.longi);
-          temp[2]+=1
+          counter+=1
 
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
           console.log(gps.lati+' '+gps.longi);
@@ -285,9 +286,12 @@
           }
         }
       }
-      center = new google.maps.LatLng({lat: temp[0]/temp[2], lng: temp[1]/temp[2]});
-      console.log({lat: temp[0]/temp[2], lng: temp[1]/temp[2]})
-      map.panTo(center);
+      if (counter!=0) {
+        center = new google.maps.LatLng({lat: temp[0]/counter, lng: temp[1]/counter});
+        console.log({lat: temp[0]/counter, lng: temp[1]/counter})
+        map.panTo(center);
+      }
+        
       console.log('```````````````````````````');
       
     };
