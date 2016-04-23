@@ -717,7 +717,7 @@ module.exports = function( app , db ){
   app.get('/adminact/:act', isAuthenticated, function(req, res){
 
         db.activities.findOne(
-          "_id": mongojs.ObjectId( req.params.act ),
+          {"_id": mongojs.ObjectId( req.params.act )},
           function(err, act){
             if(err){
               res.send( 404, err );
