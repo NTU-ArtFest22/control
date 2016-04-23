@@ -251,7 +251,7 @@
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 18,
+        zoom: 17,
         center: {lat:  25.017474 , lng:121.538739},
         mapTypeId: google.maps.MapTypeId.HYBRID
       });
@@ -273,11 +273,11 @@
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
           console.log(gps.lati+' '+gps.longi);
           if (oldlatlng[i]&&!oldlatlng.equals(latlng)) {
-            if(marker){
-              marker.setMap(null);
-              delete marker;
+            if(marker[i]){
+              marker[i].setMap(null);
+              delete marker[i];
             }
-            marker = new google.maps.Marker({
+            marker[i] = new google.maps.Marker({
               position: latlng,
               place: gps.rectime,
               map: map
