@@ -665,7 +665,7 @@ module.exports = function( app , db ){
 
   });
   app.get('/admin/stream/:act', function(req, res){
-        console.log( "query", query );
+        console.log( "act monitoring:", req.params.act );
 
         db.activities.findOne(
           { "_id": mongojs.ObjectId( req.params.act )},
