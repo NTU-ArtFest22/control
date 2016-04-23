@@ -238,6 +238,7 @@
 
     $scope.oldStream = [];
     $scope.countTime = 0;
+    rtc.group = [];
 
     rtc.remoteStreams = [];
     function getStreamById(id) {
@@ -301,7 +302,7 @@
           
           for (var i = $scope.act.group.length - 1; i >= 0; i--) {
             if($scope.act.group[i].stream){
-              if( rtc.group[i].stream != $scope.oldStream[i] ){
+              if( rtc.group[i].stream||rtc.group[i].stream != $scope.oldStream[i] ){
                 rtc.call( rtc.group[i].stream );
                 $scope.oldStream[i] = rtc.group[i].stream;
               }
