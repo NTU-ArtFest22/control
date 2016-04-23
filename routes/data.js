@@ -714,6 +714,18 @@ module.exports = function( app , db ){
             }
           })  
   })
+  app.get('/adminact/:act', isAuthenticated, function(req, res){
+
+        db.activities.findOne(
+          "_id": mongojs.ObjectId( req.params.act ),
+          function(err, act){
+            if(err){
+              res.send( 404, err );
+            } else {
+              res.json( act );
+            }
+          })  
+  })
 
   app.put('/group/:act/artist', isAuthenticated, function(req, res){
     db.activities.findAndModify({

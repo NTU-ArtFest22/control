@@ -236,7 +236,7 @@
 
     var rtc = this;
 
-    $scope.oldStream = '';
+    $scope.oldStream = [];
     $scope.countTime = 0;
 
     rtc.remoteStreams = [];
@@ -305,22 +305,25 @@
         var loc = window.location.pathname;
         var param = loc.split('/');
         console.log(param);
-        if( param[1] != "profile" ){
+        if( param[1] != "admin" && param[2]!= "stream"){
           return;
         }
-        $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
+        $http.get('/adminact/' + param[3]).success(function(data){
           if(!data)
             return;
-          rtc.group = data.group[0];        
           $scope.act = data;
-          console.log( 'reload group: ', rtc.group );
-          if( ! rtc.group.stream ){
-            return;
+          console.log( 'reload act: ', act.name );
+          
+          for (var i = act.group.length - 1; i >= 0; i--) {
+            if(act.group[i].stream){
+              if( rtc.group[i].stream != $scope.oldStream[i] ){
+                rtc.call( rtc.group[i].stream );
+                $scope.oldStream[i] = rtc.group[i].stream;
+              }
+            }
           }
-          if( rtc.group.stream != $scope.oldStream ){
-            rtc.call( rtc.group.stream );
-            $scope.oldStream = rtc.group.stream;
-          }
+          
+          
         });
       };
 

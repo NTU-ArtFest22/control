@@ -1,28 +1,38 @@
-<div class="remoteStreams streamadmin" ng-controller="RemoteStreamsControllerforAdmin as rtc">
-  <!-- <h2>Remote Streams</h2> -->
+<div class="row"  ng-controller="RemoteStreamsControllerforAdmin as rtc">
+  <div class="col-md-8">
+    <div class="remoteStreams">
+      <!-- <h2>Remote Streams</h2> -->
 
-  <div id="remoteVideosContainer"></div>
+      <div id="remoteVideosContainer"></div>
 
-  <div class="table-responsive" align="center">
-    <a class="btn btn-primary"  ng-click="rtc.loadData()" href>  Refresh Now! </a>
-    <table class="table-striped">
-      <thead>
-        <tr>
-          <th>Stream</th><th>1-way</th><th>2-way</th>
-        </tr>
-      </thead>
-      <tbody>
-  
-        <tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
-          <td><a>{{stream.name}}</a></td>
-          <td ng-click="rtc.view(stream)"><a>View</a></td>
-          <td ng-click="rtc.call(stream)"><a>Call</a></td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="table-responsive" align="center">
+        <a class="btn btn-primary"  ng-click="rtc.loadData()" href>  Refresh Now! </a>
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>Stream</th><th>1-way</th><th>2-way</th>
+            </tr>
+          </thead>
+          <tbody>
+      
+            <tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
+              <td><a>{{stream.name}}</a></td>
+              <td ng-click="rtc.view(stream)"><a>View</a></td>
+              <td ng-click="rtc.call(stream)"><a>Call</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="remoteStreams">
+      </div>
+    </div>
+         
   </div>
-
-  <div class="remoteStreams">
+  <div class="col-md-4">
+    <div id="map"></div>
   </div>
 </div>
 
+
+    
