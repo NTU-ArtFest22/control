@@ -309,11 +309,13 @@
         
         console.log('video updating');
         for (var i = $scope.act.group.length - 1; i >= 0; i--) {
-          console.log('#'+i);
+          console.log('#'+$scope.act.group[i].character);
           if($scope.act.group[i].stream){
-            console.log('stream is defined');
+            console.log('new stream is defined');
             if (rtc.group[i]) {
+              console.log('group is already exist')
               if( rtc.group[i].stream ){
+                console.log('stream is already exist')
                 if (rtc.group[i].stream != $scope.oldStream[i]) {
                   rtc.group[i] = $scope.act.group[i]
                   console.log('video update');
