@@ -251,11 +251,10 @@
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 17,
+        zoom: 19,
         center: {lat:  25.017474 , lng:121.538739},
         mapTypeId: google.maps.MapTypeId.HYBRID
       });
-
     };
 
     var addPoint = function(){
@@ -271,8 +270,6 @@
           counter+=1
 
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
-          console.log(gps.lati+' '+gps.longi);
-          console.log(gps.lati+' '+gps.longi);
           if (oldlatlng[i]&&!oldlatlng[i].equals(latlng)) {
             if(marker[i]){
               marker[i].setMap(null);
@@ -294,49 +291,48 @@
       }
         
       console.log('```````````````````````````');
-      
     };
 
-      rtc.reloadGroup = function(){
-        var loc = window.location.pathname;
-        var param = loc.split('/');
-        console.log(param);
-        if( param[1] != "admin" && param[2]!= "stream"){
+    rtc.reloadGroup = function(){
+      var loc = window.location.pathname;
+      var param = loc.split('/');
+      console.log(param);
+      if( param[1] != "admin" && param[2]!= "stream"){
+        return;
+      }
+      $http.get('/adminact/' + param[3]).success(function(data){
+        if(!data)
           return;
-        }
-        $http.get('/adminact/' + param[3]).success(function(data){
-          if(!data)
-            return;
-          $scope.act = data;
-          console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
-          console.log( 'reload act: ', $scope.act.name );
-          console.log(data);
-          console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
-          
-          
-          for (var i = $scope.act.group.length - 1; i >= 0; i--) {
-
-            if($scope.act.group[i].stream){
-              if (rtc.group[i]) {
-                if( rtc.group[i].stream&&rtc.group[i].stream != $scope.oldStream[i] ){
+        $scope.act = data;
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
+        console.log( 'reload act: ', $scope.act.name );
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
+        for (var i = $scope.act.group.length - 1; i >= 0; i--) {
+          if($scope.act.group[i].stream){
+            if (rtc.group[i]) {
+              if( rtc.group[i].stream ){
+                if (rtc.group[i].stream != $scope.oldStream[i]) {
                   rtc.group[i] = $scope.act.group[i]
-                  $scope.oldStream[i] = rtc.group[i].stream;
-                  rtc.call( rtc.group[i].stream );  
+                  console.log('video update');
+                  rtc.call( rtc.group[i].stream ); 
                 }
               }else{
                 rtc.group[i] = $scope.act.group[i]
-                rtc.call( rtc.group[i].stream );  
-                $scope.oldStream[i] = rtc.group[i].stream;
+                console.log('video add');
+                rtc.call( rtc.group[i].stream ); 
               }
-
+              $scope.oldStream[i] = rtc.group[i].stream;
               
-                
+              
+            }else{
+              rtc.group[i] = $scope.act.group[i]
+              rtc.call( rtc.group[i].stream );  
+              $scope.oldStream[i] = rtc.group[i].stream;
             }
           }
-          
-          
-        });
-      };
+        }
+      });
+    };
 
 
 
