@@ -72,8 +72,8 @@
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
-        center: {lat:  25.038085 , lng:121.538231},
-        mapTypeId: google.maps.MapTypeId.TERRAIN
+        center: {lat:  25.017474 , lng:121.538739},
+        mapTypeId: google.maps.MapTypeId.HYBRID
       });
 
       poly = new google.maps.Polyline({
