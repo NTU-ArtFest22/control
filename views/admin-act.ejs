@@ -53,7 +53,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="act in actlist" ng-class="{success : act.isRunning==1, ng-scope : !(act.isRunning==1)}">
+              <tr ng-repeat="act in actlist" ng-class="rowClass(act)">
                 <td>{{ act.name }}</td>
                 <td>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}</td>
                 <td>{{ act.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
