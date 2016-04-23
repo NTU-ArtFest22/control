@@ -364,8 +364,13 @@
       };
 
       rtc.view = function(stream){
+        if(!stream.id){
+          stream = {id: stream, isPlaying: false};
+          rtc.remoteStreams.push(stream);
+        }
         client.peerInit(stream.id);
         stream.isPlaying = !stream.isPlaying;
+
       };
       rtc.call = function(stream){
         /* If json isn't loaded yet, construct a new stream 
