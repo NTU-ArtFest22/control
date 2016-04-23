@@ -314,21 +314,19 @@
                 if (rtc.group[i].stream != $scope.oldStream[i]) {
                   rtc.group[i] = $scope.act.group[i]
                   console.log('video update');
-                  rtc.call( rtc.group[i].stream ); 
+                  rtc.view( rtc.group[i].stream ); 
                 }
               }else{
                 rtc.group[i] = $scope.act.group[i]
                 console.log('video add');
-                rtc.call( rtc.group[i].stream ); 
+                rtc.view( rtc.group[i].stream ); 
               }
-              $scope.oldStream[i] = rtc.group[i].stream;
-              
-              
             }else{
               rtc.group[i] = $scope.act.group[i]
-              rtc.call( rtc.group[i].stream );  
-              $scope.oldStream[i] = rtc.group[i].stream;
+              rtc.view( rtc.group[i].stream );  
             }
+            $scope.oldStream[i] = rtc.group[i].stream;
+
           }
         }
       });
