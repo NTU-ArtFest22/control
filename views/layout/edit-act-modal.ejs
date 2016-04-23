@@ -70,7 +70,7 @@
         <hr>
         <button class="btn btn-primary pull-right" style="align: left;" type="submit" ng-click="saveEdit()">Save</button> 
         <a class="btn {{ act.isRunning ? 'btn-danger' : 'btn-success' }}" ng-click="toggleAct()" >{{ act.isRunning ? "Close Activity" : "Run Activity" }}</a>
-        <a href="/admin/stream/{{act._id}}" class="btn bnt-info" ng-disabled="{{!act.isRunning}}" >Open Admin Page</a>
+        <a href="/admin/stream/{{act._id}}" class="btn btn-info" {{act.isRunning?"":"disabled"}} >Open Admin Page</a>
 
       </div><!-- col-xs-6 -->
       <dir class="col-xs-7" style="margin-top: 0px">
