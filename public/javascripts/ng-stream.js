@@ -301,11 +301,22 @@
           console.log( 'reload act: ', $scope.act.name );
           
           for (var i = $scope.act.group.length - 1; i >= 0; i--) {
+
             if($scope.act.group[i].stream){
-              if( rtc.group[i].stream||rtc.group[i].stream != $scope.oldStream[i] ){
-                rtc.call( rtc.group[i].stream );
+              if (rtc.group[i]) {
+                if( rtc.group[i].stream&&rtc.group[i].stream != $scope.oldStream[i] ){
+                  rtc.group[i] = $scope.act.group[i]
+                  $scope.oldStream[i] = rtc.group[i].stream;
+                  rtc.call( rtc.group[i].stream );  
+                }
+              }else{
+                rtc.group[i] = $scope.act.group[i]
+                rtc.call( rtc.group[i].stream );  
                 $scope.oldStream[i] = rtc.group[i].stream;
               }
+
+              
+                
             }
           }
           
