@@ -665,11 +665,6 @@ module.exports = function( app , db ){
 
   });
   app.get('/admin/stream/:act', function(req, res){
-
-    var query = ( req.params.type == "artist" ) ? 
-      
-        : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
-
         console.log( "query", query );
 
         db.activities.findOne(
