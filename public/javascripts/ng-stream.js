@@ -278,15 +278,12 @@
               marker[i].setMap(null);
               delete marker[i];
             }
-            
-            
-          }else{
-            marker[i] = new google.maps.Marker({
-              position: latlng,
-              place: gps.rectime,
-              map: map
-            });
           }
+          marker[i] = new google.maps.Marker({
+            position: latlng,
+            place: gps.rectime,
+            map: map
+          });
           oldlatlng[i] = latlng;
         }
       }
