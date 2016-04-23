@@ -246,7 +246,7 @@
         }
     }
 
-    var map, poly, oldlatlng, marker;
+    var map, oldlatlng=[], marker=[];
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -255,50 +255,35 @@
         mapTypeId: google.maps.MapTypeId.HYBRID
       });
 
-      poly = new google.maps.Polyline({
-        //geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.5,
-        strokeWeight: 2
-      });
-
-      poly.setMap(map);
     };
 
     var addPoint = function(){
       var gps, latlng;
-      if(!rtc.group.artist.gps)
-        return;
-      else{
-        gps = rtc.group.artist.gps;
-        latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
-        if( oldlatlng && oldlatlng.equals( latlng ) )
-          return;
+      var temp = [0., 0.];
+      for (var i = act.group.length - 1; i >= 0; i--) {
+        if(act.group[i].artist.gps){
+          gps = act.group[i].artist.gps;
+          temp[0]+=parseFloat(gps.lati);
+          temp[1]+=parseFloat(gps.longi);
+          latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
+          if (oldlatlng[i]&&!oldlatlng.equals(latlng)) {
+            if(marker){
+              marker.setMap(null);
+              delete marker;
+            }
+            marker = new google.maps.Marker({
+              position: latlng,
+              place: gps.rectime,
+              map: map
+            });
+            oldlatlng[i] = latlng;
+          }
+        }
       }
-      var path = poly.getPath();
-      console.log('--------------------------');
-      console.log(path);
-      console.log('--------------------------');
+      center = new google.maps.LatLng({lat: temp[0]/act.group.length, lng: temp[1]/act.group.length});
+      map.panTo(center);
 
-
-      // Because path is an MVCArray, we can simply append a new coordinate
-      // and it will automatically appear.
-      path.push( latlng );
-
-      if(marker){
-        marker.setMap(null);
-        delete marker;
-      }
-      // Add a new marker at the new plotted point on the polyline.
-      marker = new google.maps.Marker({
-        position: latlng,
-        place: gps.rectime,
-        map: map
-      });
-      // move map center at the new point
-      map.panTo(latlng);
-
-      oldlatlng = latlng;
+      
     };
 
       rtc.reloadGroup = function(){
