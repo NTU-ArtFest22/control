@@ -269,7 +269,7 @@
           temp[1]+=parseFloat(gps.longi);
 
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
-          console.log(latlng);
+          console.log(gps.lati+' '+gps.longi);
           if (oldlatlng[i]&&!oldlatlng.equals(latlng)) {
             if(marker){
               marker.setMap(null);
@@ -285,7 +285,7 @@
         }
       }
       center = new google.maps.LatLng({lat: temp[0]/$scope.act.group.length, lng: temp[1]/$scope.act.group.length});
-      console.log(center)
+      console.log({lat: temp[0]/$scope.act.group.length, lng: temp[1]/$scope.act.group.length})
       map.panTo(center);
       console.log('```````````````````````````');
       
