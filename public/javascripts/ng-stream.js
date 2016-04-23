@@ -272,18 +272,22 @@
 
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
           console.log(gps.lati+' '+gps.longi);
+          console.log(gps.lati+' '+gps.longi);
           if (oldlatlng[i]&&!oldlatlng[i].equals(latlng)) {
             if(marker[i]){
               marker[i].setMap(null);
               delete marker[i];
             }
+            
+            
+          }else{
             marker[i] = new google.maps.Marker({
               position: latlng,
               place: gps.rectime,
               map: map
             });
-            oldlatlng[i] = latlng;
           }
+          oldlatlng[i] = latlng;
         }
       }
       if (counter!=0) {
