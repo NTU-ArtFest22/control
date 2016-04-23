@@ -267,6 +267,7 @@
           gps = $scope.act.group[i].artist.gps;
           temp[0]+=parseFloat(gps.lati);
           temp[1]+=parseFloat(gps.longi);
+          temp[2]+=1
 
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
           console.log(gps.lati+' '+gps.longi);
@@ -284,8 +285,8 @@
           }
         }
       }
-      center = new google.maps.LatLng({lat: temp[0]/$scope.act.group.length, lng: temp[1]/$scope.act.group.length});
-      console.log({lat: temp[0]/$scope.act.group.length, lng: temp[1]/$scope.act.group.length})
+      center = new google.maps.LatLng({lat: temp[0]/temp[2], lng: temp[1]/temp[2]});
+      console.log({lat: temp[0]/temp[2], lng: temp[1]/temp[2]})
       map.panTo(center);
       console.log('```````````````````````````');
       
