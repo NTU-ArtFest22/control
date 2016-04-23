@@ -82,9 +82,7 @@ button[disabled], input[disabled], select[disabled] {
   right: 15px;
   float: right;
 }
-.adminStream video{
-  width: 50%
-}
+
 
 .localStream video {
   border: 5px solid rgb(119, 119, 119);
@@ -112,6 +110,7 @@ button[disabled], input[disabled], select[disabled] {
 .remoteStreams video{
   width: 100%;
 }
+
 .remoteStreams td:hover {
   cursor: pointer;
   background-color: #aaa;
@@ -125,4 +124,6 @@ button[disabled], input[disabled], select[disabled] {
   border-radius: 3px 3px 3px 3px; 
   box-shadow:inset 1px 2px 6px #070707;
 }
-
+.adminStream video{
+  width: 50%
+}

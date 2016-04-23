@@ -316,7 +316,7 @@
               console.log('group is already exist')
               if( rtc.group[i].stream ){
                 console.log('stream is already exist:'+rtc.group[i].stream)
-                if (!rtc.group[i].stream.equals($scope.oldStream[i])) {
+                if (!$scope.oldStream[i]||!rtc.group[i].stream==$scope.oldStream[i]) {
                   rtc.group[i] = $scope.act.group[i]
                   console.log('video update');
                   console.log(rtc.group[i])
