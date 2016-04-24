@@ -270,7 +270,7 @@
           counter+=1
 
           latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
-          if (oldlatlng[i]&&!oldlatlng[i].equals(latlng)) {
+          if (oldlatlng[i]) {
             if(marker[i]){
               marker[i].setMap(null);
               circles[i].setMap(null);
