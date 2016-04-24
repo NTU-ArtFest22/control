@@ -286,7 +286,7 @@
             fillOpacity: 0.35,
             map: map,
             center: citymap[city].center,
-            radius: parseFloat(gps.acc);
+            radius: parseFloat(gps.acc)
 
           })
           marker[i] = new google.maps.Marker({
