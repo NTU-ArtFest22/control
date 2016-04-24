@@ -29,6 +29,9 @@
         $window.alert('Fail to remove the activity.');
       }
     };
+     $scope.rowClass = function(act){
+        return (act.isRunning?'success': '');
+      }
 
     $scope.newact = function(){
       var modalInstance = $uibModal.open({

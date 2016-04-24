@@ -677,7 +677,7 @@ module.exports = function( app , db ){
             } else {
               console.log('                   got act  :', act);
               if( act.isRunning )
-                res.render('stream', { act: act});
+                res.render('stream', { act: act, user:req.user});
               else
                 res.redirect('/admin/activity')
             }

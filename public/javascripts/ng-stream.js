@@ -415,9 +415,7 @@
           mytimeout = $timeout($scope.onTimeout,1000);
       };
 
-      $scope.rowClass = function(act){
-        return (act.isRunning?'success': '');
-      }
+     
 
       var mytimeout = $timeout( $scope.onTimeout, 1000);
 
