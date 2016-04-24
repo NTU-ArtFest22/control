@@ -285,7 +285,7 @@
             fillColor: '#FF0000',
             fillOpacity: 0.35,
             map: map,
-            center: citymap[city].center,
+            center: latlng,
             radius: parseFloat(gps.acc)
 
           })
