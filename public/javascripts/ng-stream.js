@@ -362,6 +362,7 @@
           }
         }
         console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
+        addPoint();
       });
     };
 
@@ -434,7 +435,7 @@
         $scope.countTime++;
         if( $scope.countTime == 5){
           rtc.userReloadGroup();
-          addPoint();
+          
         }else
           mytimeout = $timeout($scope.onTimeout,1000);
       };
