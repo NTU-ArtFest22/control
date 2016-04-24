@@ -31,7 +31,7 @@
   </div>
   <div class="col-md-4">
     <div id="map" style="height:500px"></div>
-    <table class="table" style="width: 100%">
+    <table class="table" style="width: 100%;text-align: center;">
       <thead>
         <th>Name</th>
         <th>Acc</th>
@@ -41,9 +41,9 @@
       </thead>
       <tbody>
         <tr ng-repeat="group in act.group">
-          <td>{{group.artist.name}}</td>
-          <td>{{group.artist.gps.acc}}</td>
-          <td>{{group.artist.gps.battery}}</td>
+          <td style="text-align: left;">{{group.artist.name}}</td>
+          <td>{{group.artist.gps.acc}}m</td>
+          <td>{{group.artist.gps.battery}}%</td>
           <td>0</td>
           <td>{{group.artist.gps.rectime}}</td>
         </tr>
