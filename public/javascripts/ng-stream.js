@@ -247,7 +247,7 @@
         }
     }
 
-    var map, oldlatlng=[], marker=[];
+    var map, oldlatlng=[], marker=[], circles=[];
 
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -273,15 +273,39 @@
           if (oldlatlng[i]&&!oldlatlng[i].equals(latlng)) {
             if(marker[i]){
               marker[i].setMap(null);
+              circles[i].setMap(null);
               delete marker[i];
+              delete circles[i]
             }
           }
+          circles[i] = new google.maps.circles({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: citymap[city].center,
+            radius: parseFloat(gps.acc);
+
+          })
           marker[i] = new google.maps.Marker({
             position: latlng,
             place: gps.rectime,
-            map: map
+            map: map,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                fillColor: '#0000FF',
+                fillOpacity: 1,
+                strokeColor: '#0000FF',
+                strokeWeight: 1,
+                scale: 3
+            }
           });
           oldlatlng[i] = latlng;
+
+
+          // add gps circle
         }
       }
       if (counter!=0) {
