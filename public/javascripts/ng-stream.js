@@ -295,11 +295,11 @@
             map: map,
             icon: {
                 path: google.maps.SymbolPath.CIRCLE,
-                fillColor: '#0000FF',
+                fillColor: '#FF0000',
                 fillOpacity: 1,
-                strokeColor: '#0000FF',
-                strokeWeight: 1,
-                scale: 3
+                strokeColor: '#FF0000',
+                strokeWeight: 3,
+                scale: 5
             }
           });
           oldlatlng[i] = latlng;
@@ -432,7 +432,7 @@
 
       $scope.onTimeout = function(){
         $scope.countTime++;
-        if( $scope.countTime == 10){
+        if( $scope.countTime == 5){
           rtc.userReloadGroup();
           addPoint();
         }else

@@ -31,6 +31,24 @@
   </div>
   <div class="col-md-4">
     <div id="map" style="height:500px"></div>
+    <table class="table" style="width: 100%">
+      <thead>
+        <th>Name</th>
+        <th>Acc</th>
+        <th>Battery</th>
+        <th>LTEsignal</th>
+        <th>update time</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="group in act.group">
+          <td>{{group.artist.name}}</td>
+          <td>{{group.artist.gps.acc}}</td>
+          <td>{{group.artist.gps.battery}}</td>
+          <td>0</td>
+          <td>{{group.artist.gps.rectime}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
