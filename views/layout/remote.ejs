@@ -1,5 +1,5 @@
 <div class="row"  ng-controller="RemoteStreamsControllerforAdmin as rtc">
-  <div class="col-md-8">
+  <div class="col-md-7">
     <div class="remoteStreams">
       <div class="alert {{ act.isRunning ? 'alert-success' : 'alert-danger' }}">
         <strong>{{act.name}}({{ act.isRunning ? "Activity is now running" : "Activity is now closed" }})</strong>
@@ -29,23 +29,33 @@
     </div>
          
   </div>
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div id="map" style="height:500px"></div>
     <table class="table" style="width: 100%;text-align: center;">
       <thead>
         <th>Name</th>
+        <th>Character</th>
+        <th>Class</th>
         <th>Acc</th>
         <th>Battery</th>
         <th>LTEsignal</th>
-        <th>update time</th>
+        <!-- <th>update time</th> -->
+        <th>Stream</th>
+        <th>View</th>
+        <th>Call</th>
       </thead>
       <tbody>
         <tr ng-repeat="group in act.group">
           <td style="text-align: left;">{{group.artist.name}}</td>
+          <td>{{group.artist.gps.character}}</td>
+          <td>{{group.artist.gps.sclass}}</td>
           <td>{{group.artist.gps.acc}}m</td>
           <td>{{group.artist.gps.battery}}%</td>
           <td>0</td>
-          <td>{{group.artist.gps.time}}</td>
+          <!-- <td>{{group.artist.gps.time}}</td> -->
+          <td><span class='glyphicon glyphicon-{{ group.stream ? "ok" : "minus"}}'></span></td>
+          <td ng-click="rtc.view(group.stream)"><a>View</a></td>
+          <td ng-click="rtc.call(group.stream)"><a>Call</a></td>
         </tr>
       </tbody>
     </table>

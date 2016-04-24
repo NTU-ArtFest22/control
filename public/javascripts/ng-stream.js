@@ -331,36 +331,36 @@
         console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
         console.log( 'reload act: ', $scope.act.name );
         
-        console.log('video updating');
-        for (var i = $scope.act.group.length - 1; i >= 0; i--) {
-          console.log('#'+$scope.act.group[i].character);
-          if($scope.act.group[i].stream){
-            console.log('new stream is defined:'+$scope.act.group[i].stream);
-            if (rtc.group[i]) {
-              console.log('group is already exist')
-              if( rtc.group[i].stream ){
-                console.log('stream is already exist:'+rtc.group[i].stream)
-                if (!$scope.oldStream[i]||!rtc.group[i].stream==$scope.oldStream[i]) {
-                  rtc.group[i] = $scope.act.group[i]
-                  console.log('video update');
-                  console.log(rtc.group[i])
-                  rtc.view( rtc.group[i].stream ); 
-                }
-              }else{
-                rtc.group[i] = $scope.act.group[i]
-                console.log('video add');
-                rtc.view( rtc.group[i].stream ); 
-              }
-            }else{
-              console.log('group is not defined')
-              rtc.group[i] = $scope.act.group[i]
-              console.log(rtc.group[i])
-              rtc.view( rtc.group[i].stream );  
-            }
-            $scope.oldStream[i] = rtc.group[i].stream;
+        // console.log('video updating');
+        // for (var i = $scope.act.group.length - 1; i >= 0; i--) {
+        //   console.log('#'+$scope.act.group[i].character);
+        //   if($scope.act.group[i].stream){
+        //     console.log('new stream is defined:'+$scope.act.group[i].stream);
+        //     if (rtc.group[i]) {
+        //       console.log('group is already exist')
+        //       if( rtc.group[i].stream ){
+        //         console.log('stream is already exist:'+rtc.group[i].stream)
+        //         if (!$scope.oldStream[i]||!rtc.group[i].stream==$scope.oldStream[i]) {
+        //           rtc.group[i] = $scope.act.group[i]
+        //           console.log('video update');
+        //           console.log(rtc.group[i])
+        //           rtc.view( rtc.group[i].stream ); 
+        //         }
+        //       }else{
+        //         rtc.group[i] = $scope.act.group[i]
+        //         console.log('video add');
+        //         rtc.view( rtc.group[i].stream ); 
+        //       }
+        //     }else{
+        //       console.log('group is not defined')
+        //       rtc.group[i] = $scope.act.group[i]
+        //       console.log(rtc.group[i])
+        //       rtc.view( rtc.group[i].stream );  
+        //     }
+        //     $scope.oldStream[i] = rtc.group[i].stream;
 
-          }
-        }
+        //   }
+        // }
         console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
         addPoint();
       });
