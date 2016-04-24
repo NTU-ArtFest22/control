@@ -278,7 +278,7 @@
               delete circles[i]
             }
           }
-          circles[i] = new google.maps.circles({
+          circles[i] = new google.maps.Circle({
             strokeColor: '#FF0000',
             strokeOpacity: 0.8,
             strokeWeight: 2,
