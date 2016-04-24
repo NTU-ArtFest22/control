@@ -48,6 +48,7 @@
               <tr ng-repeat="user in userlist">
                 <td><strong>{{ user.isAdmin ? "+" : "-" }}</strong></td>
                 <td><font color="red"><strong>{{ user.isArtist ? "V" : "" }}</strong></font></td>
+                <td><font color="green"><strong>{{ user.isDoll ? "&" : "" }}</strong></font></td>
                 <td>{{user.fb.displayName}}</td>
                 <td>{{ user.fb.email }}</td>
                 <td>{{user.time |date:'yyyy-MM-dd HH:mm:ss' }}</td>
@@ -60,7 +61,6 @@
                 </td>
                 <td>
                   <button class="btn btn-warning" ng-click="open( user )" >Edit</button>
-                  <button class="btn btn-danger" ng-click="remove(user._id)">Remove</button>
                 </td>
               </tr>
             </tbody>

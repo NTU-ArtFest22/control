@@ -14,19 +14,6 @@
 
     refresh();
 
-    $scope.remove = function( id ){
-      var ans = $window.confirm( "Are you sure to remove the user?" );
-      if(ans){
-        $http.delete('/admin/userlist/' + id).success(function(res){
-          refresh();
-        });  
-      }
-      else{
-        console.log('Cancel to remove the user.');
-      }
-    };
-
-
     $scope.open = function ( user ) {
       var modalInstance = $uibModal.open({
         animation: true,
@@ -144,15 +131,12 @@
       }
     };
 
-
-    $scope.makeAdmin = function(){
-      var ans = $window.prompt('What makes a good admin?');
+    $scope.make = function( c ){
+      var ans = $window.prompt('What makes a good ' + c + '?');
       if( ans == "green butter" ){ // the answer is only want to check if the user knows how this works!
         $window.alert('You got the answer!');
 
-        //$http.put('/admin/makeadmin/' + editUser._id );
-
-        $http.put('/admin/makeadmin/' + editUser._id).then(
+        $http.put('/admin/make' + c + '/' + editUser._id).then(
           function(res){
             modal_refresh();
           },
@@ -166,30 +150,6 @@
         $window.alert('Wrong answer... Please ask root admin');
       }
     };
-
-    $scope.makeArtist = function(){
-      var ans = $window.prompt('What makes a good artist?');
-      if( ans == "red butter" ){ // the answer is only want to check if the user knows how this works!
-        $window.alert('You got the answer!');
-
-        //$http.put('/admin/makeadmin/' + editUser._id );
-
-        $http.put('/admin/makeartist/' + editUser._id).then(
-          function(res){
-            modal_refresh();
-            console.log('toggle artist!');
-          },
-          function(err){
-            modal_refresh();
-            console.log(err);
-          }
-        );
-
-      }else{
-        $window.alert('Wrong answer... Please ask root admin');
-      }
-    };
-
 
     $scope.ok = function () {
       $uibModalInstance.close();
