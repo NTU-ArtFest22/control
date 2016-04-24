@@ -818,12 +818,13 @@ module.exports = function( app , db ){
     }
     return res.json(true);
   });
-  app.get('/api/act/gpslog/:act_id/:artist_id/:longi/:lati/:battery', function(req, res){
+  app.get('/api/act/gpslog/:act_id/:artist_id/:longi/:lati/:battery/:acc', function(req, res){
     var act_id = req.params.act_id;
     var access_id = req.params.artist_id;
     var longi = req.params.longi;
     var lati = req.params.lati;
     var battery = req.params.battery;
+    var acc = req.params.acc;
     var time = new Date();
     User.findOne({"fb.id": access_id}, function(err, user){
 
@@ -840,6 +841,7 @@ module.exports = function( app , db ){
             "group.$.artist.gps.lati": lati,
             "group.$.artist.gps.time": time,
             "group.$.artist.gps.battery": battery,
+            "group.$.artist.gps.acc": acc,
           }
         }, 
         new: true
