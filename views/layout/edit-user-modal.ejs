@@ -35,7 +35,7 @@
     </div>
     <div class="col-xs-12 col-sm-6 col-md-8" align="center">
       <h4 class="data-content"  style="display:inline-block;">{{ editUser.isAdmin ? "yes" : "no" }}</h4>
-      <button class="btn btn-danger btn-small"  style="display:inline-block;" ng-click="make( admin )">{{ editUser.isAdmin ? "Take away" : "Give auth" }}</button>
+      <button class="btn btn-danger btn-small"  style="display:inline-block;" ng-click="make('admin')">{{ editUser.isAdmin ? "Take away" : "Give auth" }}</button>
     </div>
   </div>
 
@@ -45,7 +45,7 @@
     </div>
     <div class="col-xs-12 col-sm-6 col-md-8" align="center">
       <h4 class="data-content"  style="display:inline-block;">{{ editUser.isArtist ? "yes" : "no" }}</h4>
-      <button class="btn btn-danger btn-small" style="display:inline-block;" ng-click="make( artist )">{{ editUser.isArtist ? "Abort" : "Magic!" }}</button>
+      <button class="btn btn-danger btn-small" style="display:inline-block;" ng-click="make( 'artist' )">{{ editUser.isArtist ? "Abort" : "Magic!" }}</button>
     </div>
   </div>
 
@@ -55,7 +55,7 @@
     </div>
     <div class="col-xs-12 col-sm-6 col-md-8" align="center">
       <h4 class="data-content"  style="display:inline-block;">{{ editUser.isDoll ? "yes" : "no" }}</h4>
-      <button class="btn btn-danger btn-small" style="display:inline-block;" ng-click="make( doll )">{{ editUser.isDoll ? "Take away" : "Doll!" }}</button>
+      <button class="btn btn-danger btn-small" style="display:inline-block;" ng-click="make( 'doll' )">{{ editUser.isDoll ? "Take away" : "Doll!" }}</button>
     </div>
   </div>
 
