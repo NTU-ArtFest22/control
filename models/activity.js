@@ -10,7 +10,15 @@ var actSchema = mongoose.Schema({
     artist: {
       id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
       name: String,
-      gps: {longi:String, lati:String, time:Date, battery:String, acc:String}
+      gps: {
+          longi:String, 
+          lati:String, 
+          time:Date, 
+          battery:{
+            work:String,
+            stream:String,
+          },
+          acc:String}
     },
     player: {
       id: {type:mongoose.Schema.Types.ObjectId, ref:"User"},
