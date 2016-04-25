@@ -13,7 +13,10 @@ var actSchema = mongoose.Schema({
       gps: {
           longi:String, 
           lati:String, 
-          time:Date, 
+          time:{
+            work:String,
+            time:String
+          }, 
           battery:{
             work:String,
             stream:String,

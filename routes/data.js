@@ -839,7 +839,7 @@ module.exports = function( app , db ){
           $set: {
             "group.$.artist.gps.longi": longi,
             "group.$.artist.gps.lati": lati,
-            "group.$.artist.gps.time": time,
+            "group.$.artist.gps.time.work": time,
             "group.$.artist.gps.battery.work": battery,
             "group.$.artist.gps.acc": acc,
           }
@@ -863,6 +863,7 @@ module.exports = function( app , db ){
     var act_id = req.params.act_id;
     var access_id = req.params.artist_id;
     var battery = req.params.battery;
+    var time = new Date();
     User.findOne({"fb.id": access_id}, function(err, user){
 
       db.activities.findAndModify({
@@ -875,6 +876,7 @@ module.exports = function( app , db ){
         update: {
           $set: {
             "group.$.artist.gps.battery.stream": battery,
+            "group.$.artist.gps.time.stream": time,
           }
         }, 
         new: true

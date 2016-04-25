@@ -37,7 +37,8 @@
         <th>Character</th>
         <th>Class</th>
         <th>Acc</th>
-        <th>Battery</th>
+        <th>Bat(work)</th>
+        <th>Bat(stream)</th>
         <th>LTEsignal</th>
         <!-- <th>update time</th> -->
         <th>Stream</th>
@@ -50,7 +51,8 @@
           <td>{{group.artist.gps.character}}</td>
           <td>{{group.artist.gps.sclass}}</td>
           <td>{{group.artist.gps.acc}}m</td>
-          <td>{{group.artist.gps.battery}}%</td>
+          <td>{{group.artist.gps.battery.work}}%</td>
+          <td>{{group.artist.gps.battery.stream}}%</td>
           <td>0</td>
           <!-- <td>{{group.artist.gps.time}}</td> -->
           <td><span class='glyphicon glyphicon-{{ group.stream ? "ok" : "minus"}}'></span></td>
