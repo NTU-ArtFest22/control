@@ -5,6 +5,7 @@
     $http.get('/json/us.json')
     .then(function(res){
       $scope.workgroups = res.data;
+      console.log(res.data)
     });
   });
 })();
