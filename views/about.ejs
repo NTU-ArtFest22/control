@@ -11,11 +11,11 @@
     <%- include layout/navbar %>
 
     <div id="head-team"  ng-controller="aboutController as aboutCtrl">
-      <div ng-repeat="workgroup in workgroups">
+      <div class="well" ng-repeat="workgroup in workgroups">
         <h1>{{workgroup.work}}</h1>
         <div class="row">
           <div class="col-md-4" ng-repeat="worker in workgroup.members">
-            <!-- <img class="img-circle img-responsive" src="/images/us/{{ worker.img }}" alt="{{ worker.name }}" style="max-height: 150px; max-width: 150px"> -->
+            <img class="img-circle img-responsive" src="/images/us/{{ worker.img }}" alt="{{ worker.name }}" style="max-height: 150px; max-width: 150px">
             <ul class="list-inline center-block text-center">
               <li> Name: {{ worker.name }} </li>
             </ul>    
