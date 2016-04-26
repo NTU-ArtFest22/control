@@ -3,13 +3,13 @@
     "work": "執行製作",
     "members": [
     	{"name":"薛元皓", "img":""},
-    	{"name":"郭仲耘", "img":""},
+    	{"name":"郭仲耘", "img":"kevin.jpg"},
     ]
   },{
     "work": "儀器開發",
     "members": [
-    	{"name":"郭仲耘", "img":""},
-    	{"name":"林祐萱", "img":""},
+    	{"name":"郭仲耘", "img":"kevin.jpg"},
+    	{"name":"林祐萱", "img":"blah.jpg"},
     ]
   },{
     "work": "平面設計",
@@ -42,12 +42,12 @@
     "members": [
     	{"name":"紀承宏", "img":""},
     	{"name":"陳韻伶", "img":""},
-    	{"name":"郭仲耘", "img":""},
+    	{"name":"郭仲耘", "img":"kevin.jpg"},
     	{"name":"張琬婷", "img":""},
     	{"name":"劉品辰", "img":""},
     	{"name":"劉萾梅", "img":""},
     	{"name":"蔡沂真", "img":""},
-    	
+
     ]
   },
 ]
