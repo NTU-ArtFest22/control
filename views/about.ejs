@@ -14,7 +14,7 @@
       <div ng-repeat="workgroup in workgroups">
         <h1>{{workgroup.work}}</h1>
         <div class="row">
-          <div class="col-md-4" ng-repeat="worker in workgroup.members">
+          <div class="col-md-4 aboutus" ng-repeat="worker in workgroup.members">
             <img class="img-circle img-responsive" src="/images/us/{{ worker.img }}" alt="{{ worker.name }}" style="max-height: 150px; max-width: 150px">
             <h3>{{ worker.name }}</h3>
           </div>

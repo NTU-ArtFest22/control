@@ -31,7 +31,9 @@ select {
   position: relative;
   text-align: right;
 }
-
+.aboutus {
+  text-align: center;
+}
 .user-picture {
   width: 100px;
   height: 100px;

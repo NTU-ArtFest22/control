@@ -53,6 +53,10 @@ module.exports = function(passport, streams){
     console.log('Want to know us??');
     res.render('about', { message: req.flash('message') , user: req.user});
   });
+  router.get('/activity', function(req, res) {
+    console.log('Want to know us??');
+    res.render('activity', { message: req.flash('message') , user: req.user});
+  });
 
   /* Handle Login POST */
   router.post('/auth', passport.authenticate('login', {

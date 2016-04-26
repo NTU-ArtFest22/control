@@ -9,24 +9,35 @@
   <body>
 
     <%- include layout/navbar %>
+    <div class="row">
+      <div class="col-lg-4">
+        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+        <h2>Ear Worm</h2>
+        <p>實驗長度：約五十分鐘。（含儀器裝戴和說明的時間）</p>
+        <p>實驗說明：受試者擔任被控制者，於日常生活中接收一名以上控制者給予的各項訊息與指令。</p>
+        <p><a class="btn btn-default" href="http://www.blink.com.tw/event/1180/" role="button">前往報名 »</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+        <h2>Beyond The Map@大稻埕</h2>
+        <p>實驗長度：約１４０分鐘。（含儀器裝戴和說明的時間）</p>
+        <p></p>
+        <p><a class="btn btn-default" href="http://www.blink.com.tw/event/1173/" role="button">前往報名 »</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+        <h2>Beyond The Map@寶藏巖</h2>
+        <p>實驗長度：約１４０分鐘。（含儀器裝戴和說明的時間）</p>
+        <p></p>
+        <p><a class="btn btn-default" href="http://www.blink.com.tw/event/1174/" role="button">前往報名 »</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div>
 
-    <% if(!local['user']) { %>
-      <div class="need-signin">
-        <h4> Oops! You have to sign in first  </h4>
-        <button type="button" class="btn btn-warning btn-lg btn-block" href="/auth/facebook">FB login</button>
-      </div>
-    <% } else { %>
-
-      <%- include layout/signup-form %>
-
-    <% } %>
 
 
 
-    <%- include layout/fb-like %>
 
     <%- include layout/links %>
-
   </body>
 </html>
 
