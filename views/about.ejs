@@ -9,135 +9,18 @@
   <body>
 
     <%- include layout/navbar %>
-    <h1>執行製作</h1>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>薛元皓</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>郭仲耘</h2>
-        <p></p>
-      </div>
-    </div>
-    <h1>儀器開發</h1>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>林祐萱</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>郭仲耘</h2>
-        <p></p>
-      </div>
-    </div>
 
-     
-    <h1>平面設計</h1>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>鄭子璇</h2>
-        <p></p>
-      </div>
-    </div>
-    
-    <h1>網頁設計</h1>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>黃文鴻</h2>
-        <p></p>
-      </div>
-    </div>
-    
-    <h1>造型設計</h1>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>王詩涵</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>鄭子璇</h2>
-        <p></p>
-      </div>
-    </div>
-    
-    
-    <h1>行銷專員</h1>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>江彥霆</h2>
-        <p></p>
-      </div>
-    </div>
-    
-    
-    <h1>創作統籌</h1>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>薛元皓</h2>
-        <p></p>
-      </div>
-    </div>
-    
-    
-    <h1>創作執行</h1>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>紀承宏</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>陳韻伶</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>郭仲耘</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>張琬婷</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>劉品辰</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>劉萾梅</h2>
-        <p></p>
-      </div>
-      <div class="col-md-3">
-        <img src="" class="img-circle img-aboutus">
-        <h2>蔡沂真</h2>
-        <p></p>
-      </div>
-    </div>
-    
-     
-
-    <div id="head-team" class="row" ng-controller="aboutController as aboutCtrl">
-      <div class="col-md-4" ng-repeat="worker in workers">
-        <img class="img-circle img-responsive" src="/images/us/{{ worker.img }}" alt="{{ worker.name }}" style="max-height: 150px; max-width=150px">
-        <ul class="list-inline center-block text-center">
-          <li> Name: {{ worker.name }} </li>
-          <li> I'm a {{ worker.job }} </li>
-        </ul>
+    <div id="head-team"  ng-controller="aboutController as aboutCtrl">
+      <div ng-repeat="workgroup in workgroups">
+        <h1>{{workgroup.work}}</h1>
+        <div class="row">
+          <div class="col-md-4" ng-repeat="worker in workgroup.members">
+            <img class="img-circle img-responsive" src="/images/us/{{ worker.img }}" alt="{{ worker.name }}" style="max-height: 150px; max-width: 150px">
+            <ul class="list-inline center-block text-center">
+              <li> Name: {{ worker.name }} </li>
+            </ul>    
+          </div>
+        </div>
       </div>
     </div>
     
