@@ -5,50 +5,6 @@
     	{"name":"薛元皓", "img":""},
     	{"name":"郭仲耘", "img":"kevin.jpg"},
     ]
-  },{
-    "work": "儀器開發",
-    "members": [
-    	{"name":"郭仲耘", "img":"kevin.jpg"},
-    	{"name":"林祐萱", "img":"blah.jpg"},
-    ]
-  },{
-    "work": "平面設計",
-    "members": [
-    	{"name":"鄭子璇", "img":""},
-    ]
-  },{
-    "work": "網頁設計",
-    "members": [
-    	{"name":"黃文鴻", "img":""},
-    ]
-  },{
-    "work": "造型設計",
-    "members": [
-    	{"name":"王詩涵", "img":""},
-    	{"name":"鄭子璇", "img":""},
-    ]
-  },{
-    "work": "行銷專員",
-    "members": [
-    	{"name":"江彥霆", "img":""},
-    ]
-  },{
-    "work": "創作統籌",
-    "members": [
-    	{"name":"薛元皓", "img":""},
-    ]
-  },{
-    "work": "創作執行",
-    "members": [
-    	{"name":"紀承宏", "img":""},
-    	{"name":"陳韻伶", "img":""},
-    	{"name":"郭仲耘", "img":"kevin.jpg"},
-    	{"name":"張琬婷", "img":""},
-    	{"name":"劉品辰", "img":""},
-    	{"name":"劉萾梅", "img":""},
-    	{"name":"蔡沂真", "img":""},
-
-    ]
   },
 ]
 
