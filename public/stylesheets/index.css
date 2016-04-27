@@ -1,0 +1,70 @@
+@font-face {
+    font-family: "squarespace-ui-font";
+    src: url("/fonts/squarespace-ui-font.ttf")
+}
+.container {
+	height: 100%;
+}
+.bg {
+	margin-top: 50px;
+	height: calc(90% - 50px);
+	background-image: url(/images/index/bg.png);
+	background-repeat: no-repeat;
+	-webkit-background-size: contain;
+	background-size: contain;
+	background-position: center center;
+	position: relative;
+}
+#arrow-box {
+	height: 10%;
+	position: relative;
+	text-align: center;
+}
+#arrow {
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%) rotate(90deg);
+	animation: 3s arrow-annimate infinite ease;
+}
+#arrow:before {
+	color: #502E90;
+	font-family: "squarespace-ui-font";
+	content: "";
+	-webkit-font-smoothing: antialiased;
+	speak: none;
+	font-size: 35px;
+	text-align: center;
+}
+
+#activity {
+	margin-top: 20px;
+	padding-top: 50px;
+}
+
+#fb-login {
+	padding: 50px 0;
+	text-align: center;
+}
+#btn-fb-login {
+	background-color: #3B5998;
+	color: #fff;
+	border: none;
+	font-size: 40px;
+	padding: 0 10px;
+	border-radius: 5px;
+}
+#btn-fb-login img {
+	height: 50px;
+	margin: 10px 0;
+}
+
+@keyframes arrow-annimate {
+	0%, 100% {
+        top: 0;
+	}
+    50% {
+        top: 10px;
+    }
+}

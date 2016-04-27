@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>22nd-NTUAF-異識流 </title>
+    <link rel="stylesheet" href="/stylesheets/index.css">
 
   </head>
 
@@ -10,10 +11,61 @@
 
     <%- include layout/navbar %>
 
+	<!-- Main View and Background -->
+    <div id="container-main" class="container">
+    	<div class="bg"></div>
+		<div id="arrow-box">
+			<div id="arrow"></div>
+		</div>
+    </div>
 
-    <%- include layout/fb-like %>
-    <%- include layout/links %>
+	<div id="container-activity" class="container">
+		<div id="activity" class="row">
+	      <div class="col-lg-4">
+	        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+	        <h2>Ear Worm</h2>
+	        <p>實驗長度：約五十分鐘。（含儀器裝戴和說明的時間）</p>
+	        <p>實驗說明：受試者擔任被控制者，於日常生活中接收一名以上控制者給予的各項訊息與指令。</p>
+	        <p><a class="btn btn-default" href="http://www.blink.com.tw/event/1180/" role="button">前往報名 »</a></p>
+	      </div><!-- /.col-lg-4 -->
+	      <div class="col-lg-4">
+	        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+	        <h2>Beyond The Map@大稻埕</h2>
+	        <p>實驗長度：約１４０分鐘。（含儀器裝戴和說明的時間）</p>
+	        <p></p>
+	        <p><a class="btn btn-default" href="http://www.blink.com.tw/event/1173/" role="button">前往報名 »</a></p>
+	      </div><!-- /.col-lg-4 -->
+	      <div class="col-lg-4">
+	        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+	        <h2>Beyond The Map@寶藏巖</h2>
+	        <p>實驗長度：約１４０分鐘。（含儀器裝戴和說明的時間）</p>
+	        <p></p>
+	        <p><a class="btn btn-default" href="http://www.blink.com.tw/event/1174/" role="button">前往報名 »</a></p>
+	      </div><!-- /.col-lg-4 -->
+	    </div>
 
+	    <!-- log in -->
+		<% if (! locals['user']) { %>
+		<div id="fb-login">
+		  <!-- <ul class="nav navbar-nav navbar-right"> -->
+		    <!-- <li> -->
+		      <!-- <a href="/auth/facebook">FB Login</a> -->
+		      <!--Login with FB-->
+		      <!-- <img href="/auth/facebook" src="/images/fb-login.png" width="96px" height="46px"> -->
+		      <a id="btn-fb-login" type="button" href="/auth/facebook" class="btn btn-default navbar-btn">
+		      	<img src="/images/fb-icon.png" alt="">
+		      	Login with Facebook
+		      </a>
+		    <!-- </li> -->
+		  <!-- </ul> -->
+		</div>
+		<% } %>
+		<%- include layout/fb-like %>
+    	
+	</div>
+
+	<%- include layout/links %>
+	<script type="text/javascript" src="/javascripts/index.js"></script>
 
   </body>
 </html>

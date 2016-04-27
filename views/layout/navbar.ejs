@@ -9,15 +9,15 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <img alt="Home" src="/images/NTUAF-copy.png" width="48px" height="27px">
+        <img alt="Home" src="/images/NTUAF-copy.png">
       </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li><a href="#" onclick="scroll_to_div('#container-activity');">Activities</a></li>
         <li><a href="/about">About us</a></li>
-        <li><a href="/activity">Activities</a></li>
         <!-- <li><a href="/contact">Ping us</a></li> -->
 <!--         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Activities <span class="caret"></span></a>
@@ -35,16 +35,7 @@
 
 
       <!-- log in -->
-      <% if (! locals['user']) { %>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="/auth/facebook">FB Login</a>
-            <!--Login with FB-->
-            <!--<img href="/auth/facebook" src="/images/fb-login.png" width="96px" height="46px">-->
-            <!--<button type="button" href="/auth/facebook" class="btn btn-default navbar-btn">Login with FB</button>-->
-          </li>
-        </ul>
-      <% } else { %>
+      <% if (locals['user']) { %>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
