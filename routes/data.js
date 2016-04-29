@@ -719,8 +719,10 @@ module.exports = function( app , db ){
 
     var query = ( req.params.type == "artist" ) ? 
       { "_id": mongojs.ObjectId( req.params.act ), "group.artist.id": req.user._id.toString() }
-        : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
-
+        : { "_id": mongojs.ObjectId( req.params.act ), "group.character": req.params.type };
+    // var query = ( req.params.type == "artist" ) ? 
+    //   { "_id": mongojs.ObjectId( req.params.act ), "group.artist.id": req.user._id.toString() }
+    //     : { "_id": mongojs.ObjectId( req.params.act ), "group.player.id": req.user._id.toString() };
         db.activities.findOne(
           query,
           { 'group.$': 1 , 'name': 1 },
