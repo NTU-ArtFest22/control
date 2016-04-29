@@ -132,6 +132,7 @@
         $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
           if(!data)
             return;
+          console.log(data);
           rtc.group = data.group[0];        
           $scope.act = data;
           console.log( 'reload group: ', rtc.group );
