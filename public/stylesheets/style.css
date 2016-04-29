@@ -18,7 +18,9 @@ body {
 select {
   width: auto;
 }
-
+.intro {
+  text-align: center;
+}
 .navbar {
   width: 90%;
   margin: 0 auto;
