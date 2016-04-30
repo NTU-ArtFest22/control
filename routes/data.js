@@ -57,7 +57,7 @@ module.exports = function( app , db ){
             console.log( 'check if ok:     ', act );
             if(err || !act){
               console.log(err);
-              errorfunc(req, res);
+              res.redirect('/profile');
             } else {
               var act_name = act.name;
               console.log('===============================================');
@@ -68,7 +68,7 @@ module.exports = function( app , db ){
                   console.log('++++++ found group +++++');
                   if( group.player && group.player.id){
                     console.log('found user already in group ', group.player);
-                    errorfunc(req, res);
+                    res.redirect('/profile');
                   }else{
                     console.log('found user not in group ', group.player);
                     break;
