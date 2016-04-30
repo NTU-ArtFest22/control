@@ -55,18 +55,22 @@ module.exports = function( app , db ){
         db.activities.findOne(
           { "_id": mongojs.ObjectId( act_id ) },
           function( err, act ){
-            console.log( act )
+            console.log( 'check if ok:     ', act );
             if(err || !act){
               console.log(err);
               errorfunc(req, res);
             } else {
               var act_name = act.name;
               for( var group in act.group ){
+                console.log('++++++ found group +++++');
                 if( group.character == player_id ){
-                  if( group.player && group.player.name )
+                  if( group.player && group.player.id){
+                    console.log('found user already in group ', group.player);
                     errorfunc(req, res);
-                  else
+                  }else{
+                    console.log('found user not in group ', group.player);
                     break;
+                  }
                 }
               }
 
