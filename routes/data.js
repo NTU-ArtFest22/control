@@ -58,6 +58,7 @@ module.exports = function( app , db ){
             if(err || !act){
               console.log(err);
               res.redirect('/profile');
+              return;
             } else {
               var act_name = act.name;
               console.log('===============================================');
@@ -69,6 +70,7 @@ module.exports = function( app , db ){
                   if( group.player && group.player.id){
                     console.log('found user already in group ', group.player);
                     res.redirect('/profile');
+                    return;
                   }else{
                     console.log('found user not in group ', group.player);
                     break;
@@ -685,7 +687,7 @@ module.exports = function( app , db ){
               if( act.isRunning )
                 res.render('stream', { act: act, user:req.user});
               else
-                res.redirect('/admin/activity')
+                res.redirect('/admin/activity');
             }
           })  
   });
