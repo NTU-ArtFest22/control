@@ -51,7 +51,6 @@ module.exports = function( app , db ){
       if(! player_id ){
         errorfunc(req, res);
       }else{
-        console.log(req.body.code , ' --> ', player_id);
         db.activities.findOne(
           { "_id": mongojs.ObjectId( act_id ) },
           function( err, act ){
@@ -61,7 +60,9 @@ module.exports = function( app , db ){
               errorfunc(req, res);
             } else {
               var act_name = act.name;
+              console.log('===============================================');
               for( var group in act.group ){
+                console.log( group.character , '  []  ', player_id.toString() );
                 if( group.character == player_id.toString() ){
                   console.log('++++++ found group +++++');
                   if( group.player && group.player.id){
