@@ -61,7 +61,8 @@ module.exports = function( app , db ){
             } else {
               var act_name = act.name;
               console.log('===============================================');
-              for( var group in act.group ){
+              for( var groupid in act.group ){
+                var group = act.group[ groupid ];
                 console.log( group.character , '  []  ', player_id.toString() );
                 if( group.character == player_id.toString() ){
                   console.log('++++++ found group +++++');
