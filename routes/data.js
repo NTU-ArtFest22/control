@@ -62,8 +62,8 @@ module.exports = function( app , db ){
             } else {
               var act_name = act.name;
               for( var group in act.group ){
-                console.log('++++++ found group +++++');
-                if( group.character == player_id ){
+                if( group.character == player_id.toString() ){
+                  console.log('++++++ found group +++++');
                   if( group.player && group.player.id){
                     console.log('found user already in group ', group.player);
                     errorfunc(req, res);
