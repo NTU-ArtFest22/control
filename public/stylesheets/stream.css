@@ -1,7 +1,4 @@
 #remoteVideosContainer {
-	
-}
-.remoteStreams {
 	background-image: url(/images/stream/loading.gif);
 	width: 100%;
 	-webkit-background-size: contain;
