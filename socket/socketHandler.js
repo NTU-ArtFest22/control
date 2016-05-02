@@ -1,4 +1,4 @@
-module.exports = function(io, streams) {
+module.exports = function(io, streams, routes, data) {
   console.log('ready for connection');
 
 
@@ -7,8 +7,15 @@ module.exports = function(io, streams) {
 
     console.log('-- ' + client.id);
     client.emit('id', client.id);
+// mission system
+    client.on('register_client', function(info){
+
+      client.emit('register_status', 'success');
+    });
 
 
+
+// original
     client.on('message', function (details) {
       var otherClient = io.sockets.connected[details.to];
 
@@ -30,6 +37,7 @@ module.exports = function(io, streams) {
       streams.update(client.id, options.name);
     });
 
+    // leave
     function leave() {
       console.log('-- ' + client.id + ' left --');
       streams.removeStream(client.id);
@@ -38,4 +46,5 @@ module.exports = function(io, streams) {
     client.on('disconnect', leave);
     client.on('leave', leave);
   });
+
 };

@@ -73,7 +73,7 @@ var express           =     require('express')
   app.use('/', routes);
 
 
-  require('./routes/data.js')( app , db );
+  var data = require('./routes/data.js')( app , db );
 
 
   app.get('/stream/trial', function(req, res){
@@ -134,7 +134,7 @@ var express           =     require('express')
   /**
    * Socket.io event handling
    */
-  require('./socket/socketHandler.js')(io, streams);
+  require('./socket/socketHandler.js')(io, streams, routes, data);
 
 
 
