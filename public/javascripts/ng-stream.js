@@ -297,6 +297,7 @@
             position: latlng,
             place: gps.rectime,
             map: map,
+            title: $scope.act.group[i].character,
             icon: {
                 path: google.maps.SymbolPath.CIRCLE,
                 fillColor: '#FF0000',
