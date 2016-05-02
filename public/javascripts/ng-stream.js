@@ -88,96 +88,43 @@
 
     var addPoint = function(){
       if ($scope.act.acttype==1) {
-        for (var i = $scope.act.group.length - 1; i >= 0; i--) {
-          if($scope.act.group[i].artist.gps){
-            gps = $scope.act.group[i].artist.gps;
-            if (isNaN(parseFloat(gps.lati))||isNaN(parseFloat(gps.longi))) {
-              continue;
-            }
-            temp[0]+=parseFloat(gps.lati);
-            temp[1]+=parseFloat(gps.longi);
-            counter+=1
-
-            latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
-            if (oldlatlng[i]) {
-              if(marker[i]){
-                marker[i].setMap(null);
-                circles[i].setMap(null);
-                delete marker[i];
-                delete circles[i]
-              }
-            }
-            circles[i] = new google.maps.Circle({
-              strokeColor: '#FF0000',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: '#FF0000',
-              fillOpacity: 0.35,
-              map: map,
-              center: latlng,
-              radius: parseFloat(gps.acc)
-
-            })
-            marker[i] = new google.maps.Marker({
-              position: latlng,
-              place: gps.rectime,
-              map: map,
-              title: $scope.act.group[i].character,
-              icon: {
-                  path: google.maps.SymbolPath.CIRCLE,
-                  fillColor: '#FF0000',
-                  fillOpacity: 1,
-                  strokeColor: '#FF0000',
-                  strokeWeight: 3,
-                  scale: 5
-              }
-            });
-            oldlatlng[i] = latlng;
-
-
-            // add gps circle
-          }
-        }
-        if (counter!=0) {
-          center = new google.maps.LatLng({lat: temp[0]/counter, lng: temp[1]/counter});
-          console.log({lat: temp[0]/counter, lng: temp[1]/counter})
-          map.panTo(center);
-        }
+        console.log("equals 1");
       }else{
-        var gps, latlng;
-        if(!rtc.group.artist.gps)
-          return;
-        else{
-          gps = rtc.group.artist.gps;
-          latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
-          if( oldlatlng && oldlatlng.equals( latlng ) )
-            return;
-        }
-        var path = poly.getPath();
-        console.log('--------------------------');
-        console.log(path);
-        console.log('--------------------------');
-
-
-        // Because path is an MVCArray, we can simply append a new coordinate
-        // and it will automatically appear.
-        path.push( latlng );
-
-        if(marker){
-          marker.setMap(null);
-          delete marker;
-        }
-        // Add a new marker at the new plotted point on the polyline.
-        marker = new google.maps.Marker({
-          position: latlng,
-          place: gps.rectime,
-          map: map
-        });
-        // move map center at the new point
-        map.panTo(latlng);
-
-        oldlatlng = latlng;
+        console.log("not equals 1");
       }
+      var gps, latlng;
+      if(!rtc.group.artist.gps)
+        return;
+      else{
+        gps = rtc.group.artist.gps;
+        latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
+        if( oldlatlng && oldlatlng.equals( latlng ) )
+          return;
+      }
+      var path = poly.getPath();
+      console.log('--------------------------');
+      console.log(path);
+      console.log('--------------------------');
+
+
+      // Because path is an MVCArray, we can simply append a new coordinate
+      // and it will automatically appear.
+      path.push( latlng );
+
+      if(marker){
+        marker.setMap(null);
+        delete marker;
+      }
+      // Add a new marker at the new plotted point on the polyline.
+      marker = new google.maps.Marker({
+        position: latlng,
+        place: gps.rectime,
+        map: map
+      });
+      // move map center at the new point
+      map.panTo(latlng);
+
+      oldlatlng = latlng;
     };
 
       rtc.reloadGroup = function(){
