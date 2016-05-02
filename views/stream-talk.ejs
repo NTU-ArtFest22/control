@@ -22,7 +22,7 @@
       <div class="col-md-4">
         <div class="localStream">
           
-          <h3>{{ rtc.group.character }} @ {{ act.name }} # {{ act.type==1?rtc.group.sclass:""}}</h3>
+          <h3>{{ rtc.group.character }} @ {{ act.name }} # {{ act.type==1?rtc.group.sclass:""}}<a class="btn btn-info" title="{{ 5 - countTime }}s for auto-reload" ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "重新連線" : "更新連線" }}</a></h3>
           <hr>
           <div id="map"></div>
           <hr>
@@ -37,8 +37,7 @@
               <% } %>
             </div> -->
           </div>
-          <hr>
-          <a class="btn btn-info" title="{{ 5 - countTime }}s for auto-reload" ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
+          
         </div>
 
       </div>
