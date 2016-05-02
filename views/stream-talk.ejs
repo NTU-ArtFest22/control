@@ -11,7 +11,7 @@
 
   <body>
     <div class="row" ng-controller="RemoteStreamsController as rtc">
-      <div class="col-md-9">
+      <div class="col-md-8">
         <div class="remoteStreams">
           <div class="remoteStreams">
             <div id="remoteVideosContainer"></div>
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="localStream">
           
           <h3>{{ rtc.group.character }} @ {{ act.name }} # {{ act.type==1?rtc.group.sclass:""}}</h3>
@@ -28,18 +28,17 @@
           <hr>
           <div ng-controller="LocalStreamController as localStream">
             <video id="localVideo" muted="muted" autoplay="true"></video>
-            <br/>
+            <!-- <br/> -->
             <!-- <a class="btn btn-primary" ng-click="localStream.toggleCam()" href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a> -->
-            <div class="btn-group" ng-show="localStream.cameraIsOn">    
+           <!--  <div class="btn-group" ng-show="localStream.cameraIsOn">    
               <% if( locals[ 'user' ] && ( user.isAdmin || user.isArtist || user.isDoll ) ) { %>
                 <a class="btn btn-primary" ng-click="addStreamUrl()">Add Stream URL</a>
                 <a class="btn btn-primary" ng-click="removeStreamUrl()">Remove Stream URL</a>
               <% } %>
-            </div>
+            </div> -->
           </div>
           <hr>
-          <h6>{{ 10 - countTime }}s for auto-reload</h6>
-          <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
+          <a class="btn btn-info" title="{{ 5 - countTime }}s for auto-reload" ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
         </div>
 
       </div>
