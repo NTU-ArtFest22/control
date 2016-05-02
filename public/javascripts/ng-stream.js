@@ -266,6 +266,9 @@
       for (var i = $scope.act.group.length - 1; i >= 0; i--) {
         if($scope.act.group[i].artist.gps){
           gps = $scope.act.group[i].artist.gps;
+          if (isNaN(parseFloat(gps.lati))||isNaN(parseFloat(gps.longi))) {
+            continue;
+          }
           temp[0]+=parseFloat(gps.lati);
           temp[1]+=parseFloat(gps.longi);
           counter+=1
