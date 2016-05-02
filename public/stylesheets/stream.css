@@ -1,9 +1,10 @@
 #remoteVideosContainer {
 	background-image: url(/images/stream/loading.gif);
 	width: 100%;
-	height: 800px;
+	height: 100vh;
 	-webkit-background-size: contain;
     background-repeat: no-repeat;
-	background-size: 50%;
-	background-position: center
+	background-size: 50vh;
+	background-position: center;
+	background-position-y: 25vh
 }
