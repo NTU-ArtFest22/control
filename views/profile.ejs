@@ -54,7 +54,7 @@
       <tbody>
           <tr ng-repeat="act in user.activities" >
             <td>{{ act.gameName }}</td>
-            <td>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}_{{act.actype}}</td>
+            <td>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}</td>
             <td>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</td>
             <td>{{ act.player_id }}</td>
             <td>{{ act.location }}</td>

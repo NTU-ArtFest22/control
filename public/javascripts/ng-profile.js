@@ -31,6 +31,7 @@
                 $scope.user.activities[i].location = act.location;
                 $scope.user.activities[i].time = act.time;
                 $scope.user.activities[i].isRunning = act.isRunning;
+                $scope.user.activities[i].acttype = act.acttype;
                 console.log( $scope.user.activities[i] );
                 break;
               }
