@@ -227,7 +227,7 @@
             ]
         }
       ]
-      map.setOption({styles:mapstyle});
+      map.setOptions({styles:mapstyle});
       
       poly = new google.maps.Polyline({
         //geodesic: true,
