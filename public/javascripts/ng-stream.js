@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('stream-window', ['ngAnimate', 'ui.bootstrap', 'ui.bootstrap.datetimepicker'],
+	var app = angular.module('stream-window', [],
 		function($locationProvider){$locationProvider.html5Mode(true);}
     );
 
