@@ -63,6 +63,11 @@
     $scope.oldStream = '';
     $scope.countTime = 0;
     rtc.remoteStreams = [];
+    // log
+    var loc = window.location.pathname;
+    var param = loc.split('/');
+    console.log(param);
+    // 
     function getStreamById(id) {
       for(var i=0; i<rtc.remoteStreams.length;i++) {
         if (rtc.remoteStreams[i].id === id) {return rtc.remoteStreams[i];}
@@ -79,11 +84,7 @@
     };
 
     var addPoint = function(){
-      if ($scope.act.acttype==1) {
-        console.log("equals 1");
-      }else{
-        console.log("not equals 1");
-      }
+      
       var gps, latlng;
       if(!rtc.group.artist.gps)
         return;
@@ -108,11 +109,61 @@
 
       oldlatlng = latlng;
     };
+    var addPoint = function(){
+      var gps, latlng;
+      console.log('```````````````````````````');
+      for (var i = $scope.act.group.length - 1; i >= 0; i--) {
+        if($scope.act.group[i].artist.gps){
+          gps = $scope.act.group[i].artist.gps;
+          if (isNaN(parseFloat(gps.lati))||isNaN(parseFloat(gps.longi))) {
+            continue;
+          }
+          latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
+          if (oldlatlng[i]) {
+            if(marker[i]){
+              marker[i].setMap(null);
+              circles[i].setMap(null);
+              delete marker[i];
+              delete circles[i]
+            }
+          }
+          if ($scope.act.group[i].character!=rtc.group.character) {
+            map.panTo(latlng);
+          }
+          circles[i] = new google.maps.Circle({
+            strokeColor: (($scope.act.group[i].character!=rtc.group.character)?'#FF0000':'#0000FF'),
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: (($scope.act.group[i].character!=rtc.group.character)?'#FF0000':'#0000FF'),
+            fillOpacity: 0.35,
+            map: map,
+            center: latlng,
+            radius: parseFloat(gps.acc)
+
+          })
+          marker[i] = new google.maps.Marker({
+            position: latlng,
+            place: gps.rectime,
+            map: map,
+            title: $scope.act.group[i].character,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                fillColor: (($scope.act.group[i].character!=rtc.group.character)?'#FF0000':'#0000FF'),
+                fillOpacity: 1,
+                strokeColor: (($scope.act.group[i].character!=rtc.group.character)?'#FF0000':'#0000FF'),
+                strokeWeight: 3,
+                scale: 5
+            }
+          });
+          oldlatlng[i] = latlng;
+          // add gps circle
+        }
+      }
+      console.log('```````````````````````````');
+    };
+
 
     rtc.reloadGroup = function(){
-      var loc = window.location.pathname;
-      var param = loc.split('/');
-      console.log(param);
       if( param[1] != "profile" ){
         return;
       }
@@ -120,10 +171,13 @@
         if(!data)
           return;
         console.log(data);
-        rtc.group = data.group[0];        
         $scope.act = data;
-        console.log($scope.act);
-        console.log( 'reload group: ', rtc.group );
+        rtc.group = data.group[0];
+        for (var i = data.group.length - 1; i >= 0; i--) {
+          if(data.group[i].character==param[3]){
+            rtc.group = data.group[i];
+          }
+        }
         if( ! rtc.group.stream ){
           return;
         }

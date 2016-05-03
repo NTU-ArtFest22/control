@@ -731,7 +731,6 @@ module.exports = function( app , db ){
 
         db.activities.findOne(
           query,
-          { 'group.$': 1 , 'name': 1 },
           function(err, act){
             if(err){
               res.send( 404, err );
