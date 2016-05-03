@@ -64,11 +64,12 @@
       console.log('socket:'+id);
       
       var param = loc.split('/');
-      console.log(param);
+      
       if( param[1] != "profile" ){
         return;
       }
       var info = {act_id:param[2], user_id:param[3], type:2} //type 2 for web user
+      
       socket.emit('register_client_id', info);
     });
     socket.on('register_status', function(status){
