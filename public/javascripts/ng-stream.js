@@ -371,30 +371,48 @@ var addPoint = function(){
         
       console.log('```````````````````````````');
     };
-      rtc.reloadGroup = function(){
-        var loc = window.location.pathname;
-        var param = loc.split('/');
-        console.log(param);
-        if( param[1] != "profile" ){
+      // rtc.reloadGroup = function(){
+      //   var loc = window.location.pathname;
+      //   var param = loc.split('/');
+      //   console.log(param);
+      //   if( param[1] != "profile" ){
+      //     return;
+      //   }
+      //   $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
+      //     if(!data)
+      //       return;
+      //     console.log(data);
+      //     rtc.group = data.group[0];        
+      //     $scope.act = data;
+      //     console.log( 'reload group: ', rtc.group );
+      //     if( ! rtc.group.stream ){
+      //       return;
+      //     }
+      //     if( rtc.group.stream != $scope.oldStream ){
+      //       rtc.call( rtc.group.stream );
+      //       $scope.oldStream = rtc.group.stream;
+      //     }
+      //   });
+      // };
+rtc.reloadGroup = function(){
+      var loc = window.location.pathname;
+      var param = loc.split('/');
+      console.log(param);
+      if( param[1] != "profile"){
+        return;
+      }
+      $http.get('/adminact/' + param[2]).success(function(data){
+        if(!data)
           return;
-        }
-        $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
-          if(!data)
-            return;
-          console.log(data);
-          rtc.group = data.group[0];        
-          $scope.act = data;
-          console.log( 'reload group: ', rtc.group );
-          if( ! rtc.group.stream ){
-            return;
-          }
-          if( rtc.group.stream != $scope.oldStream ){
-            rtc.call( rtc.group.stream );
-            $scope.oldStream = rtc.group.stream;
-          }
-        });
-      };
-
+        $scope.act = data;
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
+        console.log( 'reload act: ', $scope.act.name );
+        
+       
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
+        addPoint();
+      });
+    };
 
 
       rtc.loadData = function () {
