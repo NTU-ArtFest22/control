@@ -902,7 +902,7 @@ module.exports = function( app , db ){
     });
   });
   return {
-    id_register : function(act_id, user_id, socket_id, type, callback) {
+    id_register : function(act_id, character, socket_id, type, callback) {
       // type 1:admin 2:web user 3:android user
       var temp = function(err, doc){
           if(err){
@@ -910,7 +910,7 @@ module.exports = function( app , db ){
             callback('fail');
             res.send( 404, err );
           } else {
-            console.log('id-register done:'+act_id+', '+user_id);
+            console.log('id-register done:'+act_id+', '+character);
             callback('success');
             res.json( true );
           }
@@ -934,7 +934,7 @@ module.exports = function( app , db ){
             query: { 
               "_id": mongojs.ObjectId(act_id), 
               "group": { 
-                $elemMatch: { "player.id": mongojs.ObjectId(user_id) }
+                $elemMatch: { "character": character }
               }
             },
             update: {
@@ -950,7 +950,7 @@ module.exports = function( app , db ){
             query: { 
               "_id": mongojs.ObjectId(act_id), 
               "group": { 
-                $elemMatch: { "artist.id": mongojs.ObjectId(user_id) }
+                $elemMatch: { "character": character }
               }
             },
             update: {
