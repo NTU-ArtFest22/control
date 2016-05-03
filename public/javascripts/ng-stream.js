@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('stream-window', [],
+	var app = angular.module('stream-window', ['ngAnimate', 'ui.bootstrap', 'ui.bootstrap.datetimepicker'],
 		function($locationProvider){$locationProvider.html5Mode(true);}
     );
 
@@ -420,7 +420,7 @@
     };
   }]);
 
-  app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', 'ngAnimate', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', function(camera, $location, $http, $timeout, $uibModal, $scope){
+  app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope,$uibModal){
 
     var rtc = this;
     $scope.missions = [];
@@ -455,7 +455,7 @@
     };
       
     // open new mission dialog
-    $scope.open = function () {
+    $scope.open = function ()) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'new-mission-modal.html',
