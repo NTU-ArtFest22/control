@@ -57,10 +57,31 @@
 	app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
 
 		var rtc = this;
+    // socket part
     var socket = io.connect();
+    $scope.socket_status = false;
     socket.on('id', function(id){
       console.log('socket:'+id);
+      
+      var param = loc.split('/');
+      console.log(param);
+      if( param[1] != "profile" ){
+        return;
+      }
+      var info = {act_id:param[2], user_id:param[3], type:2} //type 2 for web user
+      socket.emit('register_client_id', info);
     });
+    socket.on('register_status', function(status){
+      if (status=='success') {
+        $scope.socket_status = true;
+        console.log('socket is now on');
+      }else{
+        $scope.socket_status = false;
+      }
+    })
+
+
+    // 
     $scope.oldStream = '';
     $scope.countTime = 0;
 
