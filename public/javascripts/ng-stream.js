@@ -2,6 +2,7 @@
 	var app = angular.module('stream-window', [],
 		function($locationProvider){$locationProvider.html5Mode(true);}
     );
+
 	var client = new PeerManager();
 	var mediaConfig = {
         audio:true,
@@ -56,7 +57,10 @@
 	app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
 
 		var rtc = this;
-
+    var socket = io.connect();
+    socket.on('id', function(){
+      console.log('socket:'+id);
+    });
     $scope.oldStream = '';
     $scope.countTime = 0;
 

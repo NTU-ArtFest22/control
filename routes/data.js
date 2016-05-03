@@ -901,6 +901,70 @@ module.exports = function( app , db ){
 
     });
   });
+  return {
+    id_register : function(act_id, user_id, socket_id, type, callback) {
+      // type 1:admin 2:web user 3:android user
+      var temp = function(err, doc){
+          if(err){
+            console.log('putting character error: ', err);
+            callback('fail');
+            res.send( 404, err );
+          } else {
+            console.log('id-register done:'+act_id+', '+user_id);
+            callback('success');
+            res.json( true );
+          }
+        }
+      switch(type){
+        case 1:
+          db.activities.findAndModify({
+            query: { 
+              "_id": mongojs.ObjectId(act_id), 
+            },
+            update: {
+              $set: {
+                "admin_socket_id": socket_id,
+              }
+            }, 
+            new: true
+          }, temp);
+          break;
+        case 2://web user
+          db.activities.findAndModify({
+            query: { 
+              "_id": mongojs.ObjectId(act_id), 
+              "group": { 
+                $elemMatch: { "player.id": mongojs.ObjectId(user_id) }
+              }
+            },
+            update: {
+              $set: {
+                "group.$.player.socket_id": socket_id,
+              }
+            }, 
+            new: true
+          }, temp);
+          break;
+        case 3:
+          db.activities.findAndModify({
+            query: { 
+              "_id": mongojs.ObjectId(act_id), 
+              "group": { 
+                $elemMatch: { "artist.id": mongojs.ObjectId(user_id) }
+              }
+            },
+            update: {
+              $set: {
+                "group.$.artist.socket_id": socket_id,
+              }
+            },
+            new: true
+          }, temp);
+          break;
+      }
+        
+    },
+  }
 }
 
 function run_cmd(cmd, args, cb, end) {
