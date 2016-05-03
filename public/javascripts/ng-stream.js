@@ -58,7 +58,7 @@
 
     var rtc = this;
     var socket = io.connect();
-    socket.on('id', function(){
+    socket.on('id', function(id){
       console.log('socket:'+id);
     });
     $scope.oldStream = '';
