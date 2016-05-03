@@ -14,7 +14,15 @@ module.exports = function(io, streams, routes, data) {
         client.emit('register_status', status);
       });
     });
-    // 
+    // new mission
+    client.on('new_mission_server', function(content){ //content={act_id:, mission:{name:, requirement}}
+      data.send_act_mission(content, function(socket_id, mission){  
+        //each group will do...
+        if (io.sockets.connected[socket_id]) {
+            io.sockets.connected[socket_id].emit('new_mission_client', mission);
+        }
+      })
+    })
 
 
 

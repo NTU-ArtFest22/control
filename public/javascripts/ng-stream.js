@@ -80,7 +80,9 @@
         $scope.socket_status = false;
       }
     })
-
+    socket.on('new_mission_client', function(mission){
+      console.log("new mission:"+mission);
+    });
 
     // 
     $scope.oldStream = '';
@@ -423,16 +425,14 @@
     
     var socket = io.connect();
     $scope.socket_status = false;
+    var param = loc.split('/');
+    if( param[1] != "admin"&&param[2]!="stream" ){
+      return;
+    }
+    var act_id = param[3];
     socket.on('id', function(id){
       console.log('socket:'+id);
-      
-      var param = loc.split('/');
-      
-      if( param[1] != "admin"&&param[2]!="stream" ){
-        return;
-      }
-      var info = {act_id:param[3], character:"admin", type:1} //type 1 for admin user
-      
+      var info = {act_id:act_id, character:"admin", type:1} //type 1 for admin user
       socket.emit('register_client_id', info);
     });
     socket.on('register_status', function(status){
@@ -442,7 +442,11 @@
       }else{
         $scope.socket_status = false;
       }
-    })
+    });
+    
+    var content = {act_id:act_id, mission:{name:"hello", requirement:"world"}}
+    socket.emit('new_mission_server', content);
+
 
     $scope.oldStream = [];
     $scope.countTime = 0;
