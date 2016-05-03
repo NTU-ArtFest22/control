@@ -69,21 +69,13 @@
       }
     }
 
-    var map, poly, oldlatlng, marker;
+    var map, oldlatlng, marker;
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
         center: {lat:  25.017474 , lng:121.538739},
         mapTypeId: google.maps.MapTypeId.HYBRID
       });
-      map.setOptions({styles:mapstyle});
-      poly = new google.maps.Polyline({
-        //geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.5,
-        strokeWeight: 2
-      });
-      poly.setMap(map);
     };
 
     var addPoint = function(){
@@ -101,8 +93,6 @@
         if( oldlatlng && oldlatlng.equals( latlng ) )
           return;
       }
-      var path = poly.getPath();
-      path.push( latlng );
       if(marker){
         marker.setMap(null);
         delete marker;
