@@ -74,7 +74,7 @@
       }
     }
 
-    var map, oldlatlng=[], marker=[];
+    var map, oldlatlng=[], marker=[], circles=[];
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
