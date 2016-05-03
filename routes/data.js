@@ -908,11 +908,11 @@ module.exports = function( app , db ){
           if(err){
             console.log('putting character error: ', err);
             callback('fail');
-            res.send( 404, err );
+            
           } else {
             console.log('id-register done:'+act_id+', '+character);
             callback('success');
-            res.json( true );
+            
           }
         }
       switch(type){
