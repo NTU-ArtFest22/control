@@ -420,7 +420,7 @@
     };
   }]);
 
-  app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', '$uibModal', function(camera, $location, $http, $timeout, $scope, $uibModal){
+  app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
 
     var rtc = this;
     $scope.missions = [];
@@ -455,12 +455,12 @@
     };
       
     // open new mission dialog
-    $scope.open = function () {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'new-mission-modal.html',
-      });
-    };
+    // $scope.open = function () {
+    //   var modalInstance = $uibModal.open({
+    //     animation: true,
+    //     templateUrl: 'new-mission-modal.html',
+    //   });
+    // };
 
     $scope.oldStream = [];
     $scope.countTime = 0;
