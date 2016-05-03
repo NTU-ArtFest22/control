@@ -81,6 +81,16 @@
         center: {lat:  25.017474 , lng:121.538739},
         mapTypeId: google.maps.MapTypeId.HYBRID
       });
+      if ($scope.act) {
+        if ($scope.act.acttype==1) {
+          new google.maps.Marker({
+            position: latlng,
+            place: gps.rectime,
+            map: map,
+            title: $scope.act.group[i].character,
+            icon: "/icon/alter.png"
+        }
+      }
     };
     var addPoint = function(){
       var gps, latlng;
