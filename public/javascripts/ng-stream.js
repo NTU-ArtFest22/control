@@ -12,50 +12,49 @@
         }
     };
 
-    var loc = window.location.pathname;
-    var param = loc.split('/');
+  var loc = window.location.pathname;
+  var param = loc.split('/');
 
-    app.factory('camera', ['$rootScope', '$window', function($rootScope, $window){
-      var camera = {};
-      camera.preview = $window.document.getElementById('localVideo');
+  app.factory('camera', ['$rootScope', '$window', function($rootScope, $window){
+    var camera = {};
+    camera.preview = $window.document.getElementById('localVideo');
 
-      camera.start = function(){
-        return requestUserMedia(mediaConfig).then(
-          function(stream){
-            console.log('++++++++', stream, '++++++++++++');
-            attachMediaStream(camera.preview, stream);
-            client.setLocalStream(stream);
-            camera.stream = stream;
-            $rootScope.$broadcast('cameraIsOn',true);
-            
-            return stream;
-          }
-        ).catch(Error('Failed to get access to local media.'));
-    };
-      camera.stop = function(){
-        return new Promise(function(resolve, reject){     
-        try {
-          /* original ProjectRTC has bug -> stop() no longer works */
-          //camera.stream.stop();
-          var tracks = camera.stream.getTracks();
-          tracks[0].stop();
-          tracks[1].stop();
-
-          camera.preview.src = '';
-          resolve();
-        } catch(error) {
-          reject(error);
+    camera.start = function(){
+      return requestUserMedia(mediaConfig).then(
+        function(stream){
+          console.log('++++++++', stream, '++++++++++++');
+          attachMediaStream(camera.preview, stream);
+          client.setLocalStream(stream);
+          camera.stream = stream;
+          $rootScope.$broadcast('cameraIsOn',true);
+          
+          return stream;
         }
-        })
-        .then(function(result){
-          $rootScope.$broadcast('cameraIsOn',false);
-        }); 
+      ).catch(Error('Failed to get access to local media.'));
+    };
+    camera.stop = function(){
+      return new Promise(function(resolve, reject){     
+      try {
+        /* original ProjectRTC has bug -> stop() no longer works */
+        //camera.stream.stop();
+        var tracks = camera.stream.getTracks();
+        tracks[0].stop();
+        tracks[1].stop();
+
+        camera.preview.src = '';
+        resolve();
+      } catch(error) {
+        reject(error);
+      }
+      })
+      .then(function(result){
+        $rootScope.$broadcast('cameraIsOn',false);
+      }); 
     };
     return camera;
-    }]);
+  }]);
 
   app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
-
     var rtc = this;
     var socket = io.connect();
     socket.on('id', function(id){
@@ -63,183 +62,27 @@
     });
     $scope.oldStream = '';
     $scope.countTime = 0;
-
     rtc.remoteStreams = [];
     function getStreamById(id) {
-        for(var i=0; i<rtc.remoteStreams.length;i++) {
-          if (rtc.remoteStreams[i].id === id) {return rtc.remoteStreams[i];}
-        }
+      for(var i=0; i<rtc.remoteStreams.length;i++) {
+        if (rtc.remoteStreams[i].id === id) {return rtc.remoteStreams[i];}
+      }
     }
 
     var map, poly, oldlatlng, marker;
-
     window.initMap = function() {
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
         center: {lat:  25.017474 , lng:121.538739},
         mapTypeId: google.maps.MapTypeId.HYBRID
       });
-      var mapstyle = 
-      [
-        {
-            "featureType": "landscape",
-            "stylers": [
-                {
-                    "visibility": "simplified"
-                },
-                {
-                    "color": "#2b3f57"
-                },
-                {
-                    "weight": 0.1
-                }
-            ]
-        },
-        {
-            "featureType": "administrative",
-            "stylers": [
-                {
-                    "visibility": "on"
-                },
-                {
-                    "hue": "#ff0000"
-                },
-                {
-                    "weight": 0.4
-                },
-                {
-                    "color": "#ffffff"
-                }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "labels.text",
-            "stylers": [
-                {
-                    "weight": 1.3
-                },
-                {
-                    "color": "#FFFFFF"
-                }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#f55f77"
-                },
-                {
-                    "weight": 3
-                }
-            ]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#f55f77"
-                },
-                {
-                    "weight": 1.1
-                }
-            ]
-        },
-        {
-            "featureType": "road.local",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#f55f77"
-                },
-                {
-                    "weight": 0.4
-                }
-            ]
-        },
-        {},
-        {
-            "featureType": "road.highway",
-            "elementType": "labels",
-            "stylers": [
-                {
-                    "weight": 0.8
-                },
-                {
-                    "color": "#ffffff"
-                },
-                {
-                    "visibility": "on"
-                }
-            ]
-        },
-        {
-            "featureType": "road.local",
-            "elementType": "labels",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "labels",
-            "stylers": [
-                {
-                    "color": "#ffffff"
-                },
-                {
-                    "weight": 0.7
-                }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "labels",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "stylers": [
-                {
-                    "color": "#6c5b7b"
-                }
-            ]
-        },
-        {
-            "featureType": "water",
-            "stylers": [
-                {
-                    "color": "#f3b191"
-                }
-            ]
-        },
-        {
-            "featureType": "transit.line",
-            "stylers": [
-                {
-                    "visibility": "on"
-                }
-            ]
-        }
-      ]
       map.setOptions({styles:mapstyle});
-      
       poly = new google.maps.Polyline({
         //geodesic: true,
         strokeColor: '#FF0000',
         strokeOpacity: 0.5,
         strokeWeight: 2
       });
-
       poly.setMap(map);
     };
 
@@ -259,15 +102,7 @@
           return;
       }
       var path = poly.getPath();
-      console.log('--------------------------');
-      console.log(path);
-      console.log('--------------------------');
-
-
-      // Because path is an MVCArray, we can simply append a new coordinate
-      // and it will automatically appear.
       path.push( latlng );
-
       if(marker){
         marker.setMap(null);
         delete marker;
@@ -284,66 +119,74 @@
       oldlatlng = latlng;
     };
 
-      rtc.reloadGroup = function(){
-        var loc = window.location.pathname;
-        var param = loc.split('/');
-        console.log(param);
-        if( param[1] != "profile" ){
+    rtc.reloadGroup = function(){
+      var loc = window.location.pathname;
+      var param = loc.split('/');
+      console.log(param);
+      if( param[1] != "profile" ){
+        return;
+      }
+      $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
+        if(!data)
+          return;
+        console.log(data);
+        rtc.group = data.group[0];        
+        $scope.act = data;
+        console.log($scope.act);
+        console.log( 'reload group: ', rtc.group );
+        if( ! rtc.group.stream ){
           return;
         }
-        $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
-          if(!data)
-            return;
-          console.log(data);
-          rtc.group = data.group[0];        
-          $scope.act = data;
-          console.log( 'reload group: ', rtc.group );
-          if( ! rtc.group.stream ){
-            return;
-          }
-          if( rtc.group.stream != $scope.oldStream ){
-            rtc.call( rtc.group.stream );
-            $scope.oldStream = rtc.group.stream;
-          }
-        });
-      };
-
-
-
-      rtc.loadData = function () {
-        // get list of streams from the server
-        $http.get('/streams.json').success(function(data){
-          console.log('=========================');
-          console.log(data);
-          console.log('=========================');
-          // filter own stream
-          var streams = data.filter(function(stream) {
-            return stream.id != client.getId();
-          });
-          // get former state
-          for(var i=0; i<streams.length;i++) {
-            var stream = getStreamById(streams[i].id);
-            streams[i].isPlaying = (!!stream) ? stream.isPLaying : false;
-          }
-          // save new streams
-          rtc.remoteStreams = streams;
-        });
-      };
-
-      rtc.view = function(stream){
-        client.peerInit(stream.id);
-        stream.isPlaying = !stream.isPlaying;
-      };
-      rtc.call = function(stream){
-        /* If json isn't loaded yet, construct a new stream 
-         * This happens when you load <serverUrl>/<socketId> : 
-         * it calls socketId immediatly.
-         **/
-        if(!stream.id){
-          stream = {id: stream, isPlaying: false};
-          rtc.remoteStreams.push(stream);
+        if( rtc.group.stream != $scope.oldStream ){
+          rtc.call( rtc.group.stream );
+          $scope.oldStream = rtc.group.stream;
         }
-        if(camera.isOn){
+      });
+    };
+    rtc.loadData = function () {
+      // get list of streams from the server
+      $http.get('/streams.json').success(function(data){
+        console.log('=========================');
+        console.log(data);
+        console.log('=========================');
+        // filter own stream
+        var streams = data.filter(function(stream) {
+          return stream.id != client.getId();
+        });
+        // get former state
+        for(var i=0; i<streams.length;i++) {
+          var stream = getStreamById(streams[i].id);
+          streams[i].isPlaying = (!!stream) ? stream.isPLaying : false;
+        }
+        // save new streams
+        rtc.remoteStreams = streams;
+      });
+    };
+
+    rtc.view = function(stream){
+      client.peerInit(stream.id);
+      stream.isPlaying = !stream.isPlaying;
+    };
+    rtc.call = function(stream){
+      /* If json isn't loaded yet, construct a new stream 
+       * This happens when you load <serverUrl>/<socketId> : 
+       * it calls socketId immediatly.
+       **/
+      if(!stream.id){
+        stream = {id: stream, isPlaying: false};
+        rtc.remoteStreams.push(stream);
+      }
+      if(camera.isOn){
+        client.toggleLocalStream(stream.id);
+        if(stream.isPlaying){
+          client.peerRenegociate(stream.id);
+        } else {
+          client.peerInit(stream.id);
+        }
+        stream.isPlaying = !stream.isPlaying;
+      } else {
+        camera.start()
+        .then(function(result) {
           client.toggleLocalStream(stream.id);
           if(stream.isPlaying){
             client.peerRenegociate(stream.id);
@@ -351,41 +194,31 @@
             client.peerInit(stream.id);
           }
           stream.isPlaying = !stream.isPlaying;
-        } else {
-          camera.start()
-          .then(function(result) {
-            client.toggleLocalStream(stream.id);
-            if(stream.isPlaying){
-              client.peerRenegociate(stream.id);
-            } else {
-              client.peerInit(stream.id);
-            }
-            stream.isPlaying = !stream.isPlaying;
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-        }
-      };
-
-      $scope.onTimeout = function(){
-        $scope.countTime++;
-        if( $scope.countTime == 5){
-          rtc.userReloadGroup();
-          addPoint();
-        }else
-          mytimeout = $timeout($scope.onTimeout,1000);
-      };
-
-      var mytimeout = $timeout( $scope.onTimeout, 1000);
-
-      rtc.userReloadGroup = function(){
-        rtc.loadData();
-        rtc.reloadGroup();
-        $scope.countTime = 0;
-        $timeout.cancel( mytimeout );
-        mytimeout = $timeout($scope.onTimeout, 1000);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
       }
+    };
+
+    $scope.onTimeout = function(){
+      $scope.countTime++;
+      if( $scope.countTime == 5){
+        rtc.userReloadGroup();
+        addPoint();
+      }else
+        mytimeout = $timeout($scope.onTimeout,1000);
+    };
+
+    var mytimeout = $timeout( $scope.onTimeout, 1000);
+
+    rtc.userReloadGroup = function(){
+      rtc.loadData();
+      rtc.reloadGroup();
+      $scope.countTime = 0;
+      $timeout.cancel( mytimeout );
+      mytimeout = $timeout($scope.onTimeout, 1000);
+    }
 
     //initial load
     rtc.loadData();
