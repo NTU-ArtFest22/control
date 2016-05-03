@@ -11,9 +11,13 @@
          
   </div>
   <div class="col-md-4">
-    <div style="width:100%" class="alert {{ socket_status ? 'alert-success' : 'alert-danger' }}">
+    <div style="width:100%  " class="alert {{ socket_status ? 'alert-success' : 'alert-danger' }}">
         <strong>{{ socket_status ? "Connected to Server" : "Disconnected to Server" }}</strong>
     </div>
+    <br>
+    <br>
+    <a href="#" class="btn btn-primary" ng-click="open()">new Mission</a>
+    <hr>
     <table class="table" style="width: 100%;text-align: center;">
       <thead>
         <th>Mission</th>
@@ -28,8 +32,6 @@
         </tr>
       </tbody>
     </table>
-    </div>
-         
   </div>
   <div class="col-md-5">
     <div id="map" style="height:500px"></div>

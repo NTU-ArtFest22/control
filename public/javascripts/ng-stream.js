@@ -455,7 +455,7 @@
     };
       
     // open new mission dialog
-    $scope.open = function ( act ) {
+    $scope.open = function () {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'new-mission-modal.html',
