@@ -420,7 +420,7 @@
     };
   }]);
 
-  app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
+  app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', 'ngAnimate', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', function(camera, $location, $http, $timeout, $uibModal, $scope){
 
     var rtc = this;
     $scope.missions = [];
