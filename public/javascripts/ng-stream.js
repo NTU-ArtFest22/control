@@ -82,33 +82,6 @@
         mapTypeId: google.maps.MapTypeId.HYBRID
       });
     };
-
-    // var addPoint = function(){
-      
-    //   var gps, latlng;
-    //   if(!rtc.group.artist.gps)
-    //     return;
-    //   else{
-    //     gps = rtc.group.artist.gps;
-    //     latlng = new google.maps.LatLng({ lat: parseFloat( gps.lati ), lng: parseFloat(gps.longi) });
-    //     if( oldlatlng && oldlatlng.equals( latlng ) )
-    //       return;
-    //   }
-    //   if(marker){
-    //     marker.setMap(null);
-    //     delete marker;
-    //   }
-    //   // Add a new marker at the new plotted point on the polyline.
-    //   marker = new google.maps.Marker({
-    //     position: latlng,
-    //     place: gps.rectime,
-    //     map: map
-    //   });
-    //   // move map center at the new point
-    //   map.panTo(latlng);
-
-    //   oldlatlng = latlng;
-    // };
     var addPoint = function(){
       var gps, latlng;
       console.log('```````````````````````````');
@@ -127,7 +100,7 @@
               delete circles[i]
             }
           }
-          if ($scope.act.group[i].character!=rtc.group.character) {
+          if ($scope.act.group[i].character==rtc.group.character) {
             map.panTo(latlng);
           }
           circles[i] = new google.maps.Circle({
