@@ -81,7 +81,8 @@
       }
     })
     socket.on('new_mission_client', function(mission){
-      console.log("new mission:"+mission);
+      console.log("new mission:");
+      console.log(mission)
     });
 
     // 
@@ -422,7 +423,7 @@
   app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
 
     var rtc = this;
-    
+    $scope.missions = [];
     var socket = io.connect();
     $scope.socket_status = false;
     var param = loc.split('/');
@@ -443,10 +444,23 @@
         $scope.socket_status = false;
       }
     });
-    
-    var content = {act_id:act_id, mission:{name:"hello", requirement:"world"}}
-    socket.emit('new_mission_server', content);
-
+    $scope.sendMission = function(){
+      if( ! $scope.mission.content || ! $scope.mission.name ){
+        console.log('no name or location orz');
+        return;
+      }
+      var content = {act_id:act_id, mission:{name:$scope.mission.name, requirement:$scope.mission.content, time:new Date()}}
+      missions.append(content.mission);
+      socket.emit('new_mission_server', content);
+    };
+      
+    // open new mission dialog
+    $scope.open = function ( act ) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'new-mission-modal.html',
+      });
+    };
 
     $scope.oldStream = [];
     $scope.countTime = 0;

@@ -1,5 +1,5 @@
 <div class="row"  ng-controller="RemoteStreamsControllerforAdmin as rtc">
-  <div class="col-md-7">
+  <div class="col-md-3">
     <div class="remoteStreams">
       <div class="alert {{ act.isRunning ? 'alert-success' : 'alert-danger' }}">
         <strong>{{act.name}}({{ act.isRunning ? "Activity is now running" : "Activity is now closed" }})</strong>
@@ -7,25 +7,27 @@
 
       <div id="remoteVideosContainer" class="adminStream"></div>
 
-<!--       <div class="table-responsive" align="center">
-        <a class="btn btn-primary"  ng-click="rtc.loadData()" href>  Refresh Now! </a>
-        <table class="table-striped">
-          <thead>
-            <tr>
-              <th>Stream</th><th>1-way</th><th>2-way</th>
-            </tr>
-          </thead>
-          <tbody>
-      
-            <tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
-              <td><a>{{stream.name}}</a></td>
-              <td ng-click="rtc.view(stream)"><a>View</a></td>
-              <td ng-click="rtc.call(stream)"><a>Call</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
- -->
+    </div>
+         
+  </div>
+  <div class="col-md-4">
+    <div style="width:100%" class="alert {{ socket_status ? 'alert-success' : 'alert-danger' }}">
+        <strong>{{ socket_status ? "Connected to Server" : "Disconnected to Server" }}</strong>
+    </div>
+    <table class="table" style="width: 100%;text-align: center;">
+      <thead>
+        <th>Mission</th>
+        <th>Content</th>
+        <th>Time</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="mission in missions">
+          <td style="text-align: left;">{{mission.name}}</td>
+          <td>{{mission.requirement}}</td>
+          <td>{{mission.time}}</td>
+        </tr>
+      </tbody>
+    </table>
     </div>
          
   </div>
