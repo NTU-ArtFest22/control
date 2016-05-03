@@ -963,21 +963,20 @@ module.exports = function( app , db ){
           break;
       }
         
-    },{
-      send_act_mission: function(content, callback){
-        Activity
-        .findOne({"_id":content.act_id}, function(err, act){
-          if (err) {
-            console.log('no such act');
-          }else{
-            console.log('get act info')
-            for (var i = act.group.length - 1; i >= 0; i--) {
-              callback(act.group[i].player.socket_id, content.mission);
-            }
-            
-          } 
-        });
-      }
+    },
+    send_act_mission: function(content, callback){
+      Activity
+      .findOne({"_id":content.act_id}, function(err, act){
+        if (err) {
+          console.log('no such act');
+        }else{
+          console.log('get act info')
+          for (var i = act.group.length - 1; i >= 0; i--) {
+            callback(act.group[i].player.socket_id, content.mission);
+          }
+          
+        } 
+      });
     }
   }
 }
