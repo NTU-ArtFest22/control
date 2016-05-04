@@ -91,11 +91,16 @@ module.exports = function(passport, streams){
   });
   router.get('/api/act/get_all/:access_id', function(req,res){
     var access_id = req.params.access_id;
-    return Activity.find(
+    return User
+    .findOne({"fb.id":access_id}, function(err, user){
+      console.log("========");
+      console.log(user._id);
+
+      return Activity.find(
               {
-                "group": { "$elemMatch": { "artist.id": access_id} },
-                // isRunning: true,
-              },{"isRunning": true}, 
+                "group": { "$elemMatch": { "artist.id": mongojs.ObjectId(user._id)} },
+                "isRunning": true
+              }, 
               function(err, act){
                 if(err){
                   console.log('find activity group error: ', err);
@@ -105,6 +110,7 @@ module.exports = function(passport, streams){
                   return res.json(act)
                 }
               })
+    })
   });
   router.get('/api/act/get_act_info/:act_id', function(req,res){
     var act_id = req.params.act_id;
