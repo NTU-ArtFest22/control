@@ -100,7 +100,11 @@ module.exports = function(passport, streams){
     // })
     return Activity.find(
               {
-                // "group.artist.id": mongojs.ObjectId("56fec493b158b4162f8ef380"),
+                "group":{
+                  $elemMatch: {
+                    "artist.id": mongojs.ObjectId("56fec493b158b4162f8ef380"),
+                  }
+                }
                 "isRunning": true
               }, 
               function(err, act){
