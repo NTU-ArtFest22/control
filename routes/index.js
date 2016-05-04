@@ -46,9 +46,9 @@ module.exports = function(passport, streams){
     res.render('admin-act', { user: req.user});
   });
 
-  // router.get('/admin/stream', canAccessAdmin, function(req, res){
-  //   res.render('stream', { user: req.user });
-  // });
+   router.get('/admin/stream', canAccessAdmin, function(req, res){
+     res.render('stream', { user: req.user });
+   });
 
   router.get('/about', function(req, res) {
     console.log('Want to know us??');
