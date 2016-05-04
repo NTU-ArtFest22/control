@@ -94,12 +94,12 @@ module.exports = function(passport, streams){
     return User
     .findOne({"fb.id":access_id}, function(err, user){
       console.log("========");
-      console.log(user);
-      
+      console.log(user._id);
+
       return Activity.find(
               {
                 group: {
-                  "$elemMatch": { "artist.id": user._id }  
+                  "$elemMatch": { "artist.id": mongojs.ObjectId(user._id) }  
                 },
                 isRunning: 1,
               },
