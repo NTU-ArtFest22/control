@@ -93,7 +93,9 @@ module.exports = function(passport, streams){
     var access_id = req.params.access_id;
     return User
     .findOne({"fb.id":access_id}, function(err, user){
-
+      console.log("========");
+      console.log(user);
+      
       return Activity.find(
               {
                 group: {
