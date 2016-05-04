@@ -100,8 +100,8 @@ module.exports = function(passport, streams){
     // })
     return Activity.find(
               {
-                "group.artist.id":"56fec493b158b4162f8ef380",
-                // "isRunning": true
+                // "group.artist.id":"56fec493b158b4162f8ef380",
+                "isRunning": true
               }, 
               function(err, act){
                 if(err){
