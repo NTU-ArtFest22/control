@@ -535,7 +535,7 @@
         return;
       }
       var content = {act_id:actId, mission:{name:$scope.mission.name, requirement:$scope.mission.content, time:new Date()}}
-      $scope.missions.append(content.mission);
+      $scope.missions.push(content.mission);
       socket.emit('new_mission_server', content);
       $scope.mission = {};
     };
