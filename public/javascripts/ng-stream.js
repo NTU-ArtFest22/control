@@ -1,5 +1,5 @@
 (function(){
-  var app = angular.module('stream-window', [],
+  var app = angular.module('stream-window', [ 'ngAnimate', 'ui.bootstrap', 'ngRoute' ],
     function($locationProvider){$locationProvider.html5Mode(true);}
     );
 
@@ -279,7 +279,7 @@
     };
   }]);
 
-  app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
+  app.controller('RemoteStreamsControllerforAdmin', ['$uibModal', 'camera', '$location', '$http', '$timeout', '$scope', function($uibModal, camera, $location, $http, $timeout, $scope){
 
     var rtc = this;
     // socket
