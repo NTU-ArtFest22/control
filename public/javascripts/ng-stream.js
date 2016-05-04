@@ -288,6 +288,7 @@
 
     $scope.oldStream = [];
     $scope.countTime = 0;
+    $scope.missions = [];
     rtc.group = [];
     var param = loc.split('/');
     if( param[1] != "admin"&&param[2]!="stream" ){
@@ -307,23 +308,31 @@
         $scope.socket_status = false;
       }
     });
-    $scope.sendMission = function(){
-      if( ! $scope.mission.content || ! $scope.mission.name ){
-        console.log('no name or location orz');
-        return;
-      }
-      var content = {act_id:act_id, mission:{name:$scope.mission.name, requirement:$scope.mission.content, time:new Date()}}
-      missions.append(content.mission);
-      socket.emit('new_mission_server', content);
-    };
-      
+    
     // open new mission dialog
-    // $scope.open = function () {
-    //   var modalInstance = $uibModal.open({
-    //     animation: true,
-    //     templateUrl: 'new-mission-modal.html',
-    //   });
-    // };
+     $scope.open = function ( ) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'new-mission-modal.html',
+        controller: 'MissionModalCtrl',
+        scope: $scope,
+        resolve: {
+          socket: function () {
+            return socket;
+          },
+          actId: function(){
+            return act_id;
+          }
+        }
+      });
+
+      modalInstance.result.then( function () {
+        $log.info('Modal closed at: ' + new Date());
+      }, function(){
+        $log.info('Modal dismissed.');
+      });
+    }; 
+
 
     rtc.remoteStreams = [];
     function getStreamById(id) {
@@ -419,37 +428,6 @@
         $scope.act = data;
         console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
         console.log( 'reload act: ', $scope.act.name );
-        
-        // console.log('video updating');
-        // for (var i = $scope.act.group.length - 1; i >= 0; i--) {
-        //   console.log('#'+$scope.act.group[i].character);
-        //   if($scope.act.group[i].stream){
-        //     console.log('new stream is defined:'+$scope.act.group[i].stream);
-        //     if (rtc.group[i]) {
-        //       console.log('group is already exist')
-        //       if( rtc.group[i].stream ){
-        //         console.log('stream is already exist:'+rtc.group[i].stream)
-        //         if (!$scope.oldStream[i]||!rtc.group[i].stream==$scope.oldStream[i]) {
-        //           rtc.group[i] = $scope.act.group[i]
-        //           console.log('video update');
-        //           console.log(rtc.group[i])
-        //           rtc.view( rtc.group[i].stream ); 
-        //         }
-        //       }else{
-        //         rtc.group[i] = $scope.act.group[i]
-        //         console.log('video add');
-        //         rtc.view( rtc.group[i].stream ); 
-        //       }
-        //     }else{
-        //       console.log('group is not defined')
-        //       rtc.group[i] = $scope.act.group[i]
-        //       console.log(rtc.group[i])
-        //       rtc.view( rtc.group[i].stream );  
-        //     }
-        //     $scope.oldStream[i] = rtc.group[i].stream;
-
-        //   }
-        // }
         console.log('~~~~~~~~~~~~~~~~~~~~~~~~~');
         addPoint();
       });
@@ -550,7 +528,22 @@
   }]);
 
 
+  app.controller('MissionModalCtrl', function($scope, $uibModalInstance, socket, actId){
+    $scope.sendMission = function(){
+      if( ! $scope.mission.content || ! $scope.mission.name ){
+        console.log('no name or location orz');
+        return;
+      }
+      var content = {act_id:actId, mission:{name:$scope.mission.name, requirement:$scope.mission.content, time:new Date()}}
+      $scope.missions.append(content.mission);
+      socket.emit('new_mission_server', content);
+      $scope.mission = {};
+    };
+    $scope.cancel = function(){
+      $uibModalInstance.dismiss('cancel');
+    };
 
+  });
 
   app.controller('LocalStreamController',['camera', '$scope', '$window', '$http', function(camera, $scope, $window, $http){
     var localStream = this;
