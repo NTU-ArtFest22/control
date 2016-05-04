@@ -62,6 +62,7 @@
     });
     $scope.oldStream = '';
     $scope.countTime = 0;
+    $scope.is_add_alter = 0;
     rtc.remoteStreams = [];
     // log
     var loc = window.location.pathname;
@@ -81,17 +82,6 @@
         center: {lat:  25.017474 , lng:121.538739},
         mapTypeId: google.maps.MapTypeId.HYBRID
       });
-      if ($scope.act) {
-        if ($scope.act.acttype==1) {
-          console.log('add alter')
-          new google.maps.Marker({
-            position: new google.maps.LatLng({lat:25.031038, lng:121.535896}),
-            map: map,
-            title: $scope.act.group[i].character,
-            icon: "/icon/alter.png"
-          });
-        }
-      }
     };
     var addPoint = function(){
       var gps, latlng;
@@ -170,6 +160,18 @@
           $scope.oldStream = rtc.group.stream;
         }
       });
+      if ($scope.act&&$scope.is_add_alter==1) {
+        if ($scope.act.acttype==1) {
+          console.log('add alter')
+          new google.maps.Marker({
+            position: new google.maps.LatLng({lat:25.031038, lng:121.535896}),
+            map: map,
+            title: $scope.act.group[i].character,
+            icon: "/icon/alter.png"
+          });
+          $scope.is_add_alter = 1;
+        }
+      }
     };
     rtc.loadData = function () {
       // get list of streams from the server
