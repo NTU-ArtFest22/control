@@ -17,6 +17,7 @@ module.exports = function(io, streams, routes, data) {
     });
     // new mission
     client.on('new_mission_server', function(content){ //content={act_id:, mission:{name:, requirement}}
+      console.log("new mission:"+content);
       data.send_act_mission(content, function(socket_id, mission){  
         //each group will do...
         if (io.sockets.connected[socket_id]) {
