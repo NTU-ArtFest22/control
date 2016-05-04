@@ -57,8 +57,30 @@
   app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
     var rtc = this;
     var socket = io.connect();
+    $scope.socket_status = false;
     socket.on('id', function(id){
       console.log('socket:'+id);
+      
+      var param = loc.split('/');
+      
+      if( param[1] != "profile" ){
+        return;
+      }
+      var info = {act_id:param[2], character:param[3], type:2} //type 2 for web user
+
+      socket.emit('register_client_id', info);
+    });
+    socket.on('register_status', function(status){
+      if (status=='success') {
+        $scope.socket_status = true;
+        console.log('socket is now on');
+      }else{
+        $scope.socket_status = false;
+      }
+    })
+    socket.on('new_mission_client', function(mission){
+      console.log("new mission:");
+      console.log(mission)
     });
     $scope.oldStream = '';
     $scope.countTime = 0;
@@ -260,10 +282,48 @@
   app.controller('RemoteStreamsControllerforAdmin', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
 
     var rtc = this;
+    // socket
+    var socket = io.connect();
+    $scope.socket_status = false;
 
     $scope.oldStream = [];
     $scope.countTime = 0;
     rtc.group = [];
+    var param = loc.split('/');
+    if( param[1] != "admin"&&param[2]!="stream" ){
+      return;
+    }
+    var act_id = param[3];
+    socket.on('id', function(id){
+      console.log('socket:'+id);
+      var info = {act_id:act_id, character:"admin", type:1} //type 1 for admin user
+      socket.emit('register_client_id', info);
+    });
+    socket.on('register_status', function(status){
+      if (status=='success') {
+        $scope.socket_status = true;
+        console.log('socket is now on');
+      }else{
+        $scope.socket_status = false;
+      }
+    });
+    $scope.sendMission = function(){
+      if( ! $scope.mission.content || ! $scope.mission.name ){
+        console.log('no name or location orz');
+        return;
+      }
+      var content = {act_id:act_id, mission:{name:$scope.mission.name, requirement:$scope.mission.content, time:new Date()}}
+      missions.append(content.mission);
+      socket.emit('new_mission_server', content);
+    };
+      
+    // open new mission dialog
+    // $scope.open = function () {
+    //   var modalInstance = $uibModal.open({
+    //     animation: true,
+    //     templateUrl: 'new-mission-modal.html',
+    //   });
+    // };
 
     rtc.remoteStreams = [];
     function getStreamById(id) {
