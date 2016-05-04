@@ -94,7 +94,7 @@ module.exports = function(passport, streams){
     return User
     .findOne({"fb.id":access_id}, function(err, user){
 
-      return db.activities.find(
+      return Activity.find(
               {
                 group: {
                   "$elemMatch": { "artist.id": user._id }  
