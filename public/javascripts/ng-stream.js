@@ -83,6 +83,7 @@
       });
       if ($scope.act) {
         if ($scope.act.acttype==1) {
+          console.log('add alter')
           new google.maps.Marker({
             position: new google.maps.LatLng({lat:25.031038, lng:121.535896}),
             map: map,
