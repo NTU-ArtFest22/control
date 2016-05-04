@@ -98,7 +98,8 @@ module.exports = function(passport, streams){
 
       return Activity.find(
               {
-                "group.artist.id": mongojs.ObjectId(user._id),
+                "group.artist.id": user._id.toString(),
+                "isRunning": true;
               }, 
               function(err, act){
                 if(err){
