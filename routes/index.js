@@ -98,7 +98,7 @@ module.exports = function(passport, streams){
 
       return Activity.find(
               {
-                "group.artist.id": user._id.toString(),
+                "group.artist.id": user._id,
                 "isRunning": true
               }, 
               function(err, act){
