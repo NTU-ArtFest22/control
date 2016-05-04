@@ -99,7 +99,7 @@ module.exports = function(passport, streams){
       return Activity.find(
               {
                 "group.artist.id": user._id.toString(),
-                "isRunning": true;
+                "isRunning": true
               }, 
               function(err, act){
                 if(err){
