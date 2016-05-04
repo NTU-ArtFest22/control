@@ -4,6 +4,7 @@ var mongojs = require('mongojs');
 var User = require('../models/user.js');
 var Activity = require('../models/activity.js');
 var safety = require('../config/safety.js');
+var urlSessions = {};
 
 var canAccessAdmin = function (req, res, next){
   //console.log(req);
@@ -32,7 +33,7 @@ var isAuthenticated = function (req, res, next) {
 };
 
 
-module.exports = function( app , db ){
+module.exports = function( app , db , OpenTokObject , OTKEY  ){
 
   app.get('/user', function(req, res){
     console.log('getting user: ', req.user);
@@ -696,23 +697,46 @@ module.exports = function( app , db ){
 
         console.log( "query", query );
 
+        var roomId = req.params.act + '_' + req.params.type;
+
         db.activities.findOne(
           query,
           { 'group.$': 1 , 'isRunning':1},
           function(err, act){
             if(err){
-              console.log('find activity group error: ', err);
               res.send( 404, err );
             } else {
-              console.log('                   got act  :', act);
-              console.log('got user activity group: ', act.group[0]);
-              if( act.isRunning )
-                res.render('stream-talk', { group:  act.group[0] , user: req.user});
-              else
+              if( act.isRunning ){
+                if(urlSessions[ roomId ] == undefined){
+                  OpenTokObject.createSession(function(err, result){
+                    if(err){
+                      console.log(err);
+                      return;
+                    }
+                    console.log('User created room: ', result.sessionId);
+                    urlSessions[ roomId ] = result.sessionId;
+                    sendResponse( result.sessionId, res , req, act.group[0]);
+                  });
+                }else{
+                  var sessionId = urlSessions[ roomId ];
+                  console.log('User entered room: ', sessionId);
+                  sendResponse( sessionId, res, req, act.group[0] );
+                }
+              }else
                 res.render('profile', { warning: 'hasnot start' , user: req.user});
             }
-          })  
+          });  
   });
+
+  // ***
+  // *** All sessionIds need a corresponding token
+  // *** generateToken and then sendResponse based on ejs template
+  // ***
+  function sendResponse( sessionId, responder , request, group ){
+    var token = OpenTokObject.generateToken( sessionId );
+    var data = {user: request.user, OpenTokKey:OTKEY, sessionId: sessionId, token:token, group: group};
+    responder.render( 'stream-talk', data );
+  }
 
   /* type: artist / [ character ] */
   app.get('/group/:act/:type', isAuthenticated, function(req, res){
@@ -734,15 +758,15 @@ module.exports = function( app , db ){
   })
   app.get('/adminact/:act', isAuthenticated, function(req, res){
 
-        db.activities.findOne(
-          {"_id": mongojs.ObjectId( req.params.act )},
-          function(err, act){
-            if(err){
-              res.send( 404, err );
-            } else {
-              res.json( act );
-            }
-          })  
+    db.activities.findOne(
+      {"_id": mongojs.ObjectId( req.params.act )},
+      function(err, act){
+        if(err){
+          res.send( 404, err );
+        } else {
+          res.json( act );
+        }
+      })  
   })
 
   app.put('/group/:act/artist', isAuthenticated, function(req, res){

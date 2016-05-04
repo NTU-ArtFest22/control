@@ -31,7 +31,7 @@
     "cookie-parser": "~1.3.5",
     "crypto": "0.0.3",
     "debug": "~2.2.0",
-    "ejs": "2.4.1",
+    "ejs": "^2.4.1",
     "errorhandler": "^1.4.3",
     "express": "~4.13.1",
     "express-session": "1.7.6",
@@ -41,15 +41,17 @@
     "mongoose": "^4.4.2",
     "mongoose-validator": "^1.2.4",
     "morgan": "~1.6.1",
-    "passport": "^0.2.2",
+    "opentok": "^2.4.0-beta.1",
+    "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
     "reliable-signaler": "1.0.2",
     "serve-favicon": "~2.3.0",
     "socket.io": "1.0",
-    "underscore": "^1.8.3", 
-    "supervisor": "~0.9.1"
+    "supervisor": "~0.9.1",
+    "underscore": "^1.8.3"
   },
   "repository": {
-    "type": "git",   "url": "git://github.com/NTU-ArtFest22/control.git" 
+    "type": "git",
+    "url": "git://github.com/NTU-ArtFest22/control.git"
   }
 }

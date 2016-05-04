@@ -1,0 +1,5 @@
+module.exports = {
+  "api_key"      :     <FB_API_KEY>,
+  "api_secret"   :     <FB_API_SECRET>,
+	"callback_url"  :     "http://localhost:3000/auth/facebook/callback"
+}

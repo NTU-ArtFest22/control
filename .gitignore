@@ -5,5 +5,7 @@ npm-debug.log
 *.key
 *.csr
 config/fb.js
+config/config.js
+views/utility/mapjs.ejs
 app.js
 fb.js

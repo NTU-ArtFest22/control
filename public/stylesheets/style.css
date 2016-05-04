@@ -103,7 +103,7 @@ button[disabled], input[disabled], select[disabled] {
 
 .remoteStreams{
   display: inline-block;
-  top: 15px;
+  top: 30px;
   right: 15px;
   float: left;
   text-align: center;

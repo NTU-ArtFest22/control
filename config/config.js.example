@@ -1,0 +1,5 @@
+module.exports={
+  "use_database"          :     "true",
+  "host"                  :     "localhost",
+  "rootadmin_fbid"        :     <FB_ID_for_admin>
+}

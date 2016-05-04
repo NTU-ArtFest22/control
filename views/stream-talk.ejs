@@ -14,6 +14,7 @@
       <div class="col-md-9">
         <div class="remoteStreams">
           <div class="remoteStreams">
+            <br><br>
             <div id="remoteVideosContainer"></div>
           </div>
         </div>
@@ -26,20 +27,11 @@
           <hr>
           <div id="map"></div>
           <hr>
-          <div ng-controller="LocalStreamController as localStream">
-            <video id="localVideo" muted="muted" autoplay="true"></video>
-            <br/>
-            <!-- <a class="btn btn-primary" ng-click="localStream.toggleCam()" href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a> -->
-            <div class="btn-group" ng-show="localStream.cameraIsOn">    
-              <% if( locals[ 'user' ] && ( user.isAdmin || user.isArtist || user.isDoll ) ) { %>
-                <a class="btn btn-primary" ng-click="addStreamUrl()">Add Stream URL</a>
-                <a class="btn btn-primary" ng-click="removeStreamUrl()">Remove Stream URL</a>
-              <% } %>
-            </div>
-          </div>
+          <div id="localVideo"></div>
+          <!--<video id="localVideo" muted="muted" autoplay="true"></video>-->
+          <br/>
           <hr>
           <h6>{{ 10 - countTime }}s for auto-reload</h6>
-          <a class="btn btn-info"  ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "Click here if losing video!" : "Refresh Now!" }}</a>
         </div>
 
       </div>
@@ -47,13 +39,9 @@
 
 
 
-      
-
-
-
-    <!-- <%- include layout/fb-like %> -->
     <%- include layout/links %>
 
+    <script src='//static.opentok.com/webrtc/v2.2/js/opentok.min.js'></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/javascripts/lib/adapter.js"></script>
     <script type="text/javascript" src="/javascripts/lib/rtcClient.js"></script>
@@ -62,6 +50,34 @@
     <script type="text/javascript" src="/javascripts/ng-stream.js"></script>
     <%- include utility/mapjs %>
     <script src="/javascripts/bootstrap-3.3.6/bootstrap.min.js"></script>
-</body>
+
+    <script type="text/javascript">
+      // Initialize API key, session, and token, generated from server side
+    var apiKey = "<%= OpenTokKey %>";
+    var sessionId = "<%= sessionId %>";
+    var token = "<%= token %>";
+
+    // Enable console logs for debugging
+    TB.setLogLevel(TB.DEBUG);
+
+    // Initialize session, set up event listeners, and connect
+    var session = OT.initSession(apiKey, sessionId); 
+    var publisher = OT.initPublisher('localVideo', {resolution: '320x240', publishAudio:true, publishVideo:false});
+    session.on({ 
+      streamCreated: function(event) { 
+        // add stream to div videos
+        session.subscribe(event.stream, "remoteVideosContainer", {width:720, height:540, insertMode: 'append'}); 
+      } 
+    }); 
+    session.connect(token, function(error) {
+      if (error) {
+        console.log( error );
+      } else {
+        // Create publisher and start streaming into the session
+        session.publish(publisher); 
+      }
+    });
+    </script>
+  </body>
 </html>
 

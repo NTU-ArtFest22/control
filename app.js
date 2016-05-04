@@ -21,8 +21,11 @@ var express           =     require('express')
   // , port              =     normalizePort(process.env.PORT || '443')
   , port              =     normalizePort(process.env.PORT || '3000')
   , debug             =     require('debug')('passport-mongo')
-  , https              =     require('https')
+  , https             =     require('https')
   , fs                =     require('fs')
+  , OpenTok           =     require('opentok')
+  , OTKEY             =     process.env.TB_KEY
+  , OTSECRET          =     process.env.TB_SECRET
   , http              =     require('http');
  
 
@@ -74,17 +77,13 @@ var express           =     require('express')
   app.use('/', routes);
 
 
-  require('./routes/data.js')( app , db );
+  // ***
+  // *** Setup when server first starts
+  // ***
+  var OpenTokObject = new OpenTok(OTKEY, OTSECRET);
 
+  require('./routes/data.js')( app , db , OpenTokObject , OTKEY );
 
-  app.get('/stream/trial', function(req, res){
-    res.render('stream-talk', { user: req.user , username: 'UserName', share: 'Share! -> '});
-  })
-
-  app.get('/stream/:id', function(req, res){
-    console.log('                         stream: id', req.params.id);
-    res.render('stream-talk', { user: req.user, id: req.params.id , username: 'Username'});
-  })
 
 
   // catch 404 and forward to error handler
@@ -117,8 +116,8 @@ var express           =     require('express')
   var io = require('socket.io').listen(server);
 
   //io.use(function(socket, next){
-    //// Wrap the express middleware
-    //sessionMiddle(socket.request, {}, next);
+  //// Wrap the express middleware
+  //sessionMiddle(socket.request, {}, next);
   //})
 
   server.listen( port, function(){
