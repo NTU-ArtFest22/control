@@ -94,7 +94,7 @@ module.exports = function(passport, streams){
     return User
     .findOne({"fb.id":access_id}, function(err, user){
       console.log("========");
-      console.log(user._id);
+      console.log(user._id.toString());
 
       return Activity.find(
               {
