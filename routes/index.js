@@ -98,11 +98,9 @@ module.exports = function(passport, streams){
 
       return Activity.find(
               {
-                group: {
-                  "$elemMatch": { "artist.id": user._id}  
-                },
+                "group": { "$elemMatch": { "artist.id": user._id} },
                 // isRunning: true,
-              },
+              },{"isRunning": true}, 
               function(err, act){
                 if(err){
                   console.log('find activity group error: ', err);
