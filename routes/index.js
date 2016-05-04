@@ -101,7 +101,7 @@ module.exports = function(passport, streams){
                 group: {
                   "$elemMatch": { "artist.id": mongojs.ObjectId(user._id) }  
                 },
-                isRunning: 1,
+                isRunning: true,
               },
               function(err, act){
                 if(err){
