@@ -2,7 +2,8 @@ var express = require('express')
   , router = express.Router()
   , User = require('../models/user.js')
   , Activity = require('../models/activity.js')
-  , config = require('../config/config.js');
+  , config = require('../config/config.js')
+  , var mongojs = require('mongojs');;
 
 var canAccessAdmin = function (req, res, next){
   //console.log(req);
@@ -92,7 +93,23 @@ module.exports = function(passport, streams){
     var access_id = req.params.access_id;
     return User
     .findOne({"fb.id":access_id}, function(err, user){
-      return res.json(user.activities)
+
+      return db.activities.find(
+              {
+                group: {
+                  "$elemMatch": { "artist.id": user._id }  
+                },
+                isRunning: 1,
+              },
+              function(err, act){
+                if(err){
+                  console.log('find activity group error: ', err);
+                  return res.send( 404, err );
+                } else {
+                  console.log('got act  :', act);
+                  return res.json(act)
+                }
+              })
     })
   });
   router.get('/api/act/get_act_info/:act_id', function(req,res){
