@@ -101,7 +101,7 @@ module.exports = function(passport, streams){
     return Activity.find(
               {
                 "group":{
-                  $elemMatch: { "artist.id": user._id.toString() }
+                  $elemMatch: { "artist.id":"56fec493b158b4162f8ef380"}
                 },
                 "isRunning": true
               }, 
