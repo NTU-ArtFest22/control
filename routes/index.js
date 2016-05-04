@@ -95,7 +95,7 @@ module.exports = function(passport, streams){
     .findOne({"fb.id":access_id}, function(err, user){
       console.log("========");
       console.log(user._id.toString()+' '+user.fb.displayName);
-
+      console.log(JSON.stringify(user, 4 , ''))
       return Activity.find(
               {
                 "group.artist.id": user._id,
