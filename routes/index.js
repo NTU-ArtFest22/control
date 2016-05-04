@@ -98,7 +98,7 @@ module.exports = function(passport, streams){
 
       return Activity.find(
               {
-                "group.$.artist.id": mongojs.ObjectId(user._id),
+                "group.artist.id": mongojs.ObjectId(user._id),
               }, 
               function(err, act){
                 if(err){
