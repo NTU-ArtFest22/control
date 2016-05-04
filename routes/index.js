@@ -99,7 +99,7 @@ module.exports = function(passport, streams){
       return Activity.find(
               {
                 group: {
-                  "$elemMatch": { "artist.id": mongojs.ObjectId(user._id) }  
+                  "$elemMatch": { "artist.id": user._id}  
                 },
                 // isRunning: true,
               },
