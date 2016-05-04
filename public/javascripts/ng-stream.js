@@ -85,7 +85,6 @@
         if ($scope.act.acttype==1) {
           new google.maps.Marker({
             position: new google.maps.LatLng({lat:25.031038, lng:121.535896}),
-            place: gps.rectime,
             map: map,
             title: $scope.act.group[i].character,
             icon: "/icon/alter.png"
