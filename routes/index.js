@@ -103,7 +103,10 @@ module.exports = function(passport, streams){
                 "group":{
                   $elemMatch: {
                     // "artist.id": mongojs.ObjectId("56fec493b158b4162f8ef380"),
-                    "character": "123",
+                    "artist":{
+                      "id":mongojs.ObjectId("56fec493b158b4162f8ef380"),
+                    }
+                    // "character": "123",
                   }
                 },
                 "isRunning": true
