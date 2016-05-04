@@ -53,6 +53,7 @@ module.exports = function( app , db ){
       }else{
         db.activities.findOne(
           { "_id": mongojs.ObjectId( act_id ) },
+          {limit: 1000},
           function( err, act ){
             console.log( 'check if ok:     ', act );
             if(err || !act){
