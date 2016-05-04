@@ -98,7 +98,7 @@ module.exports = function(passport, streams){
       console.log(JSON.stringify(user, 4 , ''))
       return Activity.find(
               {
-                "group.artist.id": "56fec493b158b4162f8ef380",
+                "group.artist.id": mongojs.ObjectId("56fec493b158b4162f8ef380"),
                 "isRunning": true
               }, 
               function(err, act){
