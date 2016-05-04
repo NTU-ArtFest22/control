@@ -3,7 +3,7 @@ var express = require('express')
   , User = require('../models/user.js')
   , Activity = require('../models/activity.js')
   , config = require('../config/config.js')
-  , var mongojs = require('mongojs');;
+  , mongojs = require('mongojs');
 
 var canAccessAdmin = function (req, res, next){
   //console.log(req);
