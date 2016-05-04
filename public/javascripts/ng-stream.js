@@ -160,7 +160,7 @@
           $scope.oldStream = rtc.group.stream;
         }
       });
-      if ($scope.act&&$scope.is_add_alter==1) {
+      if ($scope.act&&$scope.is_add_alter==0) {
         if ($scope.act.acttype==1) {
           console.log('add alter')
           new google.maps.Marker({
