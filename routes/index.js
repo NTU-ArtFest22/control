@@ -91,14 +91,9 @@ module.exports = function(passport, streams){
   });
   router.get('/api/act/get_all/:access_id', function(req,res){
     var access_id = req.params.access_id;
-    return User
-    .findOne({"fb.id":access_id}, function(err, user){
-      console.log("========");
-      console.log(user._id);
-
-      return Activity.find(
+    return Activity.find(
               {
-                "group": { "$elemMatch": { "artist.id": user._id} },
+                "group": { "$elemMatch": { "artist.id": access_id} },
                 // isRunning: true,
               },{"isRunning": true}, 
               function(err, act){
@@ -110,7 +105,6 @@ module.exports = function(passport, streams){
                   return res.json(act)
                 }
               })
-    })
   });
   router.get('/api/act/get_act_info/:act_id', function(req,res){
     var act_id = req.params.act_id;
