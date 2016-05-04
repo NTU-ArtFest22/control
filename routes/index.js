@@ -91,16 +91,14 @@ module.exports = function(passport, streams){
   });
   router.get('/api/act/get_all/:access_id', function(req,res){
     var access_id = req.params.access_id;
-    // return User
-    // .findOne({"fb.id":access_id}, function(err, user){
-    //   console.log("========");
-    //   console.log(user._id.toString()+' '+user.fb.displayName);
-    //   console.log(JSON.stringify(user, 4 , ''))
-    //   return 
-    // })
-    return Activity.find(
+    return User
+    .findOne({"fb.id":access_id}, function(err, user){
+      console.log("========");
+      console.log(user._id.toString()+' '+user.fb.displayName);
+      console.log(JSON.stringify(user, 4 , ''))
+      return Activity.find(
               {
-                // "group.artist.id":"56fec493b158b4162f8ef380",
+                'group.artist.name': user.fb.displayName,
                 "isRunning": true
               }, 
               function(err, act){
@@ -112,6 +110,7 @@ module.exports = function(passport, streams){
                   return res.json(act)
                 }
               })
+    })
   });
   router.get('/api/act/get_act_info/:act_id', function(req,res){
     var act_id = req.params.act_id;
