@@ -100,9 +100,7 @@ module.exports = function(passport, streams){
     // })
     return Activity.find(
               {
-                "group":{
-                  $elemMatch: { "artist.id":"56fec493b158b4162f8ef380"}
-                },
+                "group.artist.id":"56fec493b158b4162f8ef380",
                 "isRunning": true
               }, 
               function(err, act){
