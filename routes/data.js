@@ -996,7 +996,7 @@ module.exports = function( app , db ){
           console.log('exchange character error: ', err);
           
         } else {
-          console.log('data found'+JSON.stringify(ex_data, 4 , ''));
+          console.log('data found'+JSON.stringify(doc, 4 , ''));
 
           
         }
