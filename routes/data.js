@@ -986,7 +986,7 @@ module.exports = function( app , db ){
           $or:{
             "group.character":ex_data.self_character, "group.character":ex_data.other_character
           }
-        },{ 'group.$': 1 , 'isRunning':1}, function(err, doc){
+        }, function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
           
