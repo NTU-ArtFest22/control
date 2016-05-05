@@ -25,7 +25,11 @@ module.exports = function(io, streams, routes, data) {
         }
       })
     })
-
+    // 
+    client.on('exchange_request', function(ex_data){ //content={act_id:, mission:{name:, requirement}}
+      console.log("new mission:"+ex_data);
+      
+    })
 
 
 
