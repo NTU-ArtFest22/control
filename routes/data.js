@@ -985,7 +985,7 @@ module.exports = function( app , db ){
             {"_id": mongojs.ObjectId(ex_data.act_id)},
             {$or:[{"group.character":ex_data.self_character}, {"group.character":ex_data.other_character}]}
           ] 
-        }, { 'group.$': 1 , 'isRunning':1}, function(err, doc){
+        }, function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
           
