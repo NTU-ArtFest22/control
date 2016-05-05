@@ -987,7 +987,7 @@ module.exports = function( app , db ){
             {"group.character":ex_data.self_character}, {"group.character":ex_data.other_character}
           ]
         }
-      }, function(err, doc){
+      }, { 'group.$': 1 , 'isRunning':1}, function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
           
