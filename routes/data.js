@@ -977,6 +977,24 @@ module.exports = function( app , db ){
           
         } 
       });
+    },
+    exchange_status: function(ex_data, callback){
+      Activity.find({
+        query: { 
+          "_id": mongojs.ObjectId(ex_data.act_id), 
+          "group": { 
+            $elemMatch: { "character": $in:[ex_data.self_character, ex_data.other_character]}
+          }
+        }, function(err, doc){
+        if(err){
+          console.log('exchange character error: ', err);
+          res.send( 404, err );
+        } else {
+          console.log('data found'+JSON.stringify(ex_data, 4 , ''));
+
+          res.json( true );
+        }
+      });
     }
   }
 }
