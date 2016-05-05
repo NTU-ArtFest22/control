@@ -28,7 +28,16 @@ module.exports = function(io, streams, routes, data) {
     // 
     client.on('exchange_request', function(ex_data){ //content={act_id:, mission:{name:, requirement}}
       console.log("exchange_request:"+JSON.stringify(ex_data, 4 , ''));
-      data.exchange_status(ex_data, function(){});
+      data.exchange_status(ex_data, function(socket_id, data){
+        if (io.sockets.connected[socket_id]) {
+            io.sockets.connected[socket_id].emit('new_character_data', data);
+        }
+      });
+    })
+
+    client.on('update_request', function(info_data){
+      console.log('update_request'+JSON.stringify(info_data, 4 , ''));
+
     })
 
 
