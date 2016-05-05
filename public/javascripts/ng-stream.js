@@ -175,12 +175,14 @@
             console.log('get_data', data.group[i]);
           }
         }
-        if( ! rtc.group.stream ){
+        if(rtc.group.stream ){
+          if( rtc.group.stream != $scope.oldStream ){
+            rtc.call( rtc.group.stream );
+            $scope.oldStream = rtc.group.stream;
+          }
+        }else{
           console.log('no stream now');
           return;
-        }else if( rtc.group.stream != $scope.oldStream ){
-          rtc.call( rtc.group.stream );
-          $scope.oldStream = rtc.group.stream;
         }
       });
       if ($scope.act&&$scope.is_add_alter==0) {
