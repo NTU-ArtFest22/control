@@ -1043,7 +1043,7 @@ module.exports = function( app , db ){
               }else{
                 console.log("successfully exchange:");
                 for (var i = doc.group.length - 1; i >= 0; i--) {
-                  
+
                   callback(doc.group[i].artist.socket_id, doc);
                   callback(doc.group[i].player.socket_id, doc);
                 }
@@ -1053,6 +1053,24 @@ module.exports = function( app , db ){
             }
         }
       });
+    },
+    update_act: function(act_id, callback){
+      console.log("start exchange in data");
+      function temp(err, doc){
+              if (err) {
+                console.log("failed to exchange:"+err);
+              }else{
+                console.log("successfully exchange:");
+                for (var i = doc.group.length - 1; i >= 0; i--) {
+                  
+                  callback(doc.group[i].artist.socket_id, doc);
+                  callback(doc.group[i].player.socket_id, doc);
+                }
+                callback(doc.admin_socket_id, doc);
+
+              }
+            }
+      Activity.find({"_id": mongojs.ObjectId(ex_data.act_id)}, temp);
     }
   }
 }
