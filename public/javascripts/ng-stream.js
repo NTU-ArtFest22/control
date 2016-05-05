@@ -166,7 +166,7 @@
       $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
         if(!data)
           return;
-        console.log(data);
+        console.log("data:", data);
         $scope.act = data;
         
         for (var i = data.group.length - 1; i >= 0; i--) {
