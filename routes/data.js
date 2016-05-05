@@ -983,7 +983,7 @@ module.exports = function( app , db ){
         query: { 
           "_id": mongojs.ObjectId(ex_data.act_id), 
           "group": { 
-            $elemMatch: { "character": $in:[ex_data.self_character, ex_data.other_character]}
+            $elemMatch: { "character": {$in:[ex_data.self_character, ex_data.other_character]}}
           }
         }, function(err, doc){
         if(err){
