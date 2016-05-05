@@ -1036,7 +1036,7 @@ module.exports = function( app , db ){
                   callback(doc.group[i].artist.socket_id, doc);
                   callback(doc.group[i].player.socket_id, doc);
                 }
-                callback(doc.group[i].admin_socket_id, doc);
+                callback(doc.admin_socket_id, doc);
 
               }
             }
