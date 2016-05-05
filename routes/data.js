@@ -993,7 +993,47 @@ module.exports = function( app , db ){
           
         } else {
           console.log('data found'+JSON.stringify(doc, 4 , ''));
+          if (doc.group.length==2) {
+            self_sclass = doc.group[0].sclass;
+            other_sclass = doc.group[1].sclass;
+            db.activities.findAndModify({
+              query: { 
+                "_id": mongojs.ObjectId(act_id), 
+                "group": { 
+                  $elemMatch: { "character": doc.group.[0].character }
+                }
+              },
+              update: {
+                $set: {
+                  "group.$.sclass": self_sclass,
+                }
+              },
+              new: true
+            }, temp);
+            db.activities.findAndModify({
+              query: { 
+                "_id": mongojs.ObjectId(act_id), 
+                "group": { 
+                  $elemMatch: { "character": doc.group.[1].character }
+                }
+              },
+              update: {
+                $set: {
+                  "group.$.sclass": other_sclass,
+                }
+              },
+              new: true
+            }, temp);
 
+            function temp(err, doc){
+              if (err) {
+                console.log("failed to exchange:"+err);
+              }else{
+                console.log("successfully exchange:"+JSON.stringify(doc));
+                
+              }
+            }
+          }
           
         }
       });
