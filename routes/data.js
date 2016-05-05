@@ -983,9 +983,9 @@ module.exports = function( app , db ){
       Activity.find({
         query: { 
           "_id": mongojs.ObjectId(ex_data.act_id), 
-          $or:{
-            "group.character":ex_data.self_character, "group.character":ex_data.other_character
-          }
+          $or:[
+            {"group.character":ex_data.self_character}, {"group.character":ex_data.other_character}
+          ]
         }
       }, function(err, doc){
         if(err){
