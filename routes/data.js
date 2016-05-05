@@ -987,12 +987,11 @@ module.exports = function( app , db ){
       Activity.find({ 
           $and: [
             {"_id": mongojs.ObjectId(ex_data.act_id)}, 
-            {$or:
-              [
-                {"character":ex_data.self_character}, 
-                {"character":ex_data.other_character}
-              ]
-            }
+            {"group.character":{$in:
+                          [
+                            ex_data.self_character, ex_data.other_character
+                          ]
+                        }}
           ]
         }, {'group':1}, 
         function(err, doc){
