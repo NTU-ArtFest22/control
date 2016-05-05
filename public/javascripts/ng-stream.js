@@ -176,7 +176,7 @@
             console.log('get_data', data.group[i]);
           }
         }
-        if(typeof rtc.group.stream !== "undefined"){
+        if(rtc.group.stream){
           if( rtc.group.stream != $scope.oldStream ){
             rtc.call( rtc.group.stream );
             $scope.oldStream = rtc.group.stream;
@@ -227,7 +227,7 @@
        * This happens when you load <serverUrl>/<socketId> : 
        * it calls socketId immediatly.
        **/
-      if(typeof stream.id=="undefined"){
+      if(stream.id){
         stream = {id: stream, isPlaying: false};
         rtc.remoteStreams.push(stream);
       }
