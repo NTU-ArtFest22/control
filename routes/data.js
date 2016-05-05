@@ -993,6 +993,7 @@ module.exports = function( app , db ){
           
         } else {
           console.log('data found'+JSON.stringify(doc, 4 , ''));
+          console.log('data found'+doc[0].group.length);
           if (doc[0].group.length==2) {
             self_sclass = doc.group[0].sclass;
             other_sclass = doc.group[1].sclass;
@@ -1035,6 +1036,8 @@ module.exports = function( app , db ){
             }
           }
           
+        }else{
+          console.log("something wrong")
         }
       });
     }
