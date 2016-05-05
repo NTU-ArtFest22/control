@@ -991,7 +991,7 @@ module.exports = function( app , db ){
             }
           }
         }
-      }, function(err, doc){
+      },{ 'group.$': 1 , 'isRunning':1},, function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
           
