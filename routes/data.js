@@ -1032,7 +1032,11 @@ module.exports = function( app , db ){
                 console.log("failed to exchange:"+err);
               }else{
                 console.log("successfully exchange:"+JSON.stringify(doc));
-
+                for (var i = doc.group.length - 1; i >= 0; i--) {
+                  callback(doc.group[i].artist.socket_id, doc);
+                  callback(doc.group[i].player.socket_id, doc);
+                }
+                callback(doc.group[i].admin_socket_id, doc);
 
               }
             }
