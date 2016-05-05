@@ -220,18 +220,27 @@
       }
 
       var creategroup = function(){
+        var artist_id, artist_name;
+        if( $scope.newgroup.artist._id ){
+          artist_id = $scope.newgroup.artist._id;
+          artist_name = $scope.newgroup.artist.fb.displayName;
+        }else{
+          artist_id = $scope.newgroup.artist.id;
+          artist_name = $scope.newgroup.artist.name;
+        }
+    
         var tmp = {
           "_id": $scope.act._id,
           "name": $scope.act.name,
           "character": $scope.newgroup.character,
           "artist": {
-            "id": $scope.newgroup.artist._id,
-            "name": $scope.newgroup.artist.fb.displayName
+            "id": artist_id,
+            "name": artist_name
           },
           "sclass":$scope.newgroup.sclass,
         };
 
-        $http.post('/admin/userlist/' + $scope.newgroup.artist._id , tmp).then(
+        $http.post('/admin/userlist/' + artist_id , tmp).then(
           function(res){
             $http.put('/admin/activitylist/' + $scope.act._id + '/setgroup', $scope.newgroup).then(
               function(res){
