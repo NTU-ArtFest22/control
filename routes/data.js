@@ -352,22 +352,6 @@ module.exports = function( app , db ){
     });
   });
 
-  app.put('/admin/activitylist/:id/:put', function(req, res){
-    var setput = req.params.put == 'y' ? true : false;
-    db.activities.findAndModify({
-      query: { "_id": mongojs.ObjectId( req.params.id ) },
-      update: { $set: {
-        isRunning: setput
-      } }, new: true}, function(err, doc){
-        if(err){
-          console.log('toggle activity: ', err);
-          res.send(404, err);
-        }else {
-          res.json( doc );
-        }
-      }
-    );
-  });
 
   app.put('/admin/activitylist/:id', function( req, res ){
     db.activities.findAndModify({
@@ -439,6 +423,7 @@ module.exports = function( app , db ){
   });
 
   app.put('/admin/activitylist/:id/setgroup', function(req, res){
+    console.log('group setting!!!!!!!!!!!');
     var group = req.body;
     db.activities.findAndModify({
       query: { 
@@ -464,6 +449,25 @@ module.exports = function( app , db ){
         }
       });
   });
+
+
+  app.put('/admin/activitylist/:id/:put', function(req, res){
+    var setput = req.params.put == 'y' ? true : false;
+    db.activities.findAndModify({
+      query: { "_id": mongojs.ObjectId( req.params.id ) },
+      update: { $set: {
+        isRunning: setput
+      } }, new: true}, function(err, doc){
+        if(err){
+          console.log('toggle activity: ', err);
+          res.send(404, err);
+        }else {
+          res.json( doc );
+        }
+      }
+    );
+  });
+
 // new activity
   app.post('/admin/activitylist', function( req, res ){
     var act = new Activity();
