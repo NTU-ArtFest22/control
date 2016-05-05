@@ -235,6 +235,7 @@
           "character": $scope.newgroup.character,
         };
         var tgroup = {
+          "character": $scope.newgroup.character,
           "artist": {
             "id": artist_id,
             "name": artist_name
