@@ -170,8 +170,8 @@
         $scope.act = data;
         
         for (var i = data.group.length - 1; i >= 0; i--) {
-          console.log("in for loop", param[3], data.group[i].character, (param[3]==data.group[i].character))
-          if(data.group[i].character==param[3]){
+          console.log("in for loop", param[3], data.group[i].character, (decodeURI(param[3])==data.group[i].character))
+          if(data.group[i].character==decodeURI(param[3])){
             rtc.group = data.group[i];
             console.log('get_data', data.group[i]);
           }
