@@ -992,8 +992,8 @@ module.exports = function( app , db ){
           console.log('data found'+JSON.stringify(doc, 4 , ''));
           console.log('data found'+doc[0].group.length);
           if (doc[0].group.length==1) {
-            self_sclass = doc.group[0].sclass;
-            other_sclass = doc.group[0].sclass;
+            self_sclass = doc[0].group[0].sclass;
+            other_sclass = doc[0].group[0].sclass;
             db.activities.findAndModify({
               query: { 
                 "_id": mongojs.ObjectId(act_id), 
