@@ -983,15 +983,11 @@ module.exports = function( app , db ){
       Activity.find({
         query: { 
           "_id": mongojs.ObjectId(ex_data.act_id), 
-          "group": { 
-            $elemMatch: { 
-              "character": {
-                $in:[ex_data.self_character, ex_data.other_character]
-              }
-            }
+          "group.character": {
+            $in:[ex_data.self_character, ex_data.other_character]
           }
         }
-      },{ 'group.$': 2 , 'isRunning':2}, function(err, doc){
+      },{ 'group.$': 1 , 'isRunning':1}, function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
           
