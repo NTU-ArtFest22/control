@@ -996,7 +996,7 @@ module.exports = function( app , db ){
             other_sclass = doc[0].group[0].sclass;
             db.activities.findAndModify({
               query: { 
-                "_id": mongojs.ObjectId(act_id), 
+                "_id": mongojs.ObjectId(ex_data.act_id), 
                 "group": { 
                   $elemMatch: { "character": doc[0].group[0].character }
                 }
@@ -1010,7 +1010,7 @@ module.exports = function( app , db ){
             }, temp);
             db.activities.findAndModify({
               query: { 
-                "_id": mongojs.ObjectId(act_id), 
+                "_id": mongojs.ObjectId(ex_data.act_id), 
                 "group": { 
                   $elemMatch: { "character": doc[0].group[0].character }
                 }
