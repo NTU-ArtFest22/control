@@ -991,14 +991,14 @@ module.exports = function( app , db ){
         } else {
           console.log('data found'+JSON.stringify(doc, 4 , ''));
           console.log('data found'+doc[0].group.length);
-          if (doc[0].group.length==1) {
+          if (doc[0].group.length==2) {
             self_sclass = doc[0].group[0].sclass;
-            other_sclass = doc[0].group[0].sclass;
+            other_sclass = doc[0].group[1].sclass;
             db.activities.findAndModify({
               query: { 
                 "_id": mongojs.ObjectId(ex_data.act_id), 
                 "group": { 
-                  $elemMatch: { "character": doc[0].group[0].character }
+                  $elemMatch: { "character": doc[0].group[1].character }
                 }
               },
               update: {
