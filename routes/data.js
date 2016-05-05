@@ -999,7 +999,7 @@ module.exports = function( app , db ){
           console.log('exchange character error: ', err);
           
         } else {
-          console.log('data found'+JSON.stringify(doc, 4 , ''));
+          // console.log('data found'+JSON.stringify(doc, 4 , ''));
           console.log('data found'+doc[0].group.length);
           if (doc[0].group.length==2) {
             self_sclass = doc[0].group[0].sclass;
