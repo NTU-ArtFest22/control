@@ -1000,7 +1000,7 @@ module.exports = function( app , db ){
               query: { 
                 "_id": mongojs.ObjectId(act_id), 
                 "group": { 
-                  $elemMatch: { "character": doc.group.[0].character }
+                  $elemMatch: { "character": doc.group[0].character }
                 }
               },
               update: {
@@ -1014,7 +1014,7 @@ module.exports = function( app , db ){
               query: { 
                 "_id": mongojs.ObjectId(act_id), 
                 "group": { 
-                  $elemMatch: { "character": doc.group.[1].character }
+                  $elemMatch: { "character": doc.group[1].character }
                 }
               },
               update: {
@@ -1030,7 +1030,7 @@ module.exports = function( app , db ){
                 console.log("failed to exchange:"+err);
               }else{
                 console.log("successfully exchange:"+JSON.stringify(doc));
-                
+
               }
             }
           }
