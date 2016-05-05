@@ -1026,7 +1026,11 @@ module.exports = function( app , db ){
               new: true
             }, temp);
 
-            function temp(err, doc){
+            
+          }else{
+            console.log("something wrong")
+          }
+          function temp(err, doc){
               if (err) {
                 console.log("failed to exchange:"+err);
               }else{
@@ -1034,10 +1038,6 @@ module.exports = function( app , db ){
 
               }
             }
-          }
-          
-        }else{
-          console.log("something wrong")
         }
       });
     }
