@@ -177,7 +177,9 @@
           }
         }
         if(rtc.group.stream){
+          console.log('rtc stream is defined');
           if( rtc.group.stream != $scope.oldStream ){
+            console.log('rtc stream is new');
             rtc.call( rtc.group.stream );
             $scope.oldStream = rtc.group.stream;
           }
@@ -227,7 +229,8 @@
        * This happens when you load <serverUrl>/<socketId> : 
        * it calls socketId immediatly.
        **/
-      if(stream.id){
+      if(!stream.id){
+        console.log('rtc stream has no id');
         stream = {id: stream, isPlaying: false};
         rtc.remoteStreams.push(stream);
       }
