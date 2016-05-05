@@ -994,11 +994,11 @@ module.exports = function( app , db ){
       }, function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
-          res.send( 404, err );
+          
         } else {
           console.log('data found'+JSON.stringify(ex_data, 4 , ''));
 
-          res.json( true );
+          
         }
       });
     }
