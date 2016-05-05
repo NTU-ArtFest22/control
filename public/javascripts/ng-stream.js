@@ -172,12 +172,13 @@
         for (var i = data.group.length - 1; i >= 0; i--) {
           if(data.group[i].character==param[3]){
             rtc.group = data.group[i];
+            console.log('get_data', data.group[i]);
           }
         }
         if( ! rtc.group.stream ){
+          console.log('no stream now');
           return;
-        }
-        if( rtc.group.stream != $scope.oldStream ){
+        }else if( rtc.group.stream != $scope.oldStream ){
           rtc.call( rtc.group.stream );
           $scope.oldStream = rtc.group.stream;
         }
