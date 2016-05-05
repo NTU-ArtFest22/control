@@ -166,20 +166,26 @@
       $http.get('/group/' + param[2] + '/' + param[3]).success(function(data){
         if(!data)
           return;
-        console.log(data);
+        console.log("data:", data);
         $scope.act = data;
-        rtc.group = data.group[0];
+        
         for (var i = data.group.length - 1; i >= 0; i--) {
-          if(data.group[i].character==param[3]){
+          console.log("in for loop", param[3], data.group[i].character, (decodeURI(param[3])==data.group[i].character))
+          if(data.group[i].character==decodeURI(param[3])){
             rtc.group = data.group[i];
+            console.log('get_data', data.group[i]);
           }
         }
-        if( ! rtc.group.stream ){
+        if(rtc.group.stream){
+          console.log('rtc stream is defined');
+          if( rtc.group.stream != $scope.oldStream ){
+            console.log('rtc stream is new');
+            rtc.call( rtc.group.stream );
+            $scope.oldStream = rtc.group.stream;
+          }
+        }else{
+          console.log('no stream now');
           return;
-        }
-        if( rtc.group.stream != $scope.oldStream ){
-          rtc.call( rtc.group.stream );
-          $scope.oldStream = rtc.group.stream;
         }
       });
       if ($scope.act&&$scope.is_add_alter==0) {
@@ -224,6 +230,7 @@
        * it calls socketId immediatly.
        **/
       if(!stream.id){
+        console.log('rtc stream has no id');
         stream = {id: stream, isPlaying: false};
         rtc.remoteStreams.push(stream);
       }
