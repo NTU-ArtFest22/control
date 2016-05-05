@@ -240,7 +240,7 @@
             "name": artist_name
           }, 
           "stream": $scope.newgroup.stream,
-          "sclass":$scope.newgroup.sclass
+          "sclass": parseInt( $scope.newgroup.sclass )
         };
 
         $http.post('/admin/userlist/' + artist_id , tmp).then(
