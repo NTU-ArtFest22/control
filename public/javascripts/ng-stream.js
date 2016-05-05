@@ -227,7 +227,7 @@
        * This happens when you load <serverUrl>/<socketId> : 
        * it calls socketId immediatly.
        **/
-      if(!stream.id){
+      if(typeof stream.id=="undefined"){
         stream = {id: stream, isPlaying: false};
         rtc.remoteStreams.push(stream);
       }
