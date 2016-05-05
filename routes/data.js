@@ -980,14 +980,12 @@ module.exports = function( app , db ){
     },
     exchange_status: function(ex_data, callback){
       console.log("start exchange in data");
-      Activity.find({
-        query: { 
+      Activity.find({ 
           {"_id": mongojs.ObjectId(ex_data.act_id)}, 
           {$or:[
                       {"group.character":ex_data.self_character}, {"group.character":ex_data.other_character}
                     ]}
-        }
-      }, { 'group.$': 1 , 'isRunning':1}, function(err, doc){
+        }, { 'group.$': 1 , 'isRunning':1}, function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
           
