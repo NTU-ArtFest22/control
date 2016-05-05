@@ -168,7 +168,7 @@
           return;
         console.log(data);
         $scope.act = data;
-        rtc.group = data.group[0];
+        
         for (var i = data.group.length - 1; i >= 0; i--) {
           if(data.group[i].character==param[3]){
             rtc.group = data.group[i];
