@@ -1054,7 +1054,7 @@ module.exports = function( app , db ){
         }
       });
     },
-    update_act: function(act_id, callback){
+    update_act: function(info_data, callback){
       console.log("start exchange in data");
       function temp(err, doc){
               if (err) {
@@ -1062,15 +1062,15 @@ module.exports = function( app , db ){
               }else{
                 console.log("successfully exchange:");
                 for (var i = doc.group.length - 1; i >= 0; i--) {
-                  
-                  callback(doc.group[i].artist.socket_id, doc);
-                  callback(doc.group[i].player.socket_id, doc);
+                  if (doc.group[i].character==character) {
+                    console.log('===updating'+character+'===');
+                    callback(doc.group[i].artist.socket_id, doc);
+                    callback(doc.group[i].player.socket_id, doc);  
+                  }
                 }
-                callback(doc.admin_socket_id, doc);
-
               }
             }
-      Activity.find({"_id": mongojs.ObjectId(ex_data.act_id)}, temp);
+      Activity.find({"_id": mongojs.ObjectId(info_data.act_id)}, temp);
     }
   }
 }
