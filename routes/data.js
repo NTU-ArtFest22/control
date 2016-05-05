@@ -983,7 +983,7 @@ module.exports = function( app , db ){
       Activity.find({
           "_id": mongojs.ObjectId(ex_data.act_id) ,
           'group':{$elemMatch:{$or:[{"character":ex_data.self_character}, {"character":ex_data.other_character}]}
-        }, {'group.$':0_}, function(err, doc){
+        }, {'group':0}, function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
           
