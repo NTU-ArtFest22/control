@@ -981,7 +981,7 @@ module.exports = function( app , db ){
     exchange_status: function(ex_data, callback){
       console.log("start exchange in data");
       Activity.find({ 
-          {"_id": mongojs.ObjectId(ex_data.act_id)}, 
+          "_id": mongojs.ObjectId(ex_data.act_id), 
           {$or:[
                       {"group.character":ex_data.self_character}, {"group.character":ex_data.other_character}
                     ]}
