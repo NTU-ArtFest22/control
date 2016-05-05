@@ -233,16 +233,19 @@
           "_id": $scope.act._id,
           "name": $scope.act.name,
           "character": $scope.newgroup.character,
+        };
+        var tgroup = {
           "artist": {
             "id": artist_id,
             "name": artist_name
-          },
-          "sclass":$scope.newgroup.sclass,
+          }, 
+          "stream": $scope.newgroup.stream,
+          "sclass":$scope.newgroup.sclass
         };
 
         $http.post('/admin/userlist/' + artist_id , tmp).then(
           function(res){
-            $http.put('/admin/activitylist/' + $scope.act._id + '/setgroup', $scope.newgroup).then(
+            $http.put('/admin/activitylist/' + $scope.act._id + '/setgroup', tgroup).then(
               function(res){
                 console.log( res );
                 $scope.newgroup = {};
