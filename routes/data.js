@@ -982,10 +982,10 @@ module.exports = function( app , db ){
       console.log("start exchange in data");
       Activity.find({
         query: { 
-          "_id": mongojs.ObjectId(ex_data.act_id), 
-          $or:[
-            {"group.character":ex_data.self_character}, {"group.character":ex_data.other_character}
-          ]
+          {"_id": mongojs.ObjectId(ex_data.act_id)}, 
+          {$or:[
+                      {"group.character":ex_data.self_character}, {"group.character":ex_data.other_character}
+                    ]}
         }
       }, { 'group.$': 1 , 'isRunning':1}, function(err, doc){
         if(err){
