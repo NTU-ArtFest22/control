@@ -175,7 +175,7 @@
             console.log('get_data', data.group[i]);
           }
         }
-        if(rtc.group.stream ){
+        if(typeof rtc.group.stream !== "undefined"){
           if( rtc.group.stream != $scope.oldStream ){
             rtc.call( rtc.group.stream );
             $scope.oldStream = rtc.group.stream;
