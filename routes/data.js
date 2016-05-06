@@ -1062,7 +1062,7 @@ module.exports = function( app , db ){
               }else{
                 console.log("successfully exchange:", JSON.stringify(doc[0], 4 , ''));
                 for (var i = doc[0].group.length - 1; i >= 0; i--) {
-                  if (doc[0].group[i].character==decodeURI(info_data.character)) {
+                  if (doc[0].group[i].character==decodeURI(info_data.self_character)) {
                     console.log('===updating'+character+'===');
                     callback(doc[0].group[i].artist.socket_id, doc);
                     callback(doc[0].group[i].player.socket_id, doc);  
