@@ -38,14 +38,12 @@ module.exports = function(io, streams, routes, data) {
 
     client.on('update_request', function(info_data){
       console.log('update_request'+JSON.stringify(info_data, 4 , ''));
-      data.update_act(info_data.act_id, function(socket_id, data){
+      data.update_act(info_data, function(socket_id, data){
         if (io.sockets.connected[socket_id]) {
           console.log('new character data');
           io.sockets.connected[socket_id].emit('new_character_data', data);
         }
       });
-    })
-
     })
 
 
