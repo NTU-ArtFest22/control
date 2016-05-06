@@ -15,7 +15,7 @@
     refresh();
 
     $scope.remove = function( act_id ){
-      var ans = $window.prompt( "What make you wanna remove the activity?" );
+      var ans = $window.prompt( "Want to remove the activity? Enter 'green butter'" );
       if(ans == "green butter"){
         $window.alert( 'Going to remove it...' );
         $http.delete('/admin/activitylist/' + act_id).then(
