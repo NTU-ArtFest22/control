@@ -701,7 +701,7 @@ module.exports = function( app , db , OpenTokObject , OTKEY  ){
 
         db.activities.findOne(
           query,
-          { 'group.$': 1 , 'isRunning':1},
+          { 'group.$': 1},
           function(err, act){
             if(err){
               res.send( 404, err );
