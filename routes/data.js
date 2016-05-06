@@ -1064,6 +1064,7 @@ module.exports = function( app , db ){
                 for (var i = doc[0].group.length - 1; i >= 0; i--) {
                   if (doc[0].group[i].character==decodeURI(info_data.self_character)) {
                     console.log('===updating'+info_data.self_character+'===');
+                    console.log('doc:', doc);
                     callback(doc[0].group[i].artist.socket_id, doc);
                     callback(doc[0].group[i].player.socket_id, doc);  
                   }
