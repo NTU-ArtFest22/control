@@ -56,6 +56,9 @@
   }]);
 
   app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
+    
+    $scope.sclasslist = [ "角色尚未確定", "農民", "商人", "僧侶", "國王" ];
+
     var rtc = this;
     var socket = io.connect();
     $scope.socket_status = false;

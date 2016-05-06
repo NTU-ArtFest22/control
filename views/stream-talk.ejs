@@ -23,7 +23,7 @@
         <div class="localStream">
           <br>
           <div class="btn-group" style="width: 100%">
-            <a class="btn btn-info btn-lg"title="更改名稱" ng-click="alert('not ready yet!!!')">{{ rtc.group.character }} @ {{ act.name }}  {{ act.acttype==1? "#" + rtc.group.sclass:""}}</a>  
+            <a class="btn btn-info btn-lg"title="更改名稱" ng-click="alert('not ready yet!!!')">{{ rtc.group.character }} @ {{ act.name }}  {{ act.acttype==1? "#" + sclasslist[ rtc.group.sclass]:""}}</a>  
             <a class="btn btn-warning btn-lg" title="{{ 5 - countTime }}s for auto-reload" ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "重新連線" : "更新連線" }}</a>
           </div>
           
