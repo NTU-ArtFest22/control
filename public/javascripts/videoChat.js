@@ -14,7 +14,7 @@ connection.session = {
 
 connection.sdpConstraints.mandatory = {
   OfferToReceiveAudio: true,
-  OfferToReceiveVideo: true
+  OfferToReceiveVideo: false
 };
 
 var videoConstraints = {
