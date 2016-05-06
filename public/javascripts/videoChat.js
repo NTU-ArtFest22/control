@@ -8,7 +8,7 @@ var signaler = initReliableSignaler(connection, '/');
 
 connection.session = {
   audio: true,
-  video: true,
+  video: false,
   data: false
 };
 
