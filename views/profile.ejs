@@ -37,11 +37,11 @@
           </div>
           <div class="col-md-8">
             <h1>{{ act.gameName }}</h1>
-            <h3>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}</h3>
+            <h3>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Worm'))}}</h3>
             <h4>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</h4>
 
             <h4 text-align="right"> {{ act.player_id }} <span class="glyphicon glyphicon-map-marker"></span> {{ act.location }}</h4>
-            <td><a class="btn btn-primary btn-block" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a></td>
+            <td><a class="btn btn-primary btn-lg" align="right" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a></td>
           </div>
         </div>
       </div>
