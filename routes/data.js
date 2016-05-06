@@ -1065,8 +1065,8 @@ module.exports = function( app , db ){
                   if (doc[0].group[i].character==decodeURI(info_data.self_character)) {
                     console.log('===updating'+info_data.self_character+'===');
                     console.log('doc:', doc);
-                    callback(doc[0].group[i].artist.socket_id, doc);
-                    callback(doc[0].group[i].player.socket_id, doc);  
+                    callback(doc[0].group[i].artist.socket_id, doc[0]);
+                    callback(doc[0].group[i].player.socket_id, doc[0]);  
                   }
                 }
               }
