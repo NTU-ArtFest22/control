@@ -154,7 +154,7 @@ button[disabled], input[disabled], select[disabled] {
 #map {
   border: 5px solid rgb(119, 51, 204);
   outline: 0px none;
-  height: 250px;
+  height: 40vh;
   width: 100%;
 }
 
