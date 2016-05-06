@@ -291,7 +291,7 @@
         "character": $scope.newgroup.character,
         "stream": $scope.newgroup.stream,
         "gameName": $scope.act.name,
-        "sclass": $scope.newgroup.sclass
+        "sclass": parseInt( $scope.newgroup.sclass )
       };
 
       $http.post('/admin/activitylist/' + $scope.act._id, tmp).then(
