@@ -8,13 +8,13 @@ var signaler = initReliableSignaler(connection, '/');
 
 connection.session = {
   audio: true,
-  video: false,
+  video: true,
   data: false
 };
 
 connection.sdpConstraints.mandatory = {
   OfferToReceiveAudio: true,
-  OfferToReceiveVideo: false
+  OfferToReceiveVideo: true
 };
 
 var videoConstraints = {
@@ -33,7 +33,7 @@ var audioConstraints = {
     // echoCancellation: false,
     // googEchoCancellation: false, // disabling audio processing
     // googAutoGainControl: true,
-    googNoiseSuppression: true,
+    googNoiseSuppression: false,
     // googHighpassFilter: true,
     // googTypingNoiseDetection: true,
     // googAudioMirroring: true
