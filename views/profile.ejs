@@ -5,8 +5,8 @@
     <title>22nd-NTUAF-異識流 </title>
 
     <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
-    <script src="/fonts/glyphicons-halflings-regular.woff2"></script>
     <script src="/javascripts/ng-profile.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   </head>
 
   <body ng-controller="ActivityCtrl">
@@ -29,9 +29,6 @@
     <% } %>
 
 
-    <h4 text-align="center">已登記活動</h4>
-    <br>
-    <br>
     <div class="container">
       <div class="jumbotron" ng-repeat="act in user.activities" ng-show="act.isRunning">
         <div class="row">
@@ -43,7 +40,7 @@
             <h3>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}</h3>
             <h4>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</h4>
 
-            <h4 text-align="right"> {{ act.player_id }} <span class="glyphicon glyphicon-map-marker"> {{ act.location }}</h4>
+            <h4 text-align="right"> {{ act.player_id }} <span class="glyphicon glyphicon-map-marker"></span> {{ act.location }}</h4>
             <td><a class="btn btn-primary btn-block" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a></td>
           </div>
         </div>
