@@ -41,7 +41,7 @@
             <h4>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</h4>
 
             <h4 text-align="right"> {{ act.player_id }} <span class="glyphicon glyphicon-map-marker"></span> {{ act.location }}</h4>
-            <a class="btn btn-primary btn-lg" style="float:right;" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a>
+            <a class="btn btn-warning btn-lg" style="float:right;" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a>
           </div>
         </div>
       </div>
