@@ -9,7 +9,7 @@ var signaler = initReliableSignaler(connection, '/');
 connection.session = {
   audio: true,
   video: true,
-  data: true
+  data: false
 };
 
 connection.sdpConstraints.mandatory = {
@@ -23,7 +23,7 @@ var videoConstraints = {
     maxHeight: 1080,
     minAspectRatio: 1.77,
     minFrameRate: 3,
-    maxFrameRate: 64
+    maxFrameRate: 32
   },
   optional: []
 };
