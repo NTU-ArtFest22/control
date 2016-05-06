@@ -26,42 +26,22 @@
         <strong>Sorry!</strong> 活動還沒開始呦！
       </div>
     <% } %>
-<!--     <form >
-      <h5>Activity</h5>
-      <select name="ActivitySelect" ng-model="ctrl.act" ng-options="act as act.name for act in activitylist">
-        <option value="" selected>-- Activity to add--</option>
-      </select>
-      <h5>The code given</h5>
-      <input class="form" ng-model="ctrl.code" required></input>
-      <button class="btn btn-primary" ng-click="addActivity()">Add Activity</button>
 
-    </form> -->
 
     <h4>已登記活動</h4>
 
     <br>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Activity</th>
-          <th>type</th>
-          <th>Time</th>
-          <th>Character</th>
-          <th>Location</th>
-          <th>Go</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr ng-repeat="act in user.activities"  ng-show="act.isRunning">
-            <td>{{ act.gameName }}</td>
-            <td>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}</td>
-            <td>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</td>
-            <td>{{ act.player_id }}</td>
-            <td>{{ act.location }}</td>
-            <td><a class="btn btn-primary" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a></td>
-          </tr>
-      </tbody>
-    </table>
+    <div class="container">
+      <div class="jumbotron" ng-repeat="act in user.activities" ng-show="act.isRunning">
+        <div class="row">
+          <h1>{{ act.gameName }}</h1>
+          <h3>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}</h3>
+          <h4>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }} {{ act.player_id }} @ {{ act.location }}</h4>
+          <td><a class="btn btn-primary" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a></td>
+        </div>
+      </div>
+    </div>
+
 
     <%- include layout/fb-like %>
     <%- include layout/links %>
