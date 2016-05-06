@@ -12,9 +12,6 @@
 
     <%- include layout/navbar %>
     <br>
-    <br>
-    <br>
-    <br>
     <% if( typeof error !== 'undefined') { %>
       <div class="alert alert-danger" role="alert">
         <strong>Oh snap!</strong> Change the inviting code or selected activity and try submitting again.
@@ -28,14 +25,14 @@
     <% } %>
 
 
-    <h4>已登記活動</h4>
-
+    <h4 text-align="center">已登記活動</h4>
+    <br>
     <br>
     <div class="container">
       <div class="jumbotron" ng-repeat="act in user.activities" ng-show="act.isRunning">
         <div class="row">
           <div class="col-md-4">
-            <img width="100" ng-src="{{ act.acttype==3 ? '/images/intro/earworm.png' : '/images/intro/beyond.png' }}" />
+            <img width="100%" ng-src="{{ act.acttype==3 ? '/images/intro/earworm.png' : '/images/intro/beyond.png' }}" />
           </div>
           <div class="col-md-8">
             <h1>{{ act.gameName }}</h1>
