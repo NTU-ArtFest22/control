@@ -1054,23 +1054,25 @@ module.exports = function( app , db ){
       });
     },
     update_act: function(info_data, callback){
-      console.log("start exchange in data");
+      console.log("start exchange in data", info_data);
       function temp(err, doc){
               if (err) {
                 console.log("failed to exchange:"+err);
+              }else if(!doc){
+                console.log("empty doc for ", info_data);
               }else{
-                console.log("successfully exchange:", JSON.stringify(doc[0], 4 , ''));
-                for (var i = doc[0].group.length - 1; i >= 0; i--) {
-                  if (doc[0].group[i].character==decodeURI(info_data.self_character)) {
+                console.log("successfully exchange:", JSON.stringify(doc, 4 , ''));
+                for (var i = doc.group.length - 1; i >= 0; i--) {
+                  if (doc.group[i].character==decodeURI(info_data.self_character)) {
                     console.log('===updating'+info_data.self_character+'===');
                     console.log('doc:', doc);
-                    callback(doc[0].group[i].artist.socket_id, doc[0]);
-                    callback(doc[0].group[i].player.socket_id, doc[0]);  
+                    callback(doc.group[i].artist.socket_id, doc);
+                    callback(doc.group[i].player.socket_id, doc);  
                   }
                 }
               }
             }
-      Activity.find({"_id": mongojs.ObjectId(info_data.act_id)}, temp);
+      Activity.findOne({"_id": mongojs.ObjectId(info_data.act_id)}, temp);
     }
   }
 }
