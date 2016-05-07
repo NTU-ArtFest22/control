@@ -983,57 +983,58 @@ module.exports = function( app , db ){
     },
     exchange_status: function(ex_data, callback){
       console.log("start exchange in data");
-      Activity.find({ 
-          $and: [
-            {"_id": mongojs.ObjectId(ex_data.act_id)}, 
-            {"group.character":{$in:
-                          [
-                            ex_data.self_character, ex_data.other_character
-                          ]
-                        }}
-          ]
-        }, {'group.$':2}, 
+      db.activities.find({ 
+          "_id": mongojs.ObjectId(ex_data.act_id), 
+          }, 
         function(err, doc){
-        if(err){
+        if(err||!doc){
           console.log('exchange character error: ', err);
           
         } else {
           // console.log('data found'+JSON.stringify(doc, 4 , ''));
           console.log('data found'+doc[0].group.length);
-          if (doc[0].group.length==2) {
-            self_sclass = doc[0].group[0].sclass;
-            other_sclass = doc[0].group[1].sclass;
-            db.activities.findAndModify({
-              query: { 
-                "_id": mongojs.ObjectId(ex_data.act_id), 
-                "group": { 
-                  $elemMatch: { "character": doc[0].group[1].character }
-                }
-              },
-              update: {
-                $set: {
-                  "group.$.sclass": self_sclass,
-                }
-              },
-              new: true
-            }, temp);
-            db.activities.findAndModify({
-              query: { 
-                "_id": mongojs.ObjectId(ex_data.act_id), 
-                "group": { 
-                  $elemMatch: { "character": doc[0].group[0].character }
-                }
-              },
-              update: {
-                $set: {
-                  "group.$.sclass": other_sclass,
-                }
-              },
-              new: true
-            }, temp);
+          var self_index=-1, other_index=-1;
 
-            
-          }else{
+          for (var i = doc[0].group.length - 1; i >= 0; i--) {
+            if (doc[0].group[i].character==ex_data.self_character) {
+              self_index = i;
+
+            }else if(doc[0].group[i].character==ex_data.other_character){
+              other_index = i;
+            }
+          }
+          if (self_index!=-1&&other_index!=-1) {
+            self_sclass = doc[0].group[self_index].sclass;
+              other_sclass = doc[0].group[other_index].sclass;
+              db.activities.findAndModify({
+                query: { 
+                  "_id": mongojs.ObjectId(ex_data.act_id), 
+                  "group": { 
+                    $elemMatch: { "character": doc[0].group[other_index].character }
+                  }
+                },
+                update: {
+                  $set: {
+                    "group.$.sclass": self_sclass,
+                  }
+                },
+                new: true
+              }, temp);
+              db.activities.findAndModify({
+                query: { 
+                  "_id": mongojs.ObjectId(ex_data.act_id), 
+                  "group": { 
+                    $elemMatch: { "character": doc[0].group[self_index].character }
+                  }
+                },
+                update: {
+                  $set: {
+                    "group.$.sclass": other_sclass,
+                  }
+                },
+                new: true
+              }, temp);
+            }else{
             console.log("something wrong")
           }
           function temp(err, doc){
