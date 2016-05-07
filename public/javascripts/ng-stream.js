@@ -87,16 +87,16 @@
       console.log(mission)
     });
 
-    socket.on('new_character_data', function(data){
-      $scope.act = data;
-      addPoint();
-      for(var i = 0 ; i < data.group.length ; i++){
-        if( data.group[i].character == $scope.group.character ){
-          $scope.group.sclass = data.group[i].sclass;
-          break;
-        }
-      }
-    });
+    // socket.on('new_character_data', function(data){
+    //   $scope.act = data;
+    //   addPoint();
+    //   for(var i = 0 ; i < data.group.length ; i++){
+    //     if( data.group[i].character == $scope.group.character ){
+    //       $scope.group.sclass = data.group[i].sclass;
+    //       break;
+    //     }
+    //   }
+    // });
 
     $scope.oldStream = '';
     $scope.countTime = 0;
