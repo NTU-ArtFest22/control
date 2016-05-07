@@ -89,7 +89,7 @@
 
     socket.on('new_character_data', function(data){
       $scope.act = data;
-      addPoint();
+      // addPoint();
       for(var i = 0 ; i < data.group.length ; i++){
         if( data.group[i].character == $scope.group.character ){
           $scope.group.sclass = data.group[i].sclass;
