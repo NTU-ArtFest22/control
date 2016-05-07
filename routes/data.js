@@ -985,11 +985,7 @@ module.exports = function( app , db ){
       console.log("start exchange in data");
       db.activities.find({ 
           "_id": mongojs.ObjectId(ex_data.act_id), 
-          $or : {
-            ["group.character": ex_data.self_character.toString(),"group.character": ex_data.other_character.toString()]
-              
-          }
-          
+          $or : [{"group.character": ex_data.self_character.toString()},{"group.character": ex_data.other_character.toString()}]
           }, {'group.$':2}, 
         function(err, doc){
         if(err){
