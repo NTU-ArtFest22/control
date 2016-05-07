@@ -983,18 +983,10 @@ module.exports = function( app , db ){
     },
     exchange_status: function(ex_data, callback){
       console.log("start exchange in data");
-      Activity.find({ 
-          $and: [
-            {"_id": mongojs.ObjectId(ex_data.act_id)}, 
-              {"group.character":
-                {$in:
-                  [
-                    ex_data.self_character.toString(), ex_data.other_character.toString()
-                  ]
-                }
-              }
-            ]
-          }, {'group.$':2}, 
+      db.activities.find({ 
+          "_id": mongojs.ObjectId(ex_data.act_id), 
+          "group.character": ex_data.self_character.toString()
+          }, {'group.$':1}, 
         function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
@@ -1042,7 +1034,7 @@ module.exports = function( app , db ){
               if (err) {
                 console.log("failed to exchange:"+err);
               }else{
-                console.log("successfully exchange:");
+                console.log("successfully exchange");
                 for (var i = doc.group.length - 1; i >= 0; i--) {
                   if( doc.group[i].artist.socket_id )
                     callback(doc.group[i].artist.socket_id, doc);

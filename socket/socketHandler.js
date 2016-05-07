@@ -40,7 +40,7 @@ module.exports = function(io, streams, routes, data) {
       console.log('update_request');
       data.update_act(info_data, function(socket_id, data){
         if (io.sockets.connected[socket_id]) {
-          console.log('new character data'+JSON.stringify(data, 4 , ''));
+          console.log('===socket===update character data');
           io.sockets.connected[socket_id].emit('new_character_data', data);
         }
       });
