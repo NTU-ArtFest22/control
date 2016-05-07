@@ -986,13 +986,15 @@ module.exports = function( app , db ){
       Activity.find({ 
           $and: [
             {"_id": mongojs.ObjectId(ex_data.act_id)}, 
-            {"group.character":{$in:
-                          [
-                            ex_data.self_character, ex_data.other_character
-                          ]
-                        }}
-          ]
-        }, {'group.$':2}, 
+              {"group.character":
+                {$in:
+                  [
+                    ex_data.self_character.toString(), ex_data.other_character.toString()
+                  ]
+                }
+              }
+            ]
+          }, {'group.$':2}, 
         function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
