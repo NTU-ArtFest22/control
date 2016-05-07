@@ -992,7 +992,7 @@ module.exports = function( app , db ){
                           ]
                         }}
           ]
-        }, {'group':1}, 
+        }, {'group.$':2}, 
         function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
