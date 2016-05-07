@@ -985,7 +985,6 @@ module.exports = function( app , db ){
       console.log("start exchange in data");
       db.activities.find({ 
           "_id": mongojs.ObjectId(ex_data.act_id), 
-          $or : [{"group.character": ex_data.self_character.toString()},{"group.character": ex_data.other_character.toString()}]
           }, 
         function(err, doc){
         if(err||!doc){
@@ -997,10 +996,10 @@ module.exports = function( app , db ){
           var self_index=-1, other_index=-1;
 
           for (var i = doc[0].group.length - 1; i >= 0; i--) {
-            if (doc[0].group[i].character==self_character) {
+            if (doc[0].group[i].character==ex_data.self_character) {
               self_index = i;
 
-            }else if(doc[0].group[i].character==other_character){
+            }else if(doc[0].group[i].character==ex_data.other_character){
               other_index = i;
             }
           }
