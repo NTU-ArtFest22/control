@@ -275,24 +275,24 @@
       }
     };
 
-    //$scope.onTimeout = function(){
-      //$scope.countTime++;
-      //if( $scope.countTime == 5){
-        //rtc.userReloadGroup();
-        //addPoint();
-      //}else
-        //mytimeout = $timeout($scope.onTimeout,1000);
-    //};
+    $scope.onTimeout = function(){
+      $scope.countTime++;
+      if( $scope.countTime == 5){
+        rtc.userReloadGroup();
+        addPoint();
+      }else
+        mytimeout = $timeout($scope.onTimeout,1000);
+    };
 
-    //var mytimeout = $timeout( $scope.onTimeout, 1000);
+    var mytimeout = $timeout( $scope.onTimeout, 1000);
 
-    //rtc.userReloadGroup = function(){
-      //rtc.loadData();
-      //rtc.reloadGroup();
-      //$scope.countTime = 0;
-      //$timeout.cancel( mytimeout );
-      //mytimeout = $timeout($scope.onTimeout, 1000);
-    //}
+    rtc.userReloadGroup = function(){
+      rtc.loadData();
+      rtc.reloadGroup();
+      $scope.countTime = 0;
+      $timeout.cancel( mytimeout );
+      mytimeout = $timeout($scope.onTimeout, 1000);
+    }
 
     //initial load
     rtc.loadData();
