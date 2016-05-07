@@ -15,7 +15,7 @@
     refresh();
 
     $scope.remove = function( act_id ){
-      var ans = $window.prompt( "What make you wanna remove the activity?" );
+      var ans = $window.prompt( "Want to remove the activity? Enter 'green butter'" );
       if(ans == "green butter"){
         $window.alert( 'Going to remove it...' );
         $http.delete('/admin/activitylist/' + act_id).then(
@@ -235,12 +235,13 @@
           "character": $scope.newgroup.character,
         };
         var tgroup = {
+          "character": $scope.newgroup.character,
           "artist": {
             "id": artist_id,
             "name": artist_name
           }, 
           "stream": $scope.newgroup.stream,
-          "sclass":$scope.newgroup.sclass
+          "sclass": parseInt( $scope.newgroup.sclass )
         };
 
         $http.post('/admin/userlist/' + artist_id , tmp).then(
@@ -290,7 +291,7 @@
         "character": $scope.newgroup.character,
         "stream": $scope.newgroup.stream,
         "gameName": $scope.act.name,
-        "sclass": $scope.newgroup.sclass
+        "sclass": parseInt( $scope.newgroup.sclass )
       };
 
       $http.post('/admin/activitylist/' + $scope.act._id, tmp).then(

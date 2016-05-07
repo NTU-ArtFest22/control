@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/stream.css">
   </head>
 
-  <body>
+  <body style="overflow-x:hidden;overflow-y:hidden">
     <div class="row" ng-controller="RemoteStreamsController as rtc">
       <div class="col-md-8">
         <div class="remoteStreams">
@@ -21,16 +21,17 @@
 
       <div class="col-md-4">
         <div class="localStream">
+          <br>
           <div class="btn-group" style="width: 100%">
-            <a class="btn btn-info btn-lg"title="更改名稱" ng-click="alert('not ready yet!!!')"><h3>{{ rtc.group.character }} @ {{ act.name }} # {{ act.type==1?rtc.group.sclass:""}}</h3></a>  
+            <a class="btn btn-info btn-lg"title="更改名稱" ng-click="alert('not ready yet!!!')">{{ rtc.group.character }} @ {{ act.name }}  {{ act.acttype==1? "#" + sclasslist[ rtc.group.sclass]:""}}</a>  
             <a class="btn btn-warning btn-lg" title="{{ 5 - countTime }}s for auto-reload" ng-click="rtc.userReloadGroup()">{{ rtc.group.stream ? "重新連線" : "更新連線" }}</a>
           </div>
           
           <hr>
           <div id="map"></div>
           <hr>
-          <div ng-controller="LocalStreamController as localStream">
-            <video id="localVideo" muted="muted" autoplay="true"></video>
+          <div ng-controller="LocalStreamController as localStream" style="height: 40vh">
+            <video id="localVideo" muted="muted" autoplay="true" style="height: 100%"></video>
             <!-- <br/> -->
             <!-- <a class="btn btn-primary" ng-click="localStream.toggleCam()" href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a> -->
            <!--  <div class="btn-group" ng-show="localStream.cameraIsOn">    

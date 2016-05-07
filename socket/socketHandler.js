@@ -30,15 +30,20 @@ module.exports = function(io, streams, routes, data) {
       console.log("exchange_request:"+JSON.stringify(ex_data, 4 , ''));
       data.exchange_status(ex_data, function(socket_id, data){
         if (io.sockets.connected[socket_id]) {
-          console.log('new character data'+data);
+          console.log('new character data');
           io.sockets.connected[socket_id].emit('new_character_data', data);
         }
       });
     })
 
     client.on('update_request', function(info_data){
-      console.log('update_request'+JSON.stringify(info_data, 4 , ''));
-
+      console.log('update_request');
+      data.update_act(info_data, function(socket_id, data){
+        if (io.sockets.connected[socket_id]) {
+          console.log('new character data'+JSON.stringify(data, 4 , ''));
+          io.sockets.connected[socket_id].emit('new_character_data', data);
+        }
+      });
     })
 
 

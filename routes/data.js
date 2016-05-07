@@ -53,7 +53,6 @@ module.exports = function( app , db ){
       }else{
         db.activities.findOne(
           { "_id": mongojs.ObjectId( act_id ) },
-          {limit: 1000},
           function( err, act ){
             console.log( 'check if ok:     ', act );
             if(err || !act){
@@ -352,22 +351,6 @@ module.exports = function( app , db ){
     });
   });
 
-  app.put('/admin/activitylist/:id/:put', function(req, res){
-    var setput = req.params.put == 'y' ? true : false;
-    db.activities.findAndModify({
-      query: { "_id": mongojs.ObjectId( req.params.id ) },
-      update: { $set: {
-        isRunning: setput
-      } }, new: true}, function(err, doc){
-        if(err){
-          console.log('toggle activity: ', err);
-          res.send(404, err);
-        }else {
-          res.json( doc );
-        }
-      }
-    );
-  });
 
   app.put('/admin/activitylist/:id', function( req, res ){
     db.activities.findAndModify({
@@ -439,6 +422,7 @@ module.exports = function( app , db ){
   });
 
   app.put('/admin/activitylist/:id/setgroup', function(req, res){
+    console.log('group setting!!!!!!!!!!!');
     var group = req.body;
     db.activities.findAndModify({
       query: { 
@@ -464,6 +448,25 @@ module.exports = function( app , db ){
         }
       });
   });
+
+
+  app.put('/admin/activitylist/:id/:put', function(req, res){
+    var setput = req.params.put == 'y' ? true : false;
+    db.activities.findAndModify({
+      query: { "_id": mongojs.ObjectId( req.params.id ) },
+      update: { $set: {
+        isRunning: setput
+      } }, new: true}, function(err, doc){
+        if(err){
+          console.log('toggle activity: ', err);
+          res.send(404, err);
+        }else {
+          res.json( doc );
+        }
+      }
+    );
+  });
+
 // new activity
   app.post('/admin/activitylist', function( req, res ){
     var act = new Activity();
@@ -983,20 +986,19 @@ module.exports = function( app , db ){
       Activity.find({ 
           $and: [
             {"_id": mongojs.ObjectId(ex_data.act_id)}, 
-            {$or:
-              [
-                {"character":ex_data.self_character}, 
-                {"character":ex_data.other_character}
-              ]
-            }
+            {"group.character":{$in:
+                          [
+                            ex_data.self_character, ex_data.other_character
+                          ]
+                        }}
           ]
-        }, {'group':1}, 
+        }, {'group.$':2}, 
         function(err, doc){
         if(err){
           console.log('exchange character error: ', err);
           
         } else {
-          console.log('data found'+JSON.stringify(doc, 4 , ''));
+          // console.log('data found'+JSON.stringify(doc, 4 , ''));
           console.log('data found'+doc[0].group.length);
           if (doc[0].group.length==2) {
             self_sclass = doc[0].group[0].sclass;
@@ -1038,17 +1040,43 @@ module.exports = function( app , db ){
               if (err) {
                 console.log("failed to exchange:"+err);
               }else{
-                console.log("successfully exchange:"+JSON.stringify(doc));
+                console.log("successfully exchange:");
                 for (var i = doc.group.length - 1; i >= 0; i--) {
-                  callback(doc.group[i].artist.socket_id, doc);
-                  callback(doc.group[i].player.socket_id, doc);
+                  if( doc.group[i].artist.socket_id )
+                    callback(doc.group[i].artist.socket_id, doc);
+                  if( doc.group[i].player && doc.group[i].player.socket_id )
+                    callback(doc.group[i].player.socket_id, doc); 
                 }
-                callback(doc.admin_socket_id, doc);
+                if( doc.admin_socket_id )
+                  callback(doc.admin_socket_id, doc);
 
               }
             }
         }
       });
+    },
+    update_act: function(info_data, callback){
+      console.log("start exchange in data", info_data);
+      function temp(err, doc){
+        if (err) {
+          console.log("failed to exchange:"+err);
+        }else if(!doc){
+          console.log("empty doc for ", info_data);
+        }else{
+          console.log("successfully exchange:", JSON.stringify(doc, 4 , ''));
+          for (var i = doc.group.length - 1; i >= 0; i--) {
+            if (doc.group[i].character==decodeURI(info_data.self_character)) {
+              console.log('===updating'+info_data.self_character+'===');
+              console.log('doc:', doc);
+              if( doc.group[i].artist.socket_id )
+                callback(doc.group[i].artist.socket_id, doc);
+              if( doc.group[i].player && doc.group[i].player.socket_id )
+                callback(doc.group[i].player.socket_id, doc);  
+            }
+          }
+        }
+      }
+      Activity.findOne({"_id": mongojs.ObjectId(info_data.act_id)}, temp);
     }
   }
 }

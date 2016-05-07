@@ -6,6 +6,7 @@
 
     <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
     <script src="/javascripts/ng-profile.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   </head>
 
   <body ng-controller="ActivityCtrl">
@@ -26,42 +27,26 @@
         <strong>Sorry!</strong> 活動還沒開始呦！
       </div>
     <% } %>
-<!--     <form >
-      <h5>Activity</h5>
-      <select name="ActivitySelect" ng-model="ctrl.act" ng-options="act as act.name for act in activitylist">
-        <option value="" selected>-- Activity to add--</option>
-      </select>
-      <h5>The code given</h5>
-      <input class="form" ng-model="ctrl.code" required></input>
-      <button class="btn btn-primary" ng-click="addActivity()">Add Activity</button>
 
-    </form> -->
 
-    <h4>已登記活動</h4>
+    <div class="container">
+      <div class="jumbotron" ng-repeat="act in user.activities" ng-show="act.isRunning">
+        <div class="row">
+          <div class="col-md-4">
+            <img width="100%" class="img-thumbnail" ng-src="{{ act.acttype==3 ? '/images/intro/earworm.png' : '/images/intro/beyond.png' }}" />
+          </div>
+          <div class="col-md-8">
+            <h1>{{ act.gameName }}</h1>
+            <h3>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Worm'))}}</h3>
+            <h4>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</h4>
 
-    <br>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Activity</th>
-          <th>type</th>
-          <th>Time</th>
-          <th>Character</th>
-          <th>Location</th>
-          <th>Go</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr ng-repeat="act in user.activities" >
-            <td>{{ act.gameName }}</td>
-            <td>{{((act.acttype==1)?'Beyond The Map@寶藏巖':((act.acttype==2)?'Beyond The Map@大稻埕':'Ear Wrom'))}}</td>
-            <td>{{ act.time | date:'shortTime' }}, {{ act.time | date:'fullDate' }}</td>
-            <td>{{ act.player_id }}</td>
-            <td>{{ act.location }}</td>
-            <td><a class="btn btn-primary" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a></td>
-          </tr>
-      </tbody>
-    </table>
+            <h4 text-align="right"> {{ act.player_id }} <span class="glyphicon glyphicon-map-marker"></span> {{ act.location }}</h4>
+            <a class="btn btn-warning btn-lg" style="float:right;" ng-href="/profile/{{ act.id }}/{{ act.player_id }}" ng-show="act.isRunning">Go</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <%- include layout/fb-like %>
     <%- include layout/links %>

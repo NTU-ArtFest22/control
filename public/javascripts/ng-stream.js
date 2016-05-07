@@ -6,10 +6,11 @@
   var client = new PeerManager();
   var mediaConfig = {
         audio:true,
-        video: {
-      mandatory: {},
-      optional: []
-        }
+        video:false 
+          //{
+      //mandatory: {},
+      //optional: []
+        //}
     };
 
   var loc = window.location.pathname;
@@ -55,6 +56,9 @@
   }]);
 
   app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$timeout', '$scope', function(camera, $location, $http, $timeout, $scope){
+    
+    $scope.sclasslist = [ "角色尚未確定", "農民", "商人", "僧侶", "國王" ];
+
     var rtc = this;
     var socket = io.connect();
     $scope.socket_status = false;
@@ -82,6 +86,18 @@
       console.log("new mission:");
       console.log(mission)
     });
+
+    socket.on('new_character_data', function(data){
+      $scope.act = data;
+      addPoint();
+      for(var i = 0 ; i < data.group.length ; i++){
+        if( data.group[i].character == $scope.group.character ){
+          $scope.group.sclass = data.group[i].sclass;
+          break;
+        }
+      }
+    });
+
     $scope.oldStream = '';
     $scope.countTime = 0;
     $scope.is_add_alter = 0;
@@ -259,24 +275,24 @@
       }
     };
 
-    $scope.onTimeout = function(){
-      $scope.countTime++;
-      if( $scope.countTime == 5){
-        rtc.userReloadGroup();
-        addPoint();
-      }else
-        mytimeout = $timeout($scope.onTimeout,1000);
-    };
+    //$scope.onTimeout = function(){
+      //$scope.countTime++;
+      //if( $scope.countTime == 5){
+        //rtc.userReloadGroup();
+        //addPoint();
+      //}else
+        //mytimeout = $timeout($scope.onTimeout,1000);
+    //};
 
-    var mytimeout = $timeout( $scope.onTimeout, 1000);
+    //var mytimeout = $timeout( $scope.onTimeout, 1000);
 
-    rtc.userReloadGroup = function(){
-      rtc.loadData();
-      rtc.reloadGroup();
-      $scope.countTime = 0;
-      $timeout.cancel( mytimeout );
-      mytimeout = $timeout($scope.onTimeout, 1000);
-    }
+    //rtc.userReloadGroup = function(){
+      //rtc.loadData();
+      //rtc.reloadGroup();
+      //$scope.countTime = 0;
+      //$timeout.cancel( mytimeout );
+      //mytimeout = $timeout($scope.onTimeout, 1000);
+    //}
 
     //initial load
     rtc.loadData();

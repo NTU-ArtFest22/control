@@ -132,7 +132,7 @@
     };
 
     $scope.make = function( c ){
-      var ans = $window.prompt('What makes a good ' + c + '?');
+      var ans = $window.prompt('What makes a good ' + c + '? Enter green butter');
       if( ans == "green butter" ){ // the answer is only want to check if the user knows how this works!
         $window.alert('You got the answer!');
 

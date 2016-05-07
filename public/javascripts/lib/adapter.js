@@ -183,7 +183,32 @@ if (navigator.mozGetUserMedia) {
 
   // The RTCPeerConnection object.
   RTCPeerConnection = function(pcConfig, pcConstraints) {
-    return new webkitRTCPeerConnection(pcConfig, pcConstraints);
+    var npc = new webkitRTCPeerConnection(pcConfig, pcConstraints);
+    npc.session = {
+      audio: false,
+      video: true,
+      data: false
+    };
+
+    var audioConstraints = {
+      mandatory: {
+        // echoCancellation: false,
+        // googEchoCancellation: false, // disabling audio processing
+        // googAutoGainControl: true,
+        googNoiseSuppression: false,
+        // googHighpassFilter: true,
+        // googTypingNoiseDetection: true,
+        // googAudioMirroring: true
+      },
+      optional: []
+    };
+
+    npc.mediaConstraints = {
+      audio: audioConstraints
+    };
+    return npc;
+
+
   };
 
   // Get UserMedia (only difference is the prefix).
