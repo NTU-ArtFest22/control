@@ -1091,9 +1091,9 @@ module.exports = function( app , db ){
       var time = new Date();
       db.activities.findAndModify({
         query: { 
-          "_id": mongojs.ObjectId(act_id.toString), 
+          "_id": mongojs.ObjectId(act_id), 
           "group": { 
-            $elemMatch: { "character": character.toString() }
+            $elemMatch: { "character": character }
           }
         },
         update: {
