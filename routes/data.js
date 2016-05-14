@@ -1089,35 +1089,32 @@ module.exports = function( app , db ){
       var battery = info_data.battery;
       var acc = info_data.acc;
       var time = new Date();
-      User.findOne({"fb.id": access_id}, function(err, user){
-
-        db.activities.findAndModify({
-          query: { 
-            "_id": mongojs.ObjectId(act_id), 
-            "group": { 
-              $elemMatch: { "character": character.toString() }
-            }
-          },
-          update: {
-            $set: {
-              "group.$.artist.gps.longi": longi,
-              "group.$.artist.gps.lati": lati,
-              "group.$.artist.gps.time.work": time,
-              "group.$.artist.gps.battery.work": battery,
-              "group.$.artist.gps.acc": acc,
-            }
-          }, 
-          new: true
-        }, function(err, doc){
-          if(err){
-            console.log('putting character error: ', err);
-            res.send( 404, err );
-          } else {
-            console.log('GPS-logger', 'act_id:'+act_id+', artist_id:'+access_id+', '+time)
-
-            res.json( true );
+      db.activities.findAndModify({
+        query: { 
+          "_id": mongojs.ObjectId(act_id.toString), 
+          "group": { 
+            $elemMatch: { "character": character.toString() }
           }
-        })
+        },
+        update: {
+          $set: {
+            "group.$.artist.gps.longi": longi,
+            "group.$.artist.gps.lati": lati,
+            "group.$.artist.gps.time.work": time,
+            "group.$.artist.gps.battery.work": battery,
+            "group.$.artist.gps.acc": acc,
+          }
+        }, 
+        new: true
+      }, function(err, doc){
+        if(err){
+          console.log('putting character error: ', err);
+          res.send( 404, err );
+        } else {
+          console.log('GPS-logger', 'act_id:'+act_id+', artist_id:'+access_id+', '+time)
+
+          res.json( true );
+        }
       })
     }
   }
