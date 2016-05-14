@@ -10,14 +10,14 @@ module.exports = function(io, streams, routes, data) {
 // mission system
     // register client id
     client.on('register_client_id', function(info){
-      console.log("socket client register"+info.character);
+      console.log("socket client register");
       data.id_register(info.act_id, info.character, client.id, info.type, function(status){
         client.emit('register_status', status);
       });
     });
     // new mission
     client.on('new_mission_server', function(content){ //content={act_id:, mission:{name:, requirement}}
-      console.log("new mission:"+content);
+      console.log("new mission:");
       data.send_act_mission(content, function(socket_id, mission){  
         //each group will do...
         if (io.sockets.connected[socket_id]) {
@@ -40,16 +40,16 @@ module.exports = function(io, streams, routes, data) {
       console.log('update_request');
       data.update_act(info_data, function(socket_id, data){
         if (io.sockets.connected[socket_id]) {
-          console.log('new character data'+JSON.stringify(data, 4 , ''));
+          console.log('new character data');
           io.sockets.connected[socket_id].emit('new_character_data', data);
         }
       });
     })
     client.on('newGPSlog', function(info_data){
-      console.log('update_request', info_data);
+      console.log('update_request');
       data.gps_log(info_data, function(socket_id, data){
         if (io.sockets.connected[socket_id]) {
-          console.log('new character data'+JSON.stringify(data, 4 , ''));
+          // console.log('new character data'+JSON.stringify(data, 4 , ''));
           io.sockets.connected[socket_id].emit('new_character_data', data);
         }
       });
