@@ -10,8 +10,8 @@ module.exports = function(io, streams, routes, data) {
 // mission system
     // register client id
     client.on('register_client_id', function(info){
-      console.log("===socket client register===", info);
-      data.id_register(info.act_id, info.character, client.id, info.type, function(status){
+      console.log("===socket client register===", info.character.toString());
+      data.id_register(info.act_id, info.character.toString(), client.id, info.type, function(status){
         client.emit('register_status', status);
       });
     });
