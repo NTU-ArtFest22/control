@@ -982,7 +982,7 @@ module.exports = function( app , db ){
       });
     },
     exchange_status: function(ex_data, callback){
-      console.log("start exchange in data");
+      console.log("===start exchange in data===");
       db.activities.find({ 
           "_id": mongojs.ObjectId(ex_data.act_id), 
           }, 
@@ -1057,7 +1057,7 @@ module.exports = function( app , db ){
       });
     },
     update_act: function(info_data, callback){
-      console.log("start exchange in data", info_data);
+      // console.log("start exchange in data", info_data);
       function temp(err, doc){
         if (err) {
           console.log("failed to exchange:"+err);
@@ -1080,7 +1080,7 @@ module.exports = function( app , db ){
       Activity.findOne({"_id": mongojs.ObjectId(info_data.act_id)}, temp);
     },
     gps_log: function(info_data, callback){
-      console.log("gps log coming!!!");
+      // console.log("gps log coming!!!");
       
       var act_id = info_data.act_id;
       var character = info_data.self_character;
@@ -1111,7 +1111,15 @@ module.exports = function( app , db ){
           console.log('putting character error: ', err);
         } else {
           console.log('===GPS-logger', 'act_id:'+act_id+', character:'+character+', '+time+'===')
-
+          for (var i = doc.group.length - 1; i >= 0; i--) {
+              if( doc.group[i].artist.socket_id )
+                callback(doc.group[i].artist.socket_id, doc);
+              if( doc.group[i].player && doc.group[i].player.socket_id )
+                callback(doc.group[i].player.socket_id, doc); 
+            }
+            if( doc.admin_socket_id )
+              callback(doc.admin_socket_id, doc);
+          }
         }
       })
     }
