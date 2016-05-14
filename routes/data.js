@@ -1083,7 +1083,7 @@ module.exports = function( app , db ){
       console.log("gps log coming!!!");
       
       var act_id = info_data.act_id;
-      var access_id = info_data.self_character;
+      var character = info_data.self_character;
       var longi = info_data.longi;
       var lati = info_data.lati;
       var battery = info_data.battery;
