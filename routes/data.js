@@ -1041,7 +1041,7 @@ module.exports = function( app , db ){
               if (err) {
                 console.log("failed to exchange:"+err);
               }else{
-                console.log("successfully exchange:");
+                console.log("successfully exchange");
                 for (var i = doc.group.length - 1; i >= 0; i--) {
                   if( doc.group[i].artist.socket_id )
                     callback(doc.group[i].artist.socket_id, doc);
@@ -1064,7 +1064,7 @@ module.exports = function( app , db ){
         }else if(!doc){
           console.log("empty doc for ", info_data);
         }else{
-          console.log("successfully exchange:", JSON.stringify(doc, 4 , ''));
+          console.log("successfully exchange");
           for (var i = doc.group.length - 1; i >= 0; i--) {
             if (doc.group[i].character==decodeURI(info_data.self_character)) {
               console.log('===updating'+info_data.self_character+'===');
@@ -1110,7 +1110,7 @@ module.exports = function( app , db ){
         if(err){
           console.log('putting character error: ', err);
         } else {
-          console.log('===GPS-logger', 'act_id:'+act_id+', character:'+character+', '+time+'===')
+          console.log('===GPS-logger', 'act_id:'+act_id+', charac:'+character+', lati:'+longi+', '+time+'===')
           for (var i = doc.group.length - 1; i >= 0; i--) {
             if (doc.group[i].character==decodeURI(info_data.self_character)) {
               // console.log('===updating'+info_data.self_character+'===');
