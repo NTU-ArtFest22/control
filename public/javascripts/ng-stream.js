@@ -88,6 +88,7 @@
     });
 
     socket.on('new_character_data', function(data){
+      console.log('===new data===')
       $scope.act = data;
       addPoint();
       for(var i = 0 ; i < data.group.length ; i++){
@@ -281,17 +282,17 @@
         rtc.userReloadGroup();
         addPoint();
       }else
-        mytimeout = $timeout($scope.onTimeout,1000);
+        mytimeout = $timeout($scope.onTimeout,10000);
     };
 
-    var mytimeout = $timeout( $scope.onTimeout, 1000);
+    var mytimeout = $timeout( $scope.onTimeout, 10000);
 
     rtc.userReloadGroup = function(){
       rtc.loadData();
       rtc.reloadGroup();
       $scope.countTime = 0;
       $timeout.cancel( mytimeout );
-      mytimeout = $timeout($scope.onTimeout, 1000);
+      mytimeout = $timeout($scope.onTimeout, 10000);
     }
 
     //initial load
