@@ -1109,11 +1109,9 @@ module.exports = function( app , db ){
       }, function(err, doc){
         if(err){
           console.log('putting character error: ', err);
-          res.send( 404, err );
         } else {
           console.log('===GPS-logger', 'act_id:'+act_id+', character:'+character+', '+time+'===')
 
-          res.json( true );
         }
       })
     }
