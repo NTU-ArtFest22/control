@@ -45,7 +45,15 @@ module.exports = function(io, streams, routes, data) {
         }
       });
     })
-
+    client.on('newGPSlog', function(info_data){
+      console.log('update_request', info_data);
+      // data.update_act(info_data, function(socket_id, data){
+      //   if (io.sockets.connected[socket_id]) {
+      //     console.log('new character data'+JSON.stringify(data, 4 , ''));
+      //     io.sockets.connected[socket_id].emit('new_character_data', data);
+      //   }
+      // });
+    })
 
 
 // original
