@@ -1081,7 +1081,7 @@ module.exports = function( app , db ){
     },
     gps_log: function(info_data, callback){
       console.log("gps log coming!!!");
-      app.get('/api/act/gpslog/:act_id/:artist_id/:longi/:lati/:battery/:acc', function(req, res){
+      
       var act_id = info_data.act_id;
       var access_id = info_data.character;
       var longi = info_data.longi;
@@ -1118,7 +1118,7 @@ module.exports = function( app , db ){
             res.json( true );
           }
         })
-      }
+      })
     }
   }
 }
