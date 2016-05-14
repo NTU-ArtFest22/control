@@ -1114,13 +1114,16 @@ module.exports = function( app , db ){
           for (var i = doc.group.length - 1; i >= 0; i--) {
             if (doc.group[i].character==decodeURI(info_data.self_character)) {
               // console.log('===updating'+info_data.self_character+'===');
-              
+              console.log('doc', doc);
               if( doc.group[i].artist.socket_id )
                 console.log('send gps data artist')
                 callback(doc.group[i].artist.socket_id, doc);
-              if( doc.group[i].player && doc.group[i].player.socket_id )
-                console.log('send gps data player')
-                callback(doc.group[i].player.socket_id, doc);  
+              if( doc.group[i].player )
+                console.log('player is defined')
+                if (doc.group[i].player.socket_id) {
+                  console.log('send gps data player')  
+                  callback(doc.group[i].player.socket_id, doc);  
+                }
             }
           }
           if( doc.admin_socket_id )
