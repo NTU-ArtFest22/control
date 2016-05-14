@@ -1118,9 +1118,7 @@ module.exports = function( app , db ){
               if( doc.group[i].artist.socket_id )
                 console.log('send gps data artist')
                 callback(doc.group[i].artist.socket_id, doc);
-              if( doc.group[i].player )
-                console.log('player is defined')
-                if (doc.group[i].player.socket_id) {
+              if( doc.group[i].player&&doc.group[i].player.socket_id) {
                   console.log('send gps data player')  
                   callback(doc.group[i].player.socket_id, doc);  
                 }
