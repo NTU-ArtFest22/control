@@ -37,7 +37,7 @@ module.exports = function(io, streams, routes, data) {
     })
 
     client.on('update_request', function(info_data){
-      console.log('update_request');
+      console.log('update_request'+decodeURI(info_data.self_character));
       data.update_act(info_data, function(socket_id, data){
         if (io.sockets.connected[socket_id]) {
           console.log('new character data');
@@ -46,7 +46,7 @@ module.exports = function(io, streams, routes, data) {
       });
     })
     client.on('newGPSlog', function(info_data){
-      console.log('update_request');
+      
       data.gps_log(info_data, function(socket_id, data){
         if (io.sockets.connected[socket_id]) {
           // console.log('new character data'+JSON.stringify(data, 4 , ''));
