@@ -1119,7 +1119,7 @@ module.exports = function( app , db ){
               //   console.log('send gps data artist')
               //   callback(doc.group[i].artist.socket_id, doc);
               if( doc.group[i].player&&doc.group[i].player.socket_id) {
-                  console.log('send gps data to player')  
+                  // console.log('send gps data to player')  
                   callback(doc.group[i].player.socket_id, doc);  
                 }
             }
