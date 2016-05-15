@@ -331,6 +331,17 @@
         $scope.socket_status = false;
       }
     });
+    socket.on('new_character_data', function(data){
+      console.log('===new data===')
+      $scope.act = data;
+      addPoint();
+      for(var i = 0 ; i < data.group.length ; i++){
+        if( data.group[i].character == $scope.group.character ){
+          $scope.group.sclass = data.group[i].sclass;
+          break;
+        }
+      }
+    });
     
     // open new mission dialog
      $scope.open = function ( ) {
