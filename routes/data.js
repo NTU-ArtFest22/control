@@ -1114,7 +1114,7 @@ module.exports = function( app , db ){
           for (var i = doc.group.length - 1; i >= 0; i--) {
             if (doc.group[i].character==decodeURI(info_data.self_character)) {
               // console.log('===updating'+info_data.self_character+'===');
-              console.log('doc', doc);
+              
               if( doc.group[i].artist.socket_id )
                 console.log('send gps data artist')
                 callback(doc.group[i].artist.socket_id, doc);
