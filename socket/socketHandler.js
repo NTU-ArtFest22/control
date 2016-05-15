@@ -48,8 +48,9 @@ module.exports = function(io, streams, routes, data) {
     client.on('newGPSlog', function(info_data){
       
       data.gps_log(info_data, function(socket_id, data){
+        console.log('new character data'+JSON.stringify(io.sockets.connected, 4 , ''));
         if (io.sockets.connected[socket_id]) {
-          console.log('new character data'+JSON.stringify(io.sockets.connected, 4 , ''));
+          
           console.log('send to '+socket_id);
           io.sockets.connected[socket_id].emit('new_character_data', data);
         }
