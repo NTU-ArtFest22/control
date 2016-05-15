@@ -1110,7 +1110,7 @@ module.exports = function( app , db ){
         if(err){
           console.log('putting character error: ', err);
         } else {
-          console.log('===GPS-logger', 'act_id:'+act_id+', charac:'+character+', lati:'+longi+', '+time+'===')
+          // console.log('===GPS-logger', 'act_id:'+act_id+', charac:'+character+', lati:'+longi+', '+time+'===')
           for (var i = doc.group.length - 1; i >= 0; i--) {
             if (doc.group[i].character==decodeURI(info_data.self_character)) {
               // console.log('===updating'+info_data.self_character+'===');
@@ -1119,7 +1119,7 @@ module.exports = function( app , db ){
               //   console.log('send gps data artist')
               //   callback(doc.group[i].artist.socket_id, doc);
               if( doc.group[i].player&&doc.group[i].player.socket_id) {
-                  console.log('send gps data to player')  
+                  // console.log('send gps data to player')  
                   callback(doc.group[i].player.socket_id, doc);  
                 }
             }
