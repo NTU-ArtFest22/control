@@ -6,11 +6,10 @@
   var client = new PeerManager();
   var mediaConfig = {
         audio:true,
-        video:false 
-          //{
-      //mandatory: {},
-      //optional: []
-        //}
+        video: {
+      mandatory: {},
+      optional: []
+        }
     };
 
   var loc = window.location.pathname;
