@@ -277,21 +277,21 @@
 
     $scope.onTimeout = function(){
       $scope.countTime++;
-      if( $scope.countTime == 5){
+      if( $scope.countTime == 2){
         rtc.userReloadGroup();
         addPoint();
       }else
-        mytimeout = $timeout($scope.onTimeout,10000);
+        mytimeout = $timeout($scope.onTimeout,1000);
     };
 
-    var mytimeout = $timeout( $scope.onTimeout, 10000);
+    var mytimeout = $timeout( $scope.onTimeout, 1000);
 
     rtc.userReloadGroup = function(){
       rtc.loadData();
       rtc.reloadGroup();
       $scope.countTime = 0;
       $timeout.cancel( mytimeout );
-      mytimeout = $timeout($scope.onTimeout, 10000);
+      mytimeout = $timeout($scope.onTimeout, 1000);
     }
 
     //initial load
@@ -534,7 +534,7 @@
 
       $scope.onTimeout = function(){
         $scope.countTime++;
-        if( $scope.countTime == 5){
+        if( $scope.countTime == 2){
           rtc.userReloadGroup();
           
         }else

@@ -46,7 +46,6 @@ module.exports = function(io, streams, routes, data) {
       });
     })
     client.on('newGPSlog', function(info_data){
-      
       data.gps_log(info_data, function(socket_id, data){
         console.log('new character data', io.sockets.connected[socket_id]);
         if (io.sockets.connected[socket_id]) {
